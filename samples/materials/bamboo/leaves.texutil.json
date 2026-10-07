@@ -1,0 +1,15 @@
+{
+  "size": 256,
+  "seed": 220,
+  "nodes": {},
+  "outputs": {
+    "leaves.atlas.json": {
+      "type": "spritesheet",
+      "source": "leaf.texutil.json",
+      "columns": 4,
+      "rows": 2,
+      "count": 8,
+      "padding": 4
+    }
+  }
+}

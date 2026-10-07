@@ -1,0 +1,38 @@
+{
+  "density": {
+    "default": 1,
+    "description": "Multiply instance/ribbon density; survivors retain their original placement and variation when upstream points are unchanged.",
+    "max": 1,
+    "min": 0,
+    "type": "number"
+  },
+  "outputs": {
+    "description": "Optional nonempty list of base output filenames to export for this level. Defaults to all outputs.",
+    "type": "array"
+  },
+  "overrides": {
+    "default": {},
+    "description": "Node-name to parameter-patch map, applied after global reductions. Existing op cannot change; all resulting nodes validate.",
+    "type": "object"
+  },
+  "screen_height": {
+    "description": "Optional normalized screen-height threshold recorded in the manifest for engine integration; no runtime switching is implemented.",
+    "max": 1,
+    "min": 0,
+    "type": "number"
+  },
+  "topology": {
+    "default": 1,
+    "description": "Multiply tube sides, leaf/card subdivisions and ellipsoid rings/sides, rounding down to valid minima. Leaves/cards keep their deformation controls; crossed plane count is unchanged.",
+    "max": 1,
+    "min": 0.01,
+    "type": "number"
+  },
+  "tube_stride": {
+    "default": 1,
+    "description": "Multiply tube/ribbon stride, clamped at 512; retain the original growth paths and both tube endpoints.",
+    "max": 512,
+    "min": 1,
+    "type": "integer"
+  }
+}

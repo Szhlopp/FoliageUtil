@@ -1,0 +1,18 @@
+{
+  "size": [
+    384,
+    480
+  ],
+  "seed": 823,
+  "outputs": {
+    "sprigs.atlas.json": {
+      "type": "spritesheet",
+      "source": "sprig.texutil.json",
+      "columns": 3,
+      "rows": 2,
+      "count": 6,
+      "padding": 6,
+      "seed": 823
+    }
+  }
+}

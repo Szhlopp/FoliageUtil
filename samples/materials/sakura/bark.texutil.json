@@ -1,0 +1,345 @@
+{
+  "size": 2048,
+  "seed": 824,
+  "tile": true,
+  "nodes": {
+    "furrows": {
+      "op": "voronoi",
+      "feature": "edges",
+      "scale": 24,
+      "stretch": [
+        1,
+        5
+      ]
+    },
+    "bend": {
+      "op": "simplex",
+      "scale": 4,
+      "fractal": "fbm",
+      "octaves": 3,
+      "stretch": [
+        1,
+        2
+      ]
+    },
+    "drift": {
+      "op": "simplex",
+      "scale": 7,
+      "fractal": "fbm",
+      "octaves": 3
+    },
+    "furrows-warp": {
+      "op": "warp",
+      "input": "furrows",
+      "x": "bend",
+      "y": "drift",
+      "strength": 0.018
+    },
+    "plates": {
+      "op": "levels",
+      "input": "furrows-warp",
+      "in": [
+        0.006,
+        0.13
+      ],
+      "out": [
+        0.14,
+        0.78
+      ]
+    },
+    "grain": {
+      "op": "simplex",
+      "scale": 76,
+      "fractal": "fbm",
+      "octaves": 3,
+      "stretch": [
+        1,
+        3
+      ]
+    },
+    "plate-grain": {
+      "op": "blend",
+      "a": "plates",
+      "b": "grain",
+      "mode": "mix",
+      "opacity": 0.2
+    },
+    "lenticle": {
+      "op": "shape",
+      "type": "capsule",
+      "size": [
+        0.96,
+        0.8
+      ],
+      "softness": 0.16
+    },
+    "lenticels": {
+      "op": "scatter",
+      "input": "lenticle",
+      "count": 550,
+      "size": [
+        0.043,
+        0.004
+      ],
+      "size_jitter": 0.65,
+      "rotation_jitter": 5,
+      "mode": "max",
+      "wrap": true
+    },
+    "lip": {
+      "op": "stroke",
+      "input": "lenticels",
+      "width": 2,
+      "position": "outside",
+      "edge": "repeat"
+    },
+    "grooved": {
+      "op": "blend",
+      "a": "plate-grain",
+      "b": "lenticels",
+      "mode": "subtract",
+      "opacity": 0.15
+    },
+    "height": {
+      "op": "blend",
+      "a": "grooved",
+      "b": "lip",
+      "mode": "add",
+      "opacity": 0.07
+    },
+    "pigment-noise": {
+      "op": "simplex",
+      "scale": 6,
+      "fractal": "fbm",
+      "octaves": 3,
+      "stretch": [
+        1,
+        2
+      ]
+    },
+    "pigment": {
+      "op": "ramp",
+      "input": "pigment-noise",
+      "interpolation": "smooth",
+      "stops": [
+        [
+          0,
+          "#292525"
+        ],
+        [
+          0.32,
+          "#403736"
+        ],
+        [
+          0.66,
+          "#63504b"
+        ],
+        [
+          1,
+          "#8b7870"
+        ]
+      ]
+    },
+    "plate-tint": {
+      "op": "ramp",
+      "input": "plates",
+      "interpolation": "smooth",
+      "stops": [
+        [
+          0,
+          "#6c6260"
+        ],
+        [
+          0.45,
+          "#c9beba"
+        ],
+        [
+          1,
+          "#ffffff"
+        ]
+      ]
+    },
+    "bark": {
+      "op": "blend",
+      "a": "pigment",
+      "b": "plate-tint",
+      "mode": "multiply",
+      "opacity": 0.5
+    },
+    "lenticel-color": {
+      "op": "constant",
+      "value": "#b4a197"
+    },
+    "scarred": {
+      "op": "blend",
+      "a": "bark",
+      "b": "lenticel-color",
+      "mode": "mix",
+      "opacity": 0.52,
+      "mask": "lip"
+    },
+    "lichen-noise": {
+      "op": "simplex",
+      "scale": 9,
+      "fractal": "fbm",
+      "octaves": 3
+    },
+    "lichen-mask": {
+      "op": "levels",
+      "input": "lichen-noise",
+      "in": [
+        0.7,
+        0.84
+      ]
+    },
+    "lichen": {
+      "op": "ramp",
+      "input": "grain",
+      "interpolation": "smooth",
+      "stops": [
+        [
+          0,
+          "#65685b"
+        ],
+        [
+          1,
+          "#979887"
+        ]
+      ]
+    },
+    "color": {
+      "op": "blend",
+      "a": "scarred",
+      "b": "lichen",
+      "mode": "mix",
+      "opacity": 0.5,
+      "mask": "lichen-mask"
+    },
+    "roughness": {
+      "op": "levels",
+      "input": "grain",
+      "out": [
+        0.72,
+        0.9
+      ]
+    },
+    "normal": {
+      "op": "normal",
+      "input": "height",
+      "convention": "opengl",
+      "strength": 0.012,
+      "edge": "repeat"
+    },
+    "zero": {
+      "op": "constant",
+      "value": 0
+    },
+    "metallic-roughness": {
+      "op": "pack",
+      "r": "zero",
+      "g": "roughness",
+      "b": "zero"
+    },
+    "young-pigment": {
+      "op": "ramp",
+      "input": "pigment-noise",
+      "interpolation": "smooth",
+      "stops": [
+        [
+          0,
+          "#49302c"
+        ],
+        [
+          0.5,
+          "#6e4640"
+        ],
+        [
+          1,
+          "#93645b"
+        ]
+      ]
+    },
+    "young-color": {
+      "op": "blend",
+      "a": "young-pigment",
+      "b": "lenticel-color",
+      "mode": "mix",
+      "opacity": 0.5,
+      "mask": "lenticels"
+    },
+    "young-height": {
+      "op": "blend",
+      "a": "grain",
+      "b": "lenticels",
+      "mode": "subtract",
+      "opacity": 0.25
+    },
+    "young-normal": {
+      "op": "normal",
+      "input": "young-height",
+      "strength": 0.0012,
+      "convention": "opengl",
+      "edge": "repeat"
+    },
+    "young-roughness": {
+      "op": "levels",
+      "input": "grain",
+      "out": [
+        0.5,
+        0.69
+      ]
+    },
+    "young-metallic-roughness": {
+      "op": "pack",
+      "r": "zero",
+      "g": "young-roughness",
+      "b": "zero"
+    }
+  },
+  "outputs": {
+    "bark-color.png": "color",
+    "bark-normal.png": {
+      "node": "normal",
+      "bits": 16
+    },
+    "bark-metallic-roughness.png": "metallic-roughness",
+    "young-color.png": "young-color",
+    "young-normal.png": {
+      "node": "young-normal",
+      "bits": 16
+    },
+    "young-metallic-roughness.png": "young-metallic-roughness",
+    "bark-sheet.png": {
+      "type": "sheet",
+      "title": "Sakura bark | plates, lenticels and lichen",
+      "columns": 3,
+      "cell": 320,
+      "items": [
+        {
+          "node": "color",
+          "label": "Unlit mature bark"
+        },
+        {
+          "node": "normal",
+          "label": "OpenGL normal"
+        },
+        {
+          "node": "roughness",
+          "label": "Dry finish"
+        },
+        {
+          "node": "young-color",
+          "label": "Young branch pigment"
+        },
+        {
+          "node": "lenticels",
+          "label": "Horizontal lenticels"
+        },
+        {
+          "node": "height",
+          "label": "Surface relief"
+        }
+      ]
+    }
+  }
+}

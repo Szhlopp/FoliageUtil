@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "description": "Source-only sample package. Generate materials with tools/prepare_samples.py; no external recipe checkout is required.",
+  "materials": [
+    {
+      "recipe": "leaf-texture.texutil.json"
+    },
+    {
+      "recipe": "leaf-stencil.texutil.json"
+    },
+    {
+      "recipe": "bamboo/culm.texutil.json"
+    },
+    {
+      "recipe": "bamboo/leaves.texutil.json"
+    },
+    {
+      "recipe": "birch/bark.texutil.json"
+    },
+    {
+      "recipe": "birch/leaves.texutil.json"
+    },
+    {
+      "recipe": "lily-pad/pads.texutil.json"
+    },
+    {
+      "recipe": "rooted-tree/bark.texutil.json"
+    },
+    {
+      "recipe": "pine/bark.texutil.json"
+    },
+    {
+      "recipe": "rose/leaf.texutil.json"
+    },
+    {
+      "recipe": "rose/petal.texutil.json"
+    },
+    {
+      "recipe": "rose/petals.texutil.json"
+    },
+    {
+      "recipe": "spritesheets/leaves.texutil.json"
+    },
+    {
+      "recipe": "sunflower/leaf.texutil.json"
+    },
+    {
+      "recipe": "sunflower/stem.texutil.json"
+    },
+    {
+      "recipe": "sunflower/petals.texutil.json"
+    },
+    {
+      "recipe": "wheat/wheat.texutil.json"
+    },
+    {
+      "recipe": "willow/bark.texutil.json"
+    },
+    {
+      "recipe": "willow/packed/sprays.texutil.json"
+    },
+    {
+      "recipe": "sakura/bark.texutil.json"
+    },
+    {
+      "recipe": "sakura/blossom.texutil.json"
+    },
+    {
+      "recipe": "sakura/sprigs.texutil.json"
+    },
+    {
+      "recipe": "filler/greenery.texutil.json"
+    },
+    {
+      "recipe": "asiatic-lily/lily.texutil.json"
+    }
+  ]
+}

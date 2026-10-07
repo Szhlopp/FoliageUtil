@@ -1,0 +1,27 @@
+{
+  "lods": {
+    "default": false,
+    "description": "Also export configured LODs at each growth step. Maximum 128 total variants per batch.",
+    "type": "boolean"
+  },
+  "mode": {
+    "default": "scale",
+    "description": "scale preserves legacy per-node scaling. developmental advances tips along mature guides, thickens radii independently and activates offspring when support reaches each attachment.",
+    "type": "enum",
+    "values": [
+      "scale",
+      "developmental"
+    ]
+  },
+  "stages": {
+    "description": "Required node-name map: start/end in 0..1 (defaults 0/1), easing linear or smoothstep, optional mesh pivot. In developmental mode skeleton stages accept monotone length_profile and radius_profile keys [local_age, fraction], tip_length (0.001..1, default 0.15 of mature length) and tip_radius (0.01..1, default 0.12 multiplier). Instance/point/mesh stages accept scale_profile. All channels finish at 1. attachment_delay (0..0.95) delays birth by a fraction of time remaining before end. Defaults: length [[0,0],[0.75,1],[1,1]], radius [[0,0.04],[1,1]], scale [[0,0],[1,1]]. Unstaged children of developing stems inherit an automatic developmental schedule. Successive scale-mode stages compound.",
+    "type": "object"
+  },
+  "steps": {
+    "default": 5,
+    "description": "Number of evenly spaced snapshots including progress zero and mature at one. Steps are zero-based.",
+    "max": 32,
+    "min": 2,
+    "type": "integer"
+  }
+}

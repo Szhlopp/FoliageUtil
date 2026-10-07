@@ -1,0 +1,742 @@
+{
+  "version": 1,
+  "name": "Wide spreading bush",
+  "description": "Common game-environment bush with retained multi-stem wood and fitted leafy-shoot Cards / CardsLow profiles.",
+  "seed": 228,
+  "units": "meters",
+  "materials": {
+    "leaf": {
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "base_color_texture": "../assets/filler/leaf-color.png",
+      "normal_texture": "../assets/filler/leaf-normal.png",
+      "metallic_roughness_texture": "../assets/filler/leaf-metallic-roughness.png",
+      "roughness": 1,
+      "translucency": 0.16,
+      "double_sided": true
+    },
+    "grass": {
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "base_color_texture": "../assets/filler/grass-color.png",
+      "normal_texture": "../assets/filler/grass-normal.png",
+      "metallic_roughness_texture": "../assets/filler/grass-metallic-roughness.png",
+      "roughness": 1,
+      "translucency": 0.16,
+      "double_sided": true
+    },
+    "stem": {
+      "base_color": [
+        0.1,
+        0.15,
+        0.028,
+        1
+      ],
+      "roughness": 0.8,
+      "double_sided": true
+    },
+    "wood": {
+      "base_color": [
+        0.105,
+        0.071,
+        0.03,
+        1
+      ],
+      "roughness": 0.9
+    }
+  },
+  "nodes": {
+    "main_0": {
+      "op": "curve",
+      "points": [
+        [
+          0.020581,
+          0.0,
+          0.004172
+        ],
+        [
+          0.058422,
+          0.047415,
+          0.011843
+        ],
+        [
+          0.104556,
+          0.09483,
+          0.021194
+        ],
+        [
+          0.154441,
+          0.142244,
+          0.031307
+        ],
+        [
+          0.206932,
+          0.189659,
+          0.041947
+        ],
+        [
+          0.261448,
+          0.237074,
+          0.052998
+        ],
+        [
+          0.317635,
+          0.284489,
+          0.064388
+        ],
+        [
+          0.375251,
+          0.331904,
+          0.076067
+        ],
+        [
+          0.434118,
+          0.379319,
+          0.088
+        ],
+        [
+          0.494103,
+          0.426733,
+          0.10016
+        ],
+        [
+          0.555098,
+          0.474148,
+          0.112524
+        ]
+      ],
+      "radius": 0.011,
+      "taper": 0.9
+    },
+    "main_1": {
+      "op": "curve",
+      "points": [
+        [
+          -0.017995,
+          0.0,
+          0.010826
+        ],
+        [
+          -0.04459,
+          0.037191,
+          0.026825
+        ],
+        [
+          -0.077014,
+          0.074383,
+          0.046331
+        ],
+        [
+          -0.112075,
+          0.111574,
+          0.067424
+        ],
+        [
+          -0.148967,
+          0.148765,
+          0.089618
+        ],
+        [
+          -0.187282,
+          0.185956,
+          0.112668
+        ],
+        [
+          -0.226772,
+          0.223148,
+          0.136425
+        ],
+        [
+          -0.267266,
+          0.260339,
+          0.160786
+        ],
+        [
+          -0.30864,
+          0.29753,
+          0.185677
+        ],
+        [
+          -0.350798,
+          0.334722,
+          0.211039
+        ],
+        [
+          -0.393667,
+          0.371913,
+          0.236829
+        ]
+      ],
+      "radius": 0.011,
+      "taper": 0.9
+    },
+    "main_2": {
+      "op": "curve",
+      "points": [
+        [
+          0.005957,
+          0.0,
+          -0.020137
+        ],
+        [
+          0.017988,
+          0.040795,
+          -0.060809
+        ],
+        [
+          0.032656,
+          0.08159,
+          -0.110393
+        ],
+        [
+          0.048516,
+          0.122385,
+          -0.16401
+        ],
+        [
+          0.065205,
+          0.16318,
+          -0.220427
+        ],
+        [
+          0.082538,
+          0.203976,
+          -0.279021
+        ],
+        [
+          0.100402,
+          0.244771,
+          -0.339411
+        ],
+        [
+          0.118721,
+          0.285566,
+          -0.401337
+        ],
+        [
+          0.137437,
+          0.326361,
+          -0.464608
+        ],
+        [
+          0.156509,
+          0.367156,
+          -0.52908
+        ],
+        [
+          0.175901,
+          0.407951,
+          -0.594637
+        ]
+      ],
+      "radius": 0.011,
+      "taper": 0.9
+    },
+    "main_3": {
+      "op": "curve",
+      "points": [
+        [
+          0.009209,
+          0.0,
+          0.018873
+        ],
+        [
+          0.024446,
+          0.044155,
+          0.050098
+        ],
+        [
+          0.043022,
+          0.088311,
+          0.088165
+        ],
+        [
+          0.063109,
+          0.132466,
+          0.129329
+        ],
+        [
+          0.084245,
+          0.176621,
+          0.172642
+        ],
+        [
+          0.106196,
+          0.220777,
+          0.217627
+        ],
+        [
+          0.128821,
+          0.264932,
+          0.26399
+        ],
+        [
+          0.15202,
+          0.309087,
+          0.311532
+        ],
+        [
+          0.175724,
+          0.353243,
+          0.360108
+        ],
+        [
+          0.199877,
+          0.397398,
+          0.409605
+        ],
+        [
+          0.224437,
+          0.441553,
+          0.459935
+        ]
+      ],
+      "radius": 0.011,
+      "taper": 0.9
+    },
+    "main_4": {
+      "op": "curve",
+      "points": [
+        [
+          -0.019539,
+          0.0,
+          -0.007696
+        ],
+        [
+          -0.047229,
+          0.047932,
+          -0.018603
+        ],
+        [
+          -0.080988,
+          0.095864,
+          -0.0319
+        ],
+        [
+          -0.117492,
+          0.143796,
+          -0.046278
+        ],
+        [
+          -0.155903,
+          0.191728,
+          -0.061407
+        ],
+        [
+          -0.195795,
+          0.239661,
+          -0.077121
+        ],
+        [
+          -0.236911,
+          0.287593,
+          -0.093315
+        ],
+        [
+          -0.279072,
+          0.335525,
+          -0.109922
+        ],
+        [
+          -0.322149,
+          0.383457,
+          -0.126889
+        ],
+        [
+          -0.366043,
+          0.431389,
+          -0.144178
+        ],
+        [
+          -0.410677,
+          0.479321,
+          -0.161759
+        ]
+      ],
+      "radius": 0.011,
+      "taper": 0.9
+    },
+    "main_5": {
+      "op": "curve",
+      "points": [
+        [
+          0.019606,
+          0.0,
+          -0.007523
+        ],
+        [
+          0.058167,
+          0.04576,
+          -0.022318
+        ],
+        [
+          0.105179,
+          0.091521,
+          -0.040356
+        ],
+        [
+          0.156014,
+          0.137281,
+          -0.059862
+        ],
+        [
+          0.209504,
+          0.183042,
+          -0.080385
+        ],
+        [
+          0.265058,
+          0.228802,
+          -0.101701
+        ],
+        [
+          0.322315,
+          0.274562,
+          -0.12367
+        ],
+        [
+          0.381027,
+          0.320323,
+          -0.146198
+        ],
+        [
+          0.441015,
+          0.366083,
+          -0.169215
+        ],
+        [
+          0.502142,
+          0.411844,
+          -0.192669
+        ],
+        [
+          0.564297,
+          0.457604,
+          -0.216517
+        ]
+      ],
+      "radius": 0.011,
+      "taper": 0.9
+    },
+    "main_6": {
+      "op": "curve",
+      "points": [
+        [
+          -0.009376,
+          0.0,
+          0.018791
+        ],
+        [
+          -0.028161,
+          0.048171,
+          0.056437
+        ],
+        [
+          -0.051062,
+          0.096342,
+          0.102333
+        ],
+        [
+          -0.075826,
+          0.144514,
+          0.151962
+        ],
+        [
+          -0.101883,
+          0.192685,
+          0.204182
+        ],
+        [
+          -0.128946,
+          0.240856,
+          0.258418
+        ],
+        [
+          -0.156838,
+          0.289027,
+          0.314316
+        ],
+        [
+          -0.18544,
+          0.337198,
+          0.371636
+        ],
+        [
+          -0.214663,
+          0.38537,
+          0.430201
+        ],
+        [
+          -0.24444,
+          0.433541,
+          0.489877
+        ],
+        [
+          -0.274719,
+          0.481712,
+          0.550558
+        ]
+      ],
+      "radius": 0.011,
+      "taper": 0.9
+    },
+    "main_7": {
+      "op": "curve",
+      "points": [
+        [
+          -0.005778,
+          0.0,
+          -0.020189
+        ],
+        [
+          -0.014676,
+          0.03587,
+          -0.051277
+        ],
+        [
+          -0.025523,
+          0.071741,
+          -0.089177
+        ],
+        [
+          -0.037253,
+          0.107611,
+          -0.130159
+        ],
+        [
+          -0.049595,
+          0.143482,
+          -0.173282
+        ],
+        [
+          -0.062414,
+          0.179352,
+          -0.218069
+        ],
+        [
+          -0.075625,
+          0.215223,
+          -0.264228
+        ],
+        [
+          -0.089172,
+          0.251093,
+          -0.311561
+        ],
+        [
+          -0.103014,
+          0.286964,
+          -0.359923
+        ],
+        [
+          -0.117118,
+          0.322834,
+          -0.409202
+        ],
+        [
+          -0.13146,
+          0.358705,
+          -0.459311
+        ]
+      ],
+      "radius": 0.011,
+      "taper": 0.9
+    },
+    "structure": {
+      "op": "merge",
+      "inputs": [
+        "main_0",
+        "main_1",
+        "main_2",
+        "main_3",
+        "main_4",
+        "main_5",
+        "main_6",
+        "main_7"
+      ]
+    },
+    "wood": {
+      "op": "tube",
+      "input": "structure",
+      "sides": 5,
+      "stride": 2,
+      "material": "wood",
+      "cap_material": "wood"
+    },
+    "wood_low": {
+      "op": "tube",
+      "input": "structure",
+      "sides": 4,
+      "stride": 4,
+      "material": "wood",
+      "cap_material": "wood"
+    },
+    "guides": {
+      "op": "branch",
+      "input": "structure",
+      "count": 4,
+      "range": [
+        0.23,
+        0.98
+      ],
+      "length": 0.31,
+      "length_decay": 0.35,
+      "length_variation": 0.23,
+      "angle": 57,
+      "angle_jitter": 15,
+      "azimuth": 137.5,
+      "segments": 8,
+      "radius_scale": 0.28,
+      "taper": 0.91,
+      "noise": 0.025,
+      "bend": [
+        0,
+        -0.035,
+        0
+      ]
+    },
+    "twigs": {
+      "op": "tube",
+      "input": "guides",
+      "sides": 3,
+      "stride": 1,
+      "material": "stem",
+      "cap_material": "stem"
+    },
+    "leaf": {
+      "op": "leaf",
+      "shape": "oval",
+      "length": 0.12,
+      "width": 0.064,
+      "curl": 0.16,
+      "fold": 0.12,
+      "segments": 14,
+      "width_segments": 4,
+      "material": "leaf",
+      "edge_wave": 0.06,
+      "edge_frequency": 5
+    },
+    "sites": {
+      "op": "scatter",
+      "input": "guides",
+      "count": 16,
+      "range": [
+        0.05,
+        1
+      ],
+      "distribution": "alternate",
+      "angle": 57,
+      "azimuth": 137.5,
+      "jitter": 0.18,
+      "scale": [
+        0.68,
+        1.15
+      ],
+      "proximity_mesh": "twigs",
+      "max_distance": 0.005,
+      "snap_to_mesh": true
+    },
+    "leaves": {
+      "op": "instance",
+      "input": "leaf",
+      "points": "sites",
+      "color_variation": 0.23,
+      "scale_jitter": [
+        0.17,
+        0.15,
+        0.1
+      ]
+    },
+    "bake_source": {
+      "op": "merge",
+      "inputs": [
+        "twigs",
+        "leaves"
+      ]
+    },
+    "source": {
+      "op": "merge",
+      "inputs": [
+        "wood",
+        "bake_source"
+      ]
+    },
+    "wind": {
+      "op": "wind",
+      "input": "source",
+      "height": 0.88,
+      "strength": 0.65,
+      "exponent": 1.4
+    },
+    "bake_source_wind": {
+      "op": "wind",
+      "input": "bake_source",
+      "height": 0.88,
+      "strength": 0.65,
+      "exponent": 1.4
+    },
+    "keep_wind": {
+      "op": "wind",
+      "input": "wood",
+      "height": 0.88,
+      "strength": 0.65,
+      "exponent": 1.4
+    },
+    "keep_low_wind": {
+      "op": "wind",
+      "input": "wood_low",
+      "height": 0.88,
+      "strength": 0.65,
+      "exponent": 1.4
+    }
+  },
+  "outputs": {
+    "bush-spreading.glb": "wind"
+  },
+  "card_bakes": {
+    "Cards": {
+      "source": "bake_source_wind",
+      "paths": "guides",
+      "output": "bush-spreading-cards.glb",
+      "segments": 4,
+      "planes": 2,
+      "cell_width": 128,
+      "cell_height": 128,
+      "atlas_size": 1024,
+      "padding": 3,
+      "samples": 3,
+      "margin": 0.003,
+      "max_distance": 0.012,
+      "alpha_cutoff": 0.3,
+      "translucency": 0.16,
+      "memory_mb": 256,
+      "keep": "keep_wind"
+    },
+    "CardsLow": {
+      "source": "bake_source_wind",
+      "paths": "guides",
+      "output": "bush-spreading-cards-low.glb",
+      "segments": 2,
+      "planes": 2,
+      "cell_width": 64,
+      "cell_height": 64,
+      "atlas_size": 512,
+      "padding": 2,
+      "samples": 3,
+      "margin": 0.003,
+      "max_distance": 0.012,
+      "alpha_cutoff": 0.3,
+      "translucency": 0.16,
+      "memory_mb": 256,
+      "keep": "keep_low_wind"
+    }
+  }
+}

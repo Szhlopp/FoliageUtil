@@ -1,0 +1,139 @@
+{
+  "version": 1,
+  "name": "cards",
+  "description": "Structural LOD and crossed leaf cards. Uses the included procedural alpha-cutout leaf texture; replace it with a custom atlas.",
+  "seed": 42,
+  "units": "meters",
+  "materials": {
+    "leaf": {
+      "base_color": [
+        0.12,
+        0.32,
+        0.035,
+        1
+      ],
+      "base_color_texture": "../assets/leaf.png",
+      "roughness": 0.8,
+      "double_sided": true,
+      "alpha_mode": "MASK",
+      "alpha_cutoff": 0.5
+    }
+  },
+  "nodes": {
+    "trunk": {
+      "op": "trunk",
+      "length": 5,
+      "radius": 0.24,
+      "segments": 28,
+      "taper": 0.96,
+      "bend": [
+        0.12,
+        0,
+        0.08
+      ],
+      "noise": 0.3,
+      "flare": 0.55
+    },
+    "limbs": {
+      "op": "branch",
+      "input": "trunk",
+      "count": 14,
+      "range": [
+        0.3,
+        0.94
+      ],
+      "length": 2.45,
+      "radius_scale": 0.55,
+      "angle": 58,
+      "length_decay": 0.75,
+      "bend": [
+        0,
+        0.38,
+        0
+      ],
+      "segments": 12,
+      "noise": 0.18
+    },
+    "twigs": {
+      "op": "branch",
+      "input": "limbs",
+      "count": 8,
+      "range": [
+        0.22,
+        0.98
+      ],
+      "length": 0.82,
+      "radius_scale": 0.35,
+      "angle": 52,
+      "length_decay": 0.5,
+      "bend": [
+        0,
+        0.15,
+        0
+      ],
+      "segments": 6
+    },
+    "wood_paths": {
+      "op": "merge",
+      "inputs": [
+        "trunk",
+        "limbs",
+        "twigs"
+      ]
+    },
+    "wood": {
+      "op": "tube",
+      "input": "wood_paths",
+      "sides": 5,
+      "uv_scale": [
+        1,
+        1.5
+      ],
+      "ridges": 5,
+      "ridge_depth": 0.045,
+      "stride": 3
+    },
+    "attachments": {
+      "op": "scatter",
+      "input": "twigs",
+      "count": 5,
+      "range": [
+        0.12,
+        1
+      ],
+      "angle": 55,
+      "scale": [
+        0.7,
+        1.25
+      ]
+    },
+    "leaf": {
+      "op": "card",
+      "width": 0.24,
+      "height": 0.38,
+      "planes": 2
+    },
+    "leaves": {
+      "op": "instance",
+      "input": "leaf",
+      "points": "attachments",
+      "color_variation": 0.25
+    },
+    "tree": {
+      "op": "merge",
+      "inputs": [
+        "wood",
+        "leaves"
+      ]
+    },
+    "wind": {
+      "op": "wind",
+      "input": "tree",
+      "height": 5.5
+    }
+  },
+  "outputs": {
+    "cards.glb": "wind",
+    "cards.obj": "wind"
+  }
+}

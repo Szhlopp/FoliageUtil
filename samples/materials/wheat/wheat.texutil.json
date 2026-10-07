@@ -1,0 +1,186 @@
+{
+  "size": 1024,
+  "seed": 147,
+  "tile": true,
+  "nodes": {
+    "fiber": {
+      "op": "simplex",
+      "scale": 35,
+      "stretch": [
+        0.18,
+        3.0
+      ],
+      "fractal": "fbm",
+      "octaves": 3
+    },
+    "grain": {
+      "op": "simplex",
+      "scale": 65,
+      "fractal": "fbm",
+      "octaves": 2
+    },
+    "mottle": {
+      "op": "simplex",
+      "scale": 3,
+      "fractal": "fbm",
+      "octaves": 3
+    },
+    "ribs": {
+      "op": "stripes",
+      "count": 22,
+      "wave": "sine"
+    },
+    "ridges": {
+      "op": "levels",
+      "input": "ribs",
+      "gamma": 0.35
+    },
+    "warped_ribs": {
+      "op": "directional_warp",
+      "input": "ridges",
+      "intensity": "mottle",
+      "angle": 0,
+      "strength": 0.005,
+      "midlevel": 0.5,
+      "edge": "repeat"
+    },
+    "relief": {
+      "op": "blend",
+      "a": "fiber",
+      "b": "warped_ribs",
+      "mode": "mix",
+      "opacity": 0.45
+    },
+    "height": {
+      "op": "levels",
+      "input": "relief",
+      "out": [
+        0.46,
+        0.54
+      ]
+    },
+    "normal": {
+      "op": "normal",
+      "input": "height",
+      "strength": 0.004,
+      "convention": "opengl",
+      "edge": "repeat"
+    },
+    "roughness": {
+      "op": "levels",
+      "input": "grain",
+      "out": [
+        0.46,
+        0.68
+      ]
+    },
+    "husk_palette": {
+      "op": "ramp",
+      "input": "mottle",
+      "stops": [
+        [
+          0,
+          "#986721"
+        ],
+        [
+          0.4,
+          "#c99c49"
+        ],
+        [
+          0.72,
+          "#dec078"
+        ],
+        [
+          1,
+          "#edd99f"
+        ]
+      ]
+    },
+    "straw_palette": {
+      "op": "ramp",
+      "input": "mottle",
+      "stops": [
+        [
+          0,
+          "#807337"
+        ],
+        [
+          0.45,
+          "#bca45b"
+        ],
+        [
+          1,
+          "#dec984"
+        ]
+      ]
+    },
+    "leaf_palette": {
+      "op": "ramp",
+      "input": "mottle",
+      "stops": [
+        [
+          0,
+          "#61612e"
+        ],
+        [
+          0.42,
+          "#9b9147"
+        ],
+        [
+          1,
+          "#c9b767"
+        ]
+      ]
+    },
+    "rib_tint": {
+      "op": "levels",
+      "input": "warped_ribs",
+      "out": [
+        0.84,
+        1
+      ]
+    },
+    "husk": {
+      "op": "math",
+      "input": "husk_palette",
+      "b": "rib_tint",
+      "mode": "multiply"
+    },
+    "straw": {
+      "op": "math",
+      "input": "straw_palette",
+      "b": "rib_tint",
+      "mode": "multiply"
+    },
+    "leaf": {
+      "op": "math",
+      "input": "leaf_palette",
+      "b": "rib_tint",
+      "mode": "multiply"
+    },
+    "zero": {
+      "op": "constant",
+      "value": 0
+    },
+    "one": {
+      "op": "constant",
+      "value": 1
+    },
+    "metallic_roughness": {
+      "op": "pack",
+      "r": "one",
+      "g": "roughness",
+      "b": "zero"
+    }
+  },
+  "outputs": {
+    "husk-color.png": "husk",
+    "straw-color.png": "straw",
+    "leaf-color.png": "leaf",
+    "normal.png": {
+      "node": "normal",
+      "bits": 16
+    },
+    "metallic-roughness.png": "metallic_roughness"
+  }
+}

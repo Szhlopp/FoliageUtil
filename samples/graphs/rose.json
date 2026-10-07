@@ -1,0 +1,167 @@
+{
+  "version": 1,
+  "name": "rose",
+  "description": "Curved petals cup inward and overlap along a golden-angle spiral. Inner petals are smaller, taller and more upright.",
+  "seed": 42,
+  "units": "meters",
+  "materials": {
+    "stem": {
+      "base_color": [
+        0.13,
+        0.23,
+        0.035,
+        1
+      ]
+    },
+    "petal": {
+      "base_color": [
+        0.58,
+        0.012,
+        0.045,
+        1
+      ],
+      "roughness": 0.65,
+      "double_sided": true
+    },
+    "gold": {
+      "base_color": [
+        0.65,
+        0.38,
+        0.045,
+        1
+      ]
+    }
+  },
+  "nodes": {
+    "stalk": {
+      "op": "trunk",
+      "length": 0.7,
+      "radius": 0.008,
+      "segments": 14,
+      "taper": 0.4,
+      "flare": 0,
+      "noise": 0
+    },
+    "stem": {
+      "op": "tube",
+      "input": "stalk",
+      "sides": 6,
+      "material": "stem",
+      "cap_material": "stem"
+    },
+    "leaves_at": {
+      "op": "scatter",
+      "input": "stalk",
+      "count": 4,
+      "range": [
+        0.15,
+        0.7
+      ],
+      "angle": 55
+    },
+    "leaf": {
+      "op": "leaf",
+      "shape": "lanceolate",
+      "length": 0.18,
+      "width": 0.06,
+      "curl": 0.25,
+      "segments": 6
+    },
+    "leaves": {
+      "op": "instance",
+      "input": "leaf",
+      "points": "leaves_at"
+    },
+    "petal": {
+      "op": "leaf",
+      "shape": "petal",
+      "length": 0.16,
+      "width": 0.135,
+      "curl": -0.32,
+      "fold": -0.55,
+      "twist": 10,
+      "segments": 20,
+      "material": "petal",
+      "width_segments": 8
+    },
+    "petals_at": {
+      "op": "radial",
+      "mode": "spiral",
+      "count": 38,
+      "center": [
+        0,
+        0.71,
+        0
+      ],
+      "radius": [
+        0.006,
+        0.045
+      ],
+      "height": [
+        0.055,
+        0
+      ],
+      "angle_step": 137.50776,
+      "tilt": [
+        12,
+        68
+      ],
+      "scale": [
+        0.4,
+        1.1
+      ],
+      "jitter": 0.04
+    },
+    "petals": {
+      "op": "instance",
+      "input": "petal",
+      "points": "petals_at",
+      "color_variation": 0.1
+    },
+    "sepals_at": {
+      "op": "radial",
+      "count": 5,
+      "center": [
+        0,
+        0.7,
+        0
+      ],
+      "radius": [
+        0.005,
+        0.005
+      ],
+      "tilt": [
+        110,
+        110
+      ],
+      "scale": [
+        0.5,
+        0.5
+      ]
+    },
+    "sepals": {
+      "op": "instance",
+      "input": "leaf",
+      "points": "sepals_at"
+    },
+    "rose": {
+      "op": "merge",
+      "inputs": [
+        "stem",
+        "leaves",
+        "petals",
+        "sepals"
+      ]
+    },
+    "wind": {
+      "op": "wind",
+      "input": "rose",
+      "height": 0.9,
+      "strength": 0.5
+    }
+  },
+  "outputs": {
+    "rose.glb": "wind",
+    "rose.obj": "wind"
+  }
+}

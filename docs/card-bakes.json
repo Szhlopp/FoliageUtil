@@ -1,0 +1,105 @@
+{
+  "alpha_cutoff": {
+    "default": 0.4000000059604645,
+    "description": "MASK cutoff on the exported baked material. Source MASK cutoffs are respected during capture.",
+    "max": 0.9900000095367432,
+    "min": 0.009999999776482582,
+    "type": "number"
+  },
+  "atlas_size": {
+    "default": 2048,
+    "description": "Square atlas page size; unique cells spill into additional pages, up to 64.",
+    "max": 8192,
+    "min": 128,
+    "type": "integer"
+  },
+  "cell_height": {
+    "default": 256,
+    "description": "Atlas cell height including padding, in pixels.",
+    "max": 2048,
+    "min": 32,
+    "type": "integer"
+  },
+  "cell_width": {
+    "default": 64,
+    "description": "Atlas cell width including padding, in pixels.",
+    "max": 1024,
+    "min": 32,
+    "type": "integer"
+  },
+  "keep": {
+    "description": "Optional mesh to retain unchanged, such as welded trunk and branches.",
+    "type": "reference"
+  },
+  "margin": {
+    "default": 0.009999999776482582,
+    "description": "Extra fitted width and tip margins in meters.",
+    "max": 1.0,
+    "min": 0.0,
+    "type": "number"
+  },
+  "max_distance": {
+    "default": 0.05000000074505806,
+    "description": "Maximum component attachment distance from a guide path, in meters. Unmatched components fail instead of disappearing.",
+    "max": 100.0,
+    "min": 9.999999747378752e-06,
+    "type": "number"
+  },
+  "memory_mb": {
+    "default": 1024,
+    "description": "Working memory estimate limit for generated meshes, decoded PNGs, cell raster and one atlas page. Not a total process cap.",
+    "max": 16384,
+    "min": 64,
+    "type": "integer"
+  },
+  "output": {
+    "description": "Relative .glb filename. Atlas PNGs and a manifest are exported beside it in a matching .cardbake directory.",
+    "required": true,
+    "type": "string"
+  },
+  "padding": {
+    "default": 4,
+    "description": "Transparent gutter and RGB/normal dilation distance in texels; alpha is never dilated.",
+    "max": 32,
+    "min": 1,
+    "type": "integer"
+  },
+  "paths": {
+    "description": "Skeleton whose individual strands guide the fitted cards, in the same coordinate system as source.",
+    "required": true,
+    "type": "reference"
+  },
+  "planes": {
+    "default": 2,
+    "description": "One fitted strip or two crossed strips per occupied path. Each strip gets its own unique bake cell.",
+    "max": 2,
+    "min": 1,
+    "type": "integer"
+  },
+  "samples": {
+    "default": 2,
+    "description": "Supersampling grid per pixel: 1, 2x2 or 3x3. No random sampling.",
+    "max": 3,
+    "min": 1,
+    "type": "integer"
+  },
+  "segments": {
+    "default": 6,
+    "description": "Longitudinal segments per fitted card; lower values approximate curvature more coarsely.",
+    "max": 64,
+    "min": 1,
+    "type": "integer"
+  },
+  "source": {
+    "description": "Mesh containing only the leaves and fine twigs to replace. Connected components attach to the closest path at their first indexed vertex.",
+    "required": true,
+    "type": "reference"
+  },
+  "translucency": {
+    "default": 0.23999999463558197,
+    "description": "Uniform baked-card diffuse translucency for the existing Blender preview adapter.",
+    "max": 1.0,
+    "min": 0.0,
+    "type": "number"
+  }
+}

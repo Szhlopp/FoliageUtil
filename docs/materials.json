@@ -1,0 +1,144 @@
+{
+  "alpha_cutoff": {
+    "default": 0.5,
+    "description": "MASK cutoff.",
+    "max": 1.0,
+    "min": 0.0,
+    "type": "number"
+  },
+  "alpha_mode": {
+    "default": "OPAQUE",
+    "description": "glTF coverage mode.",
+    "enum": [
+      "OPAQUE",
+      "MASK",
+      "BLEND"
+    ],
+    "type": "string"
+  },
+  "attenuation_color": {
+    "default": [
+      1,
+      1,
+      1
+    ],
+    "description": "Linear RGB light remaining after attenuation_distance through a transmissive volume.",
+    "max": 1.0,
+    "min": 0.0,
+    "type": "vec3"
+  },
+  "attenuation_distance": {
+    "description": "Absorption distance in world meters for volume transmission. Omit for no volume absorption. Requires positive thickness.",
+    "max": 1000000,
+    "min": 1e-06,
+    "type": "number"
+  },
+  "base_color": {
+    "default": [
+      0.35,
+      0.5,
+      0.16,
+      1
+    ],
+    "description": "Linear RGBA, multiplied by vertex color and optional sRGB texture.",
+    "type": "color"
+  },
+  "base_color_texture": {
+    "default": null,
+    "description": "PNG or JPEG, relative to recipe; embedded in GLB.",
+    "type": "string"
+  },
+  "double_sided": {
+    "default": true,
+    "description": "Disable back-face culling for thin leaves/cards.",
+    "type": "boolean"
+  },
+  "ior": {
+    "default": 1.5,
+    "description": "Dielectric index of refraction, exported with KHR_materials_ior when non-default. E.g. diamond 2.42. Does not model dispersion.",
+    "max": 3.0,
+    "min": 1.0,
+    "type": "number"
+  },
+  "metallic": {
+    "default": 0.0,
+    "description": "PBR metallic multiplier.",
+    "max": 1.0,
+    "min": 0.0,
+    "type": "number"
+  },
+  "metallic_roughness_texture": {
+    "default": null,
+    "description": "Linear packed texture, roughness in G, metallic in B.",
+    "type": "string"
+  },
+  "normal_texture": {
+    "default": null,
+    "description": "Tangent-space OpenGL normal PNG/JPEG.",
+    "type": "string"
+  },
+  "roughness": {
+    "default": 0.800000011920929,
+    "description": "PBR roughness multiplier.",
+    "max": 1.0,
+    "min": 0.0,
+    "type": "number"
+  },
+  "subsurface": {
+    "default": 0.0,
+    "description": "Burley surface diffusion weight in the Blender preview. Saved in GLB foliageutil extras.",
+    "max": 1.0,
+    "min": 0.0,
+    "type": "number"
+  },
+  "subsurface_radius": {
+    "default": [
+      1,
+      0.45,
+      0.25
+    ],
+    "description": "Positive RGB scattering radius ratios, multiplied by subsurface_scale.",
+    "max": 16.0,
+    "min": 9.999999974752427e-07,
+    "type": "vec3"
+  },
+  "subsurface_scale": {
+    "default": 0.001500000013038516,
+    "description": "Surface diffusion scale in meters in the Blender preview.",
+    "max": 1.0,
+    "min": 9.999999974752427e-07,
+    "type": "number"
+  },
+  "thickness": {
+    "default": 0.0,
+    "description": "Approximate volume thickness in mesh meters for refractive GLB materials. Positive values require transmission and a closed mesh; ray tracers use the actual surface distance.",
+    "max": 10000.0,
+    "min": 0.0,
+    "type": "number"
+  },
+  "translucency": {
+    "default": 0.0,
+    "description": "Thin-surface diffuse transmission weight, separate from alpha coverage. Saved in GLB foliageutil extras; applied by the Blender preview adapter.",
+    "max": 1.0,
+    "min": 0.0,
+    "type": "number"
+  },
+  "translucency_color": {
+    "default": [
+      1,
+      1,
+      1
+    ],
+    "description": "Linear RGB transmission tint, multiplied by textured base color in the Blender preview.",
+    "max": 1.0,
+    "min": 0.0,
+    "type": "vec3"
+  },
+  "transmission": {
+    "default": 0.0,
+    "description": "Optical transmission through glass or gems. Exports KHR_materials_transmission; independent of alpha coverage and thin-tissue translucency. Requires a compatible viewer shader.",
+    "max": 1.0,
+    "min": 0.0,
+    "type": "number"
+  }
+}

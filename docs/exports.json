@@ -1,0 +1,93 @@
+{
+  "card_bake": {
+    "description": "Stages only: saved CardBake name, required when geometry is card_bake. Each stage bakes its currently grown source and visible guides.",
+    "type": "string"
+  },
+  "end": {
+    "default": 1,
+    "description": "Ending normalized growth progress, inclusive and greater than start.",
+    "max": 1,
+    "min": 0,
+    "type": "number"
+  },
+  "fps": {
+    "default": 24,
+    "description": "Alembic only: samples per second. Last sample time is (frames-1)/fps.",
+    "max": 120,
+    "min": 1,
+    "type": "integer"
+  },
+  "frames": {
+    "default": 192,
+    "description": "Alembic only: uniformly sampled frames. Sample times are index/fps; changing topology is not interpolated by this exporter.",
+    "max": 2000,
+    "min": 2,
+    "type": "integer"
+  },
+  "geometry": {
+    "default": "mesh",
+    "description": "Stages only: regular generated geometry or foliage captured using a saved CardBake profile.",
+    "enum": [
+      "mesh",
+      "card_bake"
+    ],
+    "type": "string"
+  },
+  "lod": {
+    "default": "base",
+    "description": "base or a saved LOD name, applied before evaluating growth. Stage overrides may select another level.",
+    "type": "string"
+  },
+  "max_output_mb": {
+    "default": 2048,
+    "description": "Maximum total package file bytes. Checked during export and before publication; failed exports preserve an existing completed package.",
+    "max": 32768,
+    "min": 16,
+    "type": "integer"
+  },
+  "max_samples_mb": {
+    "default": 2048,
+    "description": "Cumulative uncompressed output mesh estimate, counting vertex and triangle records across samples. Not a process-memory limit.",
+    "max": 32768,
+    "min": 16,
+    "type": "integer"
+  },
+  "output": {
+    "description": "Portable relative package directory. Contains manifest.json plus animation.abc and materials, or one GLB/CardBake package per stage.",
+    "required": true,
+    "type": "string"
+  },
+  "source": {
+    "description": "Final mesh node for Alembic and regular geometry stages. CardBake stages use their selected bake profile's source, paths and keep.",
+    "required": true,
+    "type": "reference"
+  },
+  "stage_overrides": {
+    "default": {},
+    "description": "Stages only: zero-based step index to geometry/card_bake/lod overrides. Unspecified values inherit the profile.",
+    "type": "object"
+  },
+  "start": {
+    "default": 0,
+    "description": "Starting normalized growth progress, inclusive.",
+    "max": 1,
+    "min": 0,
+    "type": "number"
+  },
+  "steps": {
+    "default": 16,
+    "description": "Stages only: independent snapshots over start..end. Separate from the legacy growth.steps batch.",
+    "max": 128,
+    "min": 2,
+    "type": "integer"
+  },
+  "type": {
+    "description": "Export a native Ogawa geometry cache or independent growth-stage GLBs. Profiles run only with --export NAME.",
+    "enum": [
+      "alembic",
+      "stages"
+    ],
+    "required": true,
+    "type": "string"
+  }
+}

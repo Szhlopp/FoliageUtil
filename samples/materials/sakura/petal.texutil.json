@@ -1,0 +1,298 @@
+{
+  "size": 512,
+  "seed": 804,
+  "tile": false,
+  "nodes": {
+    "u": {
+      "op": "gradient"
+    },
+    "v": {
+      "op": "gradient",
+      "angle": 90
+    },
+    "half": {
+      "op": "constant",
+      "value": 0.5
+    },
+    "centered": {
+      "op": "math",
+      "input": "u",
+      "mode": "subtract",
+      "value": 0.5
+    },
+    "neck": {
+      "op": "math",
+      "input": "v",
+      "mode": "pow",
+      "value": 3
+    },
+    "fan": {
+      "op": "math",
+      "input": "centered",
+      "b": "neck",
+      "mode": "multiply"
+    },
+    "fan-amplitude": {
+      "op": "math",
+      "input": "fan",
+      "mode": "multiply",
+      "value": 1.8
+    },
+    "fan-map": {
+      "op": "math",
+      "input": "fan-amplitude",
+      "mode": "add",
+      "value": 0.5
+    },
+    "ellipse": {
+      "op": "shape",
+      "type": "circle",
+      "center": [
+        0.5,
+        0.49
+      ],
+      "size": [
+        0.8,
+        0.93
+      ],
+      "softness": 0.008
+    },
+    "fan-shape": {
+      "op": "warp",
+      "input": "ellipse",
+      "x": "fan-map",
+      "y": "half",
+      "strength": 1,
+      "edge": "transparent"
+    },
+    "notch": {
+      "op": "shape",
+      "type": "diamond",
+      "center": [
+        0.5,
+        0.025
+      ],
+      "size": [
+        0.14,
+        0.21
+      ],
+      "softness": 0.008
+    },
+    "notched": {
+      "op": "blend",
+      "a": "fan-shape",
+      "b": "notch",
+      "mode": "subtract",
+      "opacity": 1
+    },
+    "mask": {
+      "op": "math",
+      "input": "notched",
+      "mode": "clamp",
+      "range": [
+        0,
+        1
+      ]
+    },
+    "edge-x": {
+      "op": "simplex",
+      "scale": 8,
+      "fractal": "fbm",
+      "octaves": 3
+    },
+    "edge-y": {
+      "op": "simplex",
+      "scale": 12,
+      "fractal": "fbm",
+      "octaves": 3
+    },
+    "rim": {
+      "op": "warp",
+      "input": "mask",
+      "x": "edge-x",
+      "y": "edge-y",
+      "strength": 0.012,
+      "edge": "transparent"
+    },
+    "alpha": {
+      "op": "ramp",
+      "input": "rim",
+      "interpolation": "smooth",
+      "stops": [
+        [
+          0,
+          [
+            1,
+            1,
+            1,
+            0
+          ]
+        ],
+        [
+          1,
+          [
+            1,
+            1,
+            1,
+            1
+          ]
+        ]
+      ]
+    },
+    "grain": {
+      "op": "simplex",
+      "scale": 25,
+      "fractal": "fbm",
+      "octaves": 3,
+      "stretch": [
+        0.16,
+        3.2
+      ]
+    },
+    "veins": {
+      "op": "stripes",
+      "count": 13,
+      "wave": "sine"
+    },
+    "veins-curved": {
+      "op": "warp",
+      "input": "veins",
+      "x": "fan-map",
+      "y": "half",
+      "strength": 1,
+      "edge": "clamp"
+    },
+    "tissue": {
+      "op": "blend",
+      "a": "grain",
+      "b": "veins-curved",
+      "mode": "mix",
+      "opacity": 0.42
+    },
+    "pigment": {
+      "op": "blend",
+      "a": "v",
+      "b": "edge-x",
+      "mode": "add",
+      "opacity": 0.045
+    },
+    "pink": {
+      "op": "ramp",
+      "input": "pigment",
+      "interpolation": "smooth",
+      "stops": [
+        [
+          0,
+          "#fff4f5"
+        ],
+        [
+          0.35,
+          "#fbe9ee"
+        ],
+        [
+          0.68,
+          "#f5cad8"
+        ],
+        [
+          0.9,
+          "#e290af"
+        ],
+        [
+          1,
+          "#b54b78"
+        ]
+      ]
+    },
+    "vein-tint": {
+      "op": "ramp",
+      "input": "tissue",
+      "interpolation": "smooth",
+      "stops": [
+        [
+          0,
+          "#d8b2c3"
+        ],
+        [
+          0.35,
+          "#eed8e2"
+        ],
+        [
+          1,
+          "#ffffff"
+        ]
+      ]
+    },
+    "tinted": {
+      "op": "blend",
+      "a": "pink",
+      "b": "vein-tint",
+      "mode": "multiply",
+      "opacity": 0.3
+    },
+    "color": {
+      "op": "math",
+      "input": "alpha",
+      "b": "tinted",
+      "mode": "multiply"
+    },
+    "height-tissue": {
+      "op": "levels",
+      "input": "tissue",
+      "out": [
+        0.42,
+        0.54
+      ]
+    },
+    "height": {
+      "op": "blend",
+      "a": "height-tissue",
+      "b": "rim",
+      "mode": "multiply",
+      "opacity": 1
+    },
+    "roughness": {
+      "op": "levels",
+      "input": "grain",
+      "out": [
+        0.43,
+        0.57
+      ]
+    },
+    "normal": {
+      "op": "normal",
+      "input": "height-tissue",
+      "convention": "opengl",
+      "strength": 0.018,
+      "edge": "clamp"
+    },
+    "one": {
+      "op": "constant",
+      "value": 1
+    },
+    "zero": {
+      "op": "constant",
+      "value": 0
+    },
+    "metallic-roughness": {
+      "op": "pack",
+      "r": "one",
+      "g": "roughness",
+      "b": "zero"
+    }
+  },
+  "outputs": {
+    "color.png": {
+      "node": "color",
+      "alpha": true
+    },
+    "height.png": {
+      "node": "height",
+      "bits": 16
+    },
+    "normal.png": {
+      "node": "normal",
+      "bits": 16
+    },
+    "metallic-roughness.png": "metallic-roughness"
+  }
+}

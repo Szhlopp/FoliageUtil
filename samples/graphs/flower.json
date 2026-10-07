@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "name": "flower",
+  "description": "",
+  "seed": 42,
+  "units": "meters",
+  "materials": {
+    "stem": {
+      "base_color": [
+        0.13,
+        0.23,
+        0.035,
+        1
+      ]
+    },
+    "petal": {
+      "base_color": [
+        0.65,
+        0.075,
+        0.19,
+        1
+      ]
+    },
+    "gold": {
+      "base_color": [
+        0.65,
+        0.38,
+        0.045,
+        1
+      ]
+    }
+  },
+  "nodes": {
+    "stalk": {
+      "op": "trunk",
+      "length": 0.7,
+      "radius": 0.008,
+      "segments": 14,
+      "taper": 0.4,
+      "flare": 0,
+      "noise": 0
+    },
+    "stem": {
+      "op": "tube",
+      "input": "stalk",
+      "sides": 6,
+      "material": "stem",
+      "cap_material": "stem"
+    },
+    "leaves_at": {
+      "op": "scatter",
+      "input": "stalk",
+      "count": 4,
+      "range": [
+        0.15,
+        0.7
+      ],
+      "angle": 55
+    },
+    "leaf": {
+      "op": "leaf",
+      "shape": "lanceolate",
+      "length": 0.18,
+      "width": 0.06,
+      "curl": 0.25,
+      "segments": 6
+    },
+    "leaves": {
+      "op": "instance",
+      "input": "leaf",
+      "points": "leaves_at"
+    },
+    "petal": {
+      "op": "leaf",
+      "shape": "petal",
+      "length": 0.14,
+      "width": 0.065,
+      "curl": -0.25,
+      "fold": 0.25,
+      "segments": 8,
+      "material": "petal"
+    },
+    "petals_at": {
+      "op": "radial",
+      "count": 10,
+      "center": [
+        0,
+        0.7,
+        0
+      ],
+      "radius": [
+        0.015,
+        0.015
+      ],
+      "tilt": [
+        80,
+        80
+      ],
+      "jitter": 0.03
+    },
+    "petals": {
+      "op": "instance",
+      "input": "petal",
+      "points": "petals_at",
+      "color_variation": 0.1
+    },
+    "center_shape": {
+      "op": "ellipsoid",
+      "radii": [
+        0.035,
+        0.022,
+        0.035
+      ],
+      "sides": 16,
+      "rings": 8,
+      "material": "gold"
+    },
+    "center": {
+      "op": "transform",
+      "input": "center_shape",
+      "translation": [
+        0,
+        0.713,
+        0
+      ]
+    },
+    "flower": {
+      "op": "merge",
+      "inputs": [
+        "stem",
+        "leaves",
+        "petals",
+        "center"
+      ]
+    }
+  },
+  "outputs": {
+    "flower.glb": "flower",
+    "flower.obj": "flower"
+  }
+}

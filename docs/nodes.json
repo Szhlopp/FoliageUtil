@@ -1,0 +1,1899 @@
+{
+  "boolean": {
+    "description": "Union, subtract or intersect two oriented closed solids. Preserves source materials, UVs, colors and wind, including cutter properties on new cuts. Recomputes normals; permits cavities and chained cuts.",
+    "output": "mesh",
+    "parameters": {
+      "crease_angle": {
+        "default": 45,
+        "description": "Normal-smoothing threshold in degrees. 180 smooths shading across joins; lower values keep sharp creases. Does not move the surface.",
+        "max": 180.0,
+        "min": 0.0,
+        "type": "number"
+      },
+      "input": {
+        "description": "Name of an upstream node.",
+        "kinds": [
+          "mesh"
+        ],
+        "required": true,
+        "type": "reference"
+      },
+      "max_input_triangles": {
+        "default": 250000,
+        "description": "Bound total triangles across both operands before preparing Boolean inputs.",
+        "max": 1000000.0,
+        "min": 4.0,
+        "type": "integer"
+      },
+      "max_shells": {
+        "default": 1024,
+        "description": "Bound total input boundary shells, including cavity surfaces, before the Boolean operation.",
+        "max": 10000.0,
+        "min": 1.0,
+        "type": "integer"
+      },
+      "operation": {
+        "default": "difference",
+        "description": "Combine input and tool: union, input minus tool, or their common volume. Use solidify first on overlapping shell assemblies. Tool materials label newly exposed cuts.",
+        "enum": [
+          "union",
+          "difference",
+          "intersection"
+        ],
+        "type": "string"
+      },
+      "require_connected": {
+        "default": true,
+        "description": "Require at most one positive-volume result body. Closed cavities are allowed. Empty intermediate results are allowed; an empty final output fails ordinary export.",
+        "type": "boolean"
+      },
+      "tool": {
+        "description": "Name of an upstream node.",
+        "kinds": [
+          "mesh"
+        ],
+        "required": true,
+        "type": "reference"
+      },
+      "weld_tolerance": {
+        "default": 0.0,
+        "description": "World-meter tolerance for joining duplicated seam vertices. Zero uses a scale-dependent float-precision tolerance; not a gap-filling radius.",
+        "max": 0.10000000149011612,
+        "min": 0.0,
+        "type": "number"
+      }
+    }
+  },
+  "branch": {
+    "description": "Attach another generation of paths. Chain nodes for recursive branching.",
+    "output": "skeleton",
+    "parameters": {
+      "angle": {
+        "default": 48.0,
+        "description": "Angle from parent tangent in degrees.",
+        "max": 180.0,
+        "min": 0.0,
+        "type": "number"
+      },
+      "angle_jitter": {
+        "default": 12.0,
+        "description": "Random +/- branch angle.",
+        "max": 180.0,
+        "min": 0.0,
+        "type": "number"
+      },
+      "azimuth": {
+        "default": 137.5077667236328,
+        "description": "Successive azimuth increment in degrees.",
+        "max": 360.0,
+        "min": -360.0,
+        "type": "number"
+      },
+      "bend": {
+        "default": [
+          0,
+          0,
+          0
+        ],
+        "description": "Quadratic displacement at the tip in world meters.",
+        "max": 100000,
+        "min": -100000,
+        "type": "vec3"
+      },
+      "count": {
+        "default": 8,
+        "description": "New branches per input stem. Output contains children only.",
+        "max": 10000.0,
+        "min": 0.0,
+        "type": "integer"
+      },
+      "distribution": {
+        "default": "alternate",
+        "description": "Phyllotaxis pattern.",
+        "enum": [
+          "alternate",
+          "opposite",
+          "whorled",
+          "random"
+        ],
+        "type": "string"
+      },
+      "input": {
+        "description": "Name of an upstream node.",
+        "kinds": [
+          "skeleton"
+        ],
+        "required": true,
+        "type": "reference"
+      },
+      "length": {
+        "default": 1.0,
+        "description": "Path length in meters.",
+        "max": 10000.0,
+        "min": 9.999999747378752e-06,
+        "type": "number"
+      },
+      "length_decay": {
+        "default": 0.4000000059604645,
+        "description": "Shorten children nearer parent tip.",
+        "max": 0.9900000095367432,
+        "min": 0.0,
+        "type": "number"
+      },
+      "length_variation": {
+        "default": 0.25,
+        "description": "Random fractional +/- length variation.",
+        "max": 0.949999988079071,
+        "min": 0.0,
+        "type": "number"
+      },
+      "noise": {
+        "default": 0.03999999910593033,
+        "description": "Seeded directional variation per step.",
+        "max": 2.0,
+        "min": 0.0,
+        "type": "number"
+      },
+      "noise_profile": {
+        "default": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "description": "Piecewise-linear [normalized length, multiplier] keys. Fades new directional perturbations, not bends already accumulated. Supply 2..32 keys, strictly increasing from position 0 to 1; bounds apply to multipliers.",
+        "max": 1.0,
+        "min": 0.0,
+        "type": "profile"
+      },
+      "radius_profile": {
+        "default": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "description": "Piecewise-linear radius multiplier over normalized length, applied after taper and flare. Supply 2..32 keys, strictly increasing from position 0 to 1; bounds apply to multipliers.",
+        "max": 10.0,
+        "min": 0.0010000000474974513,
+        "type": "profile"
+      },
+      "radius_scale": {
+        "default": 0.4000000059604645,
+        "description": "Child base radius relative to parent radius at attachment.",
+        "max": 1.0,
+        "min": 0.0010000000474974513,
+        "type": "number"
+      },
+      "range": {
+        "default": [
+          0.2,
+          0.95
+        ],
+        "description": "Attachment interval along parent arc length, ordered low to high.",
+        "max": 1.0,
+        "min": 0.0,
+        "type": "pair"
+      },
+      "seed": {
+        "description": "Optional node seed, independent of the root seed. Node name still identifies its random stream.",
+        "max": 2147483647.0,
+        "min": -2147483648.0,
+        "type": "integer"
+      },
+      "segments": {
+        "default": 12,
+        "description": "Longitudinal growth steps.",
+        "max": 512.0,
+        "min": 1.0,
+        "type": "integer"
+      },
+      "taper": {
+        "default": 0.8999999761581421,
+        "description": "Fraction of radius lost at the tip; tip remains nonzero.",
+        "max": 0.9990000128746033,
+        "min": 0.0,
+        "type": "number"
+      },
+      "whorl": {
+        "default": 3,
+        "description": "Branches sharing a height in whorled mode.",
+        "max": 32.0,
+        "min": 2.0,
+        "type": "integer"
+      }
+    }
+  },
+  "card": {
+    "description": "Create rectangular atlas cards, optionally crossed. Supply alpha-cutout material for silhouettes.",
+    "output": "mesh",
+    "parameters": {
+      "curl": {
+        "default": 0.0,
+        "description": "Quadratic bend along local Z, in multiples of height; anchored at pivot Y.",
+        "max": 4.0,
+        "min": -4.0,
+        "type": "number"
+      },
+      "fold": {
+        "default": 0.0,
+        "description": "Smooth crosswise cup: edge Z displacement in multiples of half-width.",
+        "max": 2.0,
+        "min": -2.0,
+        "type": "number"
+      },
+      "height": {
+        "default": 0.5,
+        "description": "Card height along +Y.",
+        "max": 10000.0,
+        "min": 9.999999747378752e-06,
+        "type": "number"
+      },
+      "material": {
+        "default": "leaf",
+        "description": "Alpha-cutout or opaque material slot.",
+        "type": "material"
+      },
+      "pivot": {
+        "default": "base",
+        "description": "Card anchor.",
+        "enum": [
+          "base",
+          "center"
+        ],
+        "type": "string"
+      },
+      "planes": {
+        "default": 1,
+        "description": "Crossed planes around local Y.",
+        "max": 8.0,
+        "min": 1.0,
+        "type": "integer"
+      },
+      "segments": {
+        "default": 1,
+        "description": "Longitudinal subdivisions; use at least 2 for curl or twist.",
+        "max": 128.0,
+        "min": 1.0,
+        "type": "integer"
+      },
+      "twist": {
+        "default": 0.0,
+        "description": "Rotation about local Y in degrees per card height, zero at pivot Y.",
+        "max": 720.0,
+        "min": -720.0,
+        "type": "number"
+      },
+      "uv_rect": {
+        "default": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "description": "Atlas [u0,v0,u1,v1], strictly increasing within 0..1.",
+        "type": "rect"
+      },
+      "width": {
+        "default": 0.30000001192092896,
+        "description": "Card width.",
+        "max": 10000.0,
+        "min": 9.999999747378752e-06,
+        "type": "number"
+      },
+      "width_segments": {
+        "default": 1,
+        "description": "Width subdivisions; use at least 2 for fold.",
+        "max": 32.0,
+        "min": 1.0,
+        "type": "integer"
+      }
+    }
+  },
+  "crystal": {
+    "description": "Create a closed faceted prism or cut gem from polygon rings. Base is at Y=0 and top at height. Profiles form points, girdles, crowns and flat tables; flat normals preserve facets.",
+    "output": "mesh",
+    "parameters": {
+      "height": {
+        "default": 1.0,
+        "description": "Full height in meters, from base to tip or table.",
+        "max": 10000.0,
+        "min": 9.999999747378752e-06,
+        "type": "number"
+      },
+      "material": {
+        "default": "leaf",
+        "description": "Material slot; declare gemstone colors and surface roughness.",
+        "type": "material"
+      },
+      "radial_jitter": {
+        "default": 0.0,
+        "description": "Seeded fractional +/- radius variation per polygon corner, shared by all rings to retain planar prism faces.",
+        "max": 0.35,
+        "min": 0.0,
+        "type": "number"
+      },
+      "radius": {
+        "default": 0.20000000298023224,
+        "description": "Circumradius in meters before the profile and jitter.",
+        "max": 10000.0,
+        "min": 9.999999747378752e-06,
+        "type": "number"
+      },
+      "radius_profile": {
+        "default": [
+          [
+            0,
+            1
+          ],
+          [
+            0.72,
+            1
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        "description": "Polygon radius over normalized height. Each key makes a ring; only endpoints may be zero (a single apex). Positive endpoints are capped. Nonzero multipliers must be at least 0.0001, and at least one key must be positive. Supply 2..32 keys, strictly increasing from position 0 to 1; bounds apply to multipliers.",
+        "max": 4.0,
+        "min": 0.0,
+        "type": "profile"
+      },
+      "seed": {
+        "description": "Optional node seed, independent of the root seed. Node name still identifies its random stream.",
+        "max": 2147483647.0,
+        "min": -2147483648.0,
+        "type": "integer"
+      },
+      "sides": {
+        "default": 6,
+        "description": "Polygon sides per ring. Six suits quartz; eight supports octagonal gems.",
+        "max": 64.0,
+        "min": 3.0,
+        "type": "integer"
+      }
+    }
+  },
+  "curve": {
+    "description": "Author an explicit polyline path; tube and scatter use the same path representation.",
+    "output": "skeleton",
+    "parameters": {
+      "points": {
+        "description": "2..513 distinct consecutive XYZ positions in meters.",
+        "required": true,
+        "type": "positions"
+      },
+      "radius": {
+        "default": 0.03999999910593033,
+        "description": "Base radius.",
+        "max": 10000.0,
+        "min": 9.999999747378752e-06,
+        "type": "number"
+      },
+      "radius_profile": {
+        "default": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "description": "Piecewise-linear radius multiplier over normalized arc length, applied after taper. Supply 2..32 keys, strictly increasing from position 0 to 1; bounds apply to multipliers.",
+        "max": 10.0,
+        "min": 0.0010000000474974513,
+        "type": "profile"
+      },
+      "taper": {
+        "default": 0.8999999761581421,
+        "description": "Fractional tip radius reduction.",
+        "max": 0.9990000128746033,
+        "min": 0.0,
+        "type": "number"
+      }
+    }
+  },
+  "ellipsoid": {
+    "description": "Create a closed bud, grain, fruit or flower center, centered at the origin.",
+    "output": "mesh",
+    "parameters": {
+      "material": {
+        "default": "leaf",
+        "description": "Material slot.",
+        "type": "material"
+      },
+      "radii": {
+        "default": [
+          0.05,
+          0.08,
+          0.05
+        ],
+        "description": "Positive XYZ radii in meters.",
+        "max": 100000,
+        "min": -100000,
+        "type": "vec3"
+      },
+      "rings": {
+        "default": 8,
+        "description": "Latitude subdivisions.",
+        "max": 128.0,
+        "min": 3.0,
+        "type": "integer"
+      },
+      "sides": {
+        "default": 12,
+        "description": "Longitude subdivisions.",
+        "max": 128.0,
+        "min": 3.0,
+        "type": "integer"
+      }
+    }
+  },
+  "grow": {
+    "description": "Shorten and bend each input stem from its own base, preserving retained segment lengths. Apply before attaching children.",
+    "output": "skeleton",
+    "parameters": {
+      "amount": {
+        "default": 1.0,
+        "description": "Retained fraction of arc length.",
+        "max": 1.0,
+        "min": 0.0010000000474974513,
+        "type": "number"
+      },
+      "direction": {
+        "default": [
+          0,
+          1,
+          0
+        ],
+        "description": "Nonzero tropism direction, world space.",
+        "max": 100000,
+        "min": -100000,
+        "type": "vec3"
+      },
+      "input": {
+        "description": "Name of an upstream node.",
+        "kinds": [
+          "skeleton"
+        ],
+        "required": true,
+        "type": "reference"
+      },
+      "interpolation": {
+        "default": "linear",
+        "description": "Direction blend. Spherical turns through the angle smoothly, including opposite directions with a deterministic perpendicular bend plane. Linear retains the original normalized-vector blend.",
+        "enum": [
+          "linear",
+          "spherical"
+        ],
+        "type": "string"
+      },
+      "radius_scale": {
+        "default": 1.0,
+        "description": "Radius multiplier.",
+        "max": 10000.0,
+        "min": 9.999999747378752e-06,
+        "type": "number"
+      },
+      "strength": {
+        "default": 0.20000000298023224,
+        "description": "Directional attraction, multiplied by strength_profile.",
+        "max": 1.0,
+        "min": 0.0,
+        "type": "number"
+      },
+      "strength_profile": {
+        "default": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "description": "Directional attraction multiplier over retained normalized arc length. Zero keeps the source tangent; one applies full strength. Use an early plateau for hanging strands. Supply 2..32 keys, strictly increasing from position 0 to 1; bounds apply to multipliers.",
+        "max": 1.0,
+        "min": 0.0,
+        "type": "profile"
+      }
+    }
+  },
+  "instance": {
+    "description": "Flatten source geometry onto placement frames. Sources can be branches, clusters, flowers or whole plants.",
+    "output": "mesh",
+    "parameters": {
+      "atlas": {
+        "default": null,
+        "description": "TexUtil spritesheet JSON manifest, relative to recipe. Remap each copy's 0..1 UVs into one occupied cell; bind its atlas PNGs in the material.",
+        "type": "string"
+      },
+      "atlas_index": {
+        "default": 0,
+        "description": "Zero-based cell for fixed mode; must be occupied.",
+        "max": 255.0,
+        "min": 0.0,
+        "type": "integer"
+      },
+      "atlas_mode": {
+        "default": "random",
+        "description": "Seeded random cell, row-major cycling, or atlas_index. Requires atlas when non-default.",
+        "enum": [
+          "random",
+          "cycle",
+          "fixed"
+        ],
+        "type": "string"
+      },
+      "color_variation": {
+        "default": 0.11999999731779099,
+        "description": "Per-instance vertex-color darkening; GLB preserves colors.",
+        "max": 1.0,
+        "min": 0.0,
+        "type": "number"
+      },
+      "density": {
+        "default": 1.0,
+        "description": "Keep ceil(density * placement count) copies as a nested seeded subset. Preserves original frame, size, color and atlas choice for survivors; zero removes all copies.",
+        "max": 1.0,
+        "min": 0.0,
+        "type": "number"
+      },
+      "input": {
+        "description": "Name of an upstream node.",
+        "kinds": [
+          "mesh"
+        ],
+        "required": true,
+        "type": "reference"
+      },
+      "points": {
+        "description": "Name of an upstream node.",
+        "kinds": [
+          "points"
+        ],
+        "required": true,
+        "type": "reference"
+      },
+      "rotation": {
+        "default": [
+          0,
+          0,
+          0
+        ],
+        "description": "Local XYZ Euler rotation in degrees before placement.",
+        "max": 100000,
+        "min": -100000,
+        "type": "vec3"
+      },
+      "scale": {
+        "default": 1.0,
+        "description": "Additional uniform scale.",
+        "max": 10000.0,
+        "min": 9.999999747378752e-06,
+        "type": "number"
+      },
+      "scale_jitter": {
+        "default": [
+          0,
+          0,
+          0
+        ],
+        "description": "Independent seeded fractional +/- local XYZ size variation around the prototype origin, before rotation. [0.1,0.15,0] varies width +/-10% and height +/-15%. UVs stay attached.",
+        "max": 0.95,
+        "min": 0,
+        "type": "vec3"
+      },
+      "seed": {
+        "description": "Optional node seed, independent of the root seed. Node name still identifies its random stream.",
+        "max": 2147483647.0,
+        "min": -2147483648.0,
+        "type": "integer"
+      }
+    }
+  },
+  "leaf": {
+    "description": "Generate a tapered, curved leaf, blade or petal with midrib and normalized UVs.",
+    "output": "mesh",
+    "parameters": {
+      "curl": {
+        "default": 0.15000000596046448,
+        "description": "Quadratic tip bend along local Z, in multiples of length.",
+        "max": 4.0,
+        "min": -4.0,
+        "type": "number"
+      },
+      "edge_frequency": {
+        "default": 3.0,
+        "description": "Number of edge ripple cycles over the leaf length.",
+        "max": 32.0,
+        "min": 0.10000000149011612,
+        "type": "number"
+      },
+      "edge_wave": {
+        "default": 0.0,
+        "description": "Ripple amplitude along local Z as a fraction of half-width, strongest at the edges and zero at the base and tip.",
+        "max": 1.0,
+        "min": 0.0,
+        "type": "number"
+      },
+      "fold": {
+        "default": 0.11999999731779099,
+        "description": "Edge Z displacement in multiples of half-width.",
+        "max": 2.0,
+        "min": -2.0,
+        "type": "number"
+      },
+      "lateral_bend": {
+        "default": 0.0,
+        "description": "Quadratic lateral tip bend along local X, in multiples of length. Base stays fixed.",
+        "max": 2.0,
+        "min": -2.0,
+        "type": "number"
+      },
+      "length": {
+        "default": 0.25,
+        "description": "Length along local +Y, base at origin.",
+        "max": 10000.0,
+        "min": 9.999999747378752e-06,
+        "type": "number"
+      },
+      "material": {
+        "default": "leaf",
+        "description": "Material slot.",
+        "type": "material"
+      },
+      "segments": {
+        "default": 8,
+        "description": "Longitudinal rows.",
+        "max": 128.0,
+        "min": 2.0,
+        "type": "integer"
+      },
+      "shape": {
+        "default": "oval",
+        "description": "Width profile.",
+        "enum": [
+          "oval",
+          "lanceolate",
+          "needle",
+          "petal"
+        ],
+        "type": "string"
+      },
+      "twist": {
+        "default": 0.0,
+        "description": "Gradual rotation about local Y in degrees.",
+        "max": 720.0,
+        "min": -720.0,
+        "type": "number"
+      },
+      "width": {
+        "default": 0.11999999731779099,
+        "description": "Maximum full width along X.",
+        "max": 10000.0,
+        "min": 9.999999747378752e-06,
+        "type": "number"
+      },
+      "width_profile": {
+        "description": "Optional full-width envelope in multiples of width, overriding shape's width outline. End values must be zero; interior values must be positive. Supply 2..32 keys, strictly increasing from position 0 to 1; bounds apply to multipliers.",
+        "max": 2.0,
+        "min": 0.0,
+        "type": "profile"
+      },
+      "width_segments": {
+        "default": 2,
+        "description": "Subdivisions across the curved surface; increase for smooth petals.",
+        "max": 32.0,
+        "min": 2.0,
+        "type": "integer"
+      }
+    }
+  },
+  "material": {
+    "description": "Assign one material to all faces of a mesh.",
+    "output": "mesh",
+    "parameters": {
+      "input": {
+        "description": "Name of an upstream node.",
+        "kinds": [
+          "mesh"
+        ],
+        "required": true,
+        "type": "reference"
+      },
+      "name": {
+        "default": "leaf",
+        "description": "Material slot name.",
+        "type": "material"
+      }
+    }
+  },
+  "merge": {
+    "description": "Combine two or more values of the same type, preserving mesh materials.",
+    "output": "same",
+    "parameters": {
+      "inputs": {
+        "description": "2..128 upstream node names, all of the same kind.",
+        "required": true,
+        "type": "references"
+      }
+    }
+  },
+  "mesh": {
+    "description": "Import an OBJ prototype with positions, optional UVs/normals, and convex polygon faces.",
+    "output": "mesh",
+    "parameters": {
+      "material": {
+        "default": "leaf",
+        "description": "Material slot for imported faces.",
+        "type": "material"
+      },
+      "path": {
+        "description": "OBJ filename relative to recipe. Material slots are replaced by material.",
+        "required": true,
+        "type": "string"
+      }
+    }
+  },
+  "orient": {
+    "description": "Aim prototype +Z (the card face normal) at a direction, optionally with seeded angular variation.",
+    "output": "points",
+    "parameters": {
+      "center": {
+        "default": [
+          0,
+          0,
+          0
+        ],
+        "description": "Pivot center for outward/inward facing.",
+        "max": 100000,
+        "min": -100000,
+        "type": "vec3"
+      },
+      "direction": {
+        "default": [
+          0,
+          0,
+          1
+        ],
+        "description": "Nonzero normal for fixed facing and fallback at the pivot.",
+        "max": 100000,
+        "min": -100000,
+        "type": "vec3"
+      },
+      "horizontal": {
+        "default": false,
+        "description": "Project outward/inward direction perpendicular to up, keeping cards upright around the pivot.",
+        "type": "boolean"
+      },
+      "input": {
+        "description": "Name of an upstream node.",
+        "kinds": [
+          "points"
+        ],
+        "required": true,
+        "type": "reference"
+      },
+      "mode": {
+        "default": "outward",
+        "description": "Face away from center, toward center, a fixed direction, or keep incoming orientation.",
+        "enum": [
+          "outward",
+          "inward",
+          "fixed",
+          "keep"
+        ],
+        "type": "string"
+      },
+      "rotation_jitter": {
+        "default": [
+          0,
+          0,
+          0
+        ],
+        "description": "Seeded +/- local XYZ rotation in degrees. Y changes facing; Z rolls the card. Zero is exact alignment.",
+        "max": 180,
+        "min": 0,
+        "type": "vec3"
+      },
+      "seed": {
+        "description": "Optional node seed, independent of the root seed. Node name still identifies its random stream.",
+        "max": 2147483647.0,
+        "min": -2147483648.0,
+        "type": "integer"
+      },
+      "up": {
+        "default": [
+          0,
+          1,
+          0
+        ],
+        "description": "Nonzero preferred card-up axis.",
+        "max": 100000,
+        "min": -100000,
+        "type": "vec3"
+      }
+    }
+  },
+  "prune": {
+    "description": "Keep complete stems whose tip is inside or outside a sphere; does not cut tubes.",
+    "output": "skeleton",
+    "parameters": {
+      "center": {
+        "default": [
+          0,
+          2,
+          0
+        ],
+        "description": "Selection sphere center.",
+        "max": 100000,
+        "min": -100000,
+        "type": "vec3"
+      },
+      "input": {
+        "description": "Name of an upstream node.",
+        "kinds": [
+          "skeleton"
+        ],
+        "required": true,
+        "type": "reference"
+      },
+      "inside": {
+        "default": true,
+        "description": "Keep inside the sphere; false keeps outside.",
+        "type": "boolean"
+      },
+      "radius": {
+        "default": 2.0,
+        "description": "Selection sphere radius.",
+        "max": 10000.0,
+        "min": 9.999999747378752e-06,
+        "type": "number"
+      }
+    }
+  },
+  "radial": {
+    "description": "Place oriented points in a ring or radial spiral. Use for petals, rosettes, cones and seed heads.",
+    "output": "points",
+    "parameters": {
+      "angle": {
+        "default": 0.0,
+        "description": "Starting azimuth in degrees.",
+        "max": 36000.0,
+        "min": -36000.0,
+        "type": "number"
+      },
+      "angle_step": {
+        "default": 137.5077667236328,
+        "description": "Successive spiral azimuth increment, degrees.",
+        "max": 36000.0,
+        "min": -36000.0,
+        "type": "number"
+      },
+      "center": {
+        "default": [
+          0,
+          0,
+          0
+        ],
+        "description": "Center position.",
+        "max": 100000,
+        "min": -100000,
+        "type": "vec3"
+      },
+      "count": {
+        "default": 12,
+        "description": "Number of placements.",
+        "max": 100000.0,
+        "min": 0.0,
+        "type": "integer"
+      },
+      "height": {
+        "default": [
+          0,
+          0
+        ],
+        "description": "Start and end height relative to center.",
+        "max": 10000.0,
+        "min": -10000.0,
+        "type": "pair"
+      },
+      "jitter": {
+        "default": 0.03999999910593033,
+        "description": "Random fractional radius/scale and angular variation.",
+        "max": 0.949999988079071,
+        "min": 0.0,
+        "type": "number"
+      },
+      "mode": {
+        "default": "ring",
+        "description": "Ring uses evenly spaced 360 degrees; spiral uses angle_step.",
+        "enum": [
+          "ring",
+          "spiral"
+        ],
+        "type": "string"
+      },
+      "radius": {
+        "default": [
+          0.1,
+          0.1
+        ],
+        "description": "Start and end radius, may increase or decrease.",
+        "max": 10000.0,
+        "min": 0.0,
+        "type": "pair"
+      },
+      "scale": {
+        "default": [
+          1,
+          1
+        ],
+        "description": "Start and end placement scale.",
+        "max": 10000.0,
+        "min": 9.999999747378752e-06,
+        "type": "pair"
+      },
+      "seed": {
+        "description": "Optional node seed, independent of the root seed. Node name still identifies its random stream.",
+        "max": 2147483647.0,
+        "min": -2147483648.0,
+        "type": "integer"
+      },
+      "tilt": {
+        "default": [
+          60,
+          60
+        ],
+        "description": "Start and end angle from up; local +Z faces radially outward.",
+        "max": 180.0,
+        "min": 0.0,
+        "type": "pair"
+      }
+    }
+  },
+  "ribbon": {
+    "description": "Sweep alpha-card strips along paths. A packed leafy-spray atlas can represent many leaves on each strip; crossed planes retain coverage from different views.",
+    "output": "mesh",
+    "parameters": {
+      "atlas": {
+        "default": null,
+        "description": "TexUtil sprite atlas manifest. Each path uses one cell shared by all its crossed planes; bind its maps on the material.",
+        "type": "string"
+      },
+      "atlas_index": {
+        "default": 0,
+        "description": "Occupied cell index for fixed mode.",
+        "max": 255.0,
+        "min": 0.0,
+        "type": "integer"
+      },
+      "atlas_mode": {
+        "default": "random",
+        "description": "Select one occupied cell per path.",
+        "enum": [
+          "random",
+          "cycle",
+          "fixed"
+        ],
+        "type": "string"
+      },
+      "color_variation": {
+        "default": 0.11999999731779099,
+        "description": "Seeded per-path color darkening.",
+        "max": 1.0,
+        "min": 0.0,
+        "type": "number"
+      },
+      "density": {
+        "default": 1.0,
+        "description": "Retain ceil(density * path count) strips as nested seeded subsets; survivors keep their atlas cell, roll and color.",
+        "max": 1.0,
+        "min": 0.0,
+        "type": "number"
+      },
+      "input": {
+        "description": "Name of an upstream node.",
+        "kinds": [
+          "skeleton"
+        ],
+        "required": true,
+        "type": "reference"
+      },
+      "material": {
+        "default": "leaf",
+        "description": "Use double-sided MASK with an actual RGBA packed-spray texture.",
+        "type": "material"
+      },
+      "planes": {
+        "default": 2,
+        "description": "Crossed strips around each path tangent.",
+        "max": 8.0,
+        "min": 1.0,
+        "type": "integer"
+      },
+      "rotation": {
+        "default": 0.0,
+        "description": "Roll around the path tangent in degrees.",
+        "max": 36000.0,
+        "min": -36000.0,
+        "type": "number"
+      },
+      "rotation_jitter": {
+        "default": 0.0,
+        "description": "Seeded +/- roll for each path.",
+        "max": 180.0,
+        "min": 0.0,
+        "type": "number"
+      },
+      "seed": {
+        "description": "Optional node seed, independent of the root seed. Node name still identifies its random stream.",
+        "max": 2147483647.0,
+        "min": -2147483648.0,
+        "type": "integer"
+      },
+      "stride": {
+        "default": 4,
+        "description": "Retain every Nth path sample and both endpoints. Larger stride lowers topology.",
+        "max": 512.0,
+        "min": 1.0,
+        "type": "integer"
+      },
+      "width": {
+        "default": 0.30000001192092896,
+        "description": "Full strip width in meters, independent of stem radius and atlas aspect ratio.",
+        "max": 10000.0,
+        "min": 9.999999747378752e-06,
+        "type": "number"
+      },
+      "width_profile": {
+        "default": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "description": "Width multiplier over normalized retained arc length; positive widths keep end quads valid. Supply 2..32 keys, strictly increasing from position 0 to 1; bounds apply to multipliers.",
+        "max": 4.0,
+        "min": 0.0010000000474974513,
+        "type": "profile"
+      }
+    }
+  },
+  "rock": {
+    "description": "Create a closed, seeded rock centered at the origin. Subdivided icosphere directions carry coherent radial weathering and optional horizontal strata. Use Boolean cuts for caves, cliffs and broken faces.",
+    "output": "mesh",
+    "parameters": {
+      "color_variation": {
+        "default": 0.18000000715255737,
+        "description": "Coherent vertex-color darkening, multiplied by the material. Uses a separate seed stream from geometry.",
+        "max": 1.0,
+        "min": 0.0,
+        "type": "number"
+      },
+      "material": {
+        "default": "bark",
+        "description": "Material slot; declare a stone material for rocks.",
+        "type": "material"
+      },
+      "noise": {
+        "default": 0.23999999463558197,
+        "description": "Fractional radial weathering amplitude. Positive radii preserve a closed star-shaped surface.",
+        "max": 0.7,
+        "min": 0.0,
+        "type": "number"
+      },
+      "noise_octaves": {
+        "default": 3,
+        "description": "Coherent weathering octaves, with halved amplitude at each octave.",
+        "max": 6.0,
+        "min": 1.0,
+        "type": "integer"
+      },
+      "noise_scale": {
+        "default": 2.5,
+        "description": "Noise frequency in normalized rock coordinates, independent of size.",
+        "max": 32.0,
+        "min": 0.1,
+        "type": "number"
+      },
+      "roundness": {
+        "default": 0.75,
+        "description": "One starts from an ellipsoid; smaller values approach a block with rounded corners.",
+        "max": 1.0,
+        "min": 0.1,
+        "type": "number"
+      },
+      "seed": {
+        "description": "Optional node seed, independent of the root seed. Node name still identifies its random stream.",
+        "max": 2147483647.0,
+        "min": -2147483648.0,
+        "type": "integer"
+      },
+      "shading": {
+        "default": "flat",
+        "description": "Flat triangle facets or area-weighted smooth vertex normals. Both retain identical closed geometry.",
+        "enum": [
+          "flat",
+          "smooth"
+        ],
+        "type": "string"
+      },
+      "size": {
+        "default": [
+          1.5,
+          1,
+          1.2
+        ],
+        "description": "Nominal full XYZ dimensions in meters before noise; actual bounds vary with seed.",
+        "max": 10000.0,
+        "min": 9.999999747378752e-05,
+        "type": "vec3"
+      },
+      "strata": {
+        "default": 0.0,
+        "description": "Fractional radial amplitude of horizontal layering.",
+        "max": 0.4000000059604645,
+        "min": 0.0,
+        "type": "number"
+      },
+      "strata_frequency": {
+        "default": 5.0,
+        "description": "Layer cycles across nominal height. Increase subdivisions to resolve layers.",
+        "max": 32.0,
+        "min": 1.0,
+        "type": "number"
+      },
+      "subdivisions": {
+        "default": 2,
+        "description": "Icosphere refinement: 20 * 4^subdivisions triangles. More detail resolves weathering; zero is a coarse icosahedron.",
+        "max": 5.0,
+        "min": 0.0,
+        "type": "integer"
+      }
+    }
+  },
+  "roots": {
+    "description": "Create spreading root paths from each input stem, descending to a world-Y ground plane and burying their tips. Output contains roots only; tube them and merge with the trunk.",
+    "output": "skeleton",
+    "parameters": {
+      "angle": {
+        "default": 0.0,
+        "description": "Starting angle around world +Y, in degrees from +X toward +Z.",
+        "max": 36000.0,
+        "min": -36000.0,
+        "type": "number"
+      },
+      "angle_jitter": {
+        "default": 10.0,
+        "description": "Seeded +/- azimuth variation in degrees.",
+        "max": 180.0,
+        "min": 0.0,
+        "type": "number"
+      },
+      "attachment": {
+        "default": 0.05000000074505806,
+        "description": "Attachment on the parent by normalized arc length. Roots start on its centerline to overlap the parent tube.",
+        "max": 1.0,
+        "min": 0.0,
+        "type": "number"
+      },
+      "bury_depth": {
+        "default": 0.20000000298023224,
+        "description": "Tip centerline depth below ground in meters. Choose more than tip radius to hide its cap.",
+        "max": 10000.0,
+        "min": 0.0,
+        "type": "number"
+      },
+      "count": {
+        "default": 8,
+        "description": "Roots per input stem.",
+        "max": 10000.0,
+        "min": 0.0,
+        "type": "integer"
+      },
+      "ground_height": {
+        "default": 0.0,
+        "description": "World Y of the flat ground surface. Does not sample a terrain mesh.",
+        "max": 100000.0,
+        "min": -100000.0,
+        "type": "number"
+      },
+      "input": {
+        "description": "Name of an upstream node.",
+        "kinds": [
+          "skeleton"
+        ],
+        "required": true,
+        "type": "reference"
+      },
+      "length": {
+        "default": 2.0,
+        "description": "Horizontal root reach in meters before variation.",
+        "max": 10000.0,
+        "min": 9.999999747378752e-06,
+        "type": "number"
+      },
+      "length_variation": {
+        "default": 0.25,
+        "description": "Seeded fractional +/- reach variation.",
+        "max": 0.949999988079071,
+        "min": 0.0,
+        "type": "number"
+      },
+      "noise": {
+        "default": 0.07999999821186066,
+        "description": "Coherent sideways meander amplitude in meters. Preserves attachment and ground descent.",
+        "max": 10000.0,
+        "min": 0.0,
+        "type": "number"
+      },
+      "noise_profile": {
+        "default": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "description": "Piecewise-linear sideways noise multiplier over normalized horizontal reach; the attachment always stays fixed. Supply 2..32 keys, strictly increasing from position 0 to 1; bounds apply to multipliers.",
+        "max": 1.0,
+        "min": 0.0,
+        "type": "profile"
+      },
+      "noise_scale": {
+        "default": 1.0,
+        "description": "Meander frequency in cycles per meter of horizontal reach.",
+        "max": 10000.0,
+        "min": 9.999999747378752e-06,
+        "type": "number"
+      },
+      "radius_profile": {
+        "default": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "description": "Piecewise-linear radius multiplier over normalized horizontal reach, applied after taper. Supply 2..32 keys, strictly increasing from position 0 to 1; bounds apply to multipliers.",
+        "max": 10.0,
+        "min": 0.0010000000474974513,
+        "type": "profile"
+      },
+      "radius_scale": {
+        "default": 0.550000011920929,
+        "description": "Root base radius relative to the parent radius at attachment.",
+        "max": 1.0,
+        "min": 0.0010000000474974513,
+        "type": "number"
+      },
+      "radius_variation": {
+        "default": 0.20000000298023224,
+        "description": "Seeded fractional +/- base radius variation.",
+        "max": 0.949999988079071,
+        "min": 0.0,
+        "type": "number"
+      },
+      "seed": {
+        "description": "Optional node seed, independent of the root seed. Node name still identifies its random stream.",
+        "max": 2147483647.0,
+        "min": -2147483648.0,
+        "type": "integer"
+      },
+      "segments": {
+        "default": 32,
+        "description": "Samples along each root, minus one.",
+        "max": 512.0,
+        "min": 2.0,
+        "type": "integer"
+      },
+      "surface_at": {
+        "default": 0.44999998807907104,
+        "description": "Fraction of reach by which the centerline has descended to ground level; smaller values make a steeper buttress.",
+        "max": 1.0,
+        "min": 0.009999999776482582,
+        "type": "number"
+      },
+      "taper": {
+        "default": 0.9800000190734863,
+        "description": "Fraction of base radius lost at the tip.",
+        "max": 0.9990000128746033,
+        "min": 0.0,
+        "type": "number"
+      }
+    }
+  },
+  "scatter": {
+    "description": "Attach oriented points along paths, uniformly over triangle area, or across a ground disk.",
+    "output": "points",
+    "parameters": {
+      "angle": {
+        "default": 65.0,
+        "description": "Direction angle from path tangent or surface normal.",
+        "max": 180.0,
+        "min": 0.0,
+        "type": "number"
+      },
+      "azimuth": {
+        "default": 137.5077667236328,
+        "description": "Degrees between successive attachment groups.",
+        "max": 360.0,
+        "min": -360.0,
+        "type": "number"
+      },
+      "count": {
+        "default": 32,
+        "description": "Points per stem, or total on mesh/ground.",
+        "max": 100000.0,
+        "min": 0.0,
+        "type": "integer"
+      },
+      "distribution": {
+        "default": "alternate",
+        "description": "Pattern on paths; tip places all points at the tip.",
+        "enum": [
+          "alternate",
+          "opposite",
+          "whorled",
+          "random",
+          "tip"
+        ],
+        "type": "string"
+      },
+      "input": {
+        "description": "Name of an upstream node.",
+        "kinds": [
+          "skeleton",
+          "mesh"
+        ],
+        "required": false,
+        "type": "reference"
+      },
+      "jitter": {
+        "default": 0.15000000596046448,
+        "description": "Random fractional position/angle variation.",
+        "max": 1.0,
+        "min": 0.0,
+        "type": "number"
+      },
+      "max_distance": {
+        "default": 0.004999999888241291,
+        "description": "With proximity_mesh, reject candidates farther than this many meters from its triangles. Count is an attempt limit; rejected points are not replaced.",
+        "max": 10000.0,
+        "min": 0.0,
+        "type": "number"
+      },
+      "max_surface_angle": {
+        "default": 90.0,
+        "description": "With normal_direction, maximum normal angle in degrees. 90 selects the facing hemisphere; 0 selects aligned normals; 180 accepts all. Count is attempted, with no retries. This does not aim the instance; use angle:0 for local +Y along the normal.",
+        "max": 180.0,
+        "min": 0.0,
+        "type": "number"
+      },
+      "normal_direction": {
+        "default": null,
+        "description": "Optional nonzero direction in graph coordinates. With mesh input, accept only interpolated surface normals within max_surface_angle of this direction. Filtering precedes offset, tilt and proximity checks.",
+        "max": 100000,
+        "min": -100000,
+        "type": "vec3"
+      },
+      "offset": {
+        "default": 0.0,
+        "description": "Extra distance along stem radial direction or surface normal.",
+        "max": 10000.0,
+        "min": -10000.0,
+        "type": "number"
+      },
+      "proximity_mesh": {
+        "description": "Optional supporting mesh. Enables distance filtering of candidate pivots after offsets.",
+        "kinds": [
+          "mesh"
+        ],
+        "required": false,
+        "type": "reference"
+      },
+      "radius": {
+        "default": 1.0,
+        "description": "Ground disk radius in meters.",
+        "max": 10000.0,
+        "min": 9.999999747378752e-06,
+        "type": "number"
+      },
+      "range": {
+        "default": [
+          0.1,
+          1
+        ],
+        "description": "Ordered arc-length interval for stem attachments.",
+        "max": 1.0,
+        "min": 0.0,
+        "type": "pair"
+      },
+      "scale": {
+        "default": [
+          0.8,
+          1.2
+        ],
+        "description": "Ordered instance scale range.",
+        "max": 10000.0,
+        "min": 9.999999747378752e-06,
+        "type": "pair"
+      },
+      "seed": {
+        "description": "Optional node seed, independent of the root seed. Node name still identifies its random stream.",
+        "max": 2147483647.0,
+        "min": -2147483648.0,
+        "type": "integer"
+      },
+      "snap_to_mesh": {
+        "default": false,
+        "description": "With proximity_mesh, snap accepted pivots to the nearest triangle surface, retaining orientation, scale and phase. Far candidates are still rejected. Alpha stencils are not evaluated.",
+        "type": "boolean"
+      },
+      "whorl": {
+        "default": 3,
+        "description": "Members in each whorl.",
+        "max": 32.0,
+        "min": 2.0,
+        "type": "integer"
+      }
+    }
+  },
+  "solidify": {
+    "description": "Boolean-union the closed shells in a mesh, removing internal faces and fusing intersecting wood. Preserves material/UV/color/wind data and recalculates normals. Open leaves/cards must be added afterward.",
+    "output": "mesh",
+    "parameters": {
+      "crease_angle": {
+        "default": 180.0,
+        "description": "Normal-smoothing threshold in degrees. 180 smooths shading across joins; lower values keep sharp creases. Does not move the surface.",
+        "max": 180.0,
+        "min": 0.0,
+        "type": "number"
+      },
+      "input": {
+        "description": "Name of an upstream node.",
+        "kinds": [
+          "mesh"
+        ],
+        "required": true,
+        "type": "reference"
+      },
+      "max_input_triangles": {
+        "default": 250000,
+        "description": "Bound source triangles before preparing the boolean input. Output still uses the global geometry budget.",
+        "max": 1000000.0,
+        "min": 4.0,
+        "type": "integer"
+      },
+      "max_shells": {
+        "default": 1024,
+        "description": "Bound closed input shells before running the union.",
+        "max": 10000.0,
+        "min": 1.0,
+        "type": "integer"
+      },
+      "require_connected": {
+        "default": true,
+        "description": "Fail unless union produces exactly one connected closed solid. False permits multiple disconnected solids, without adding bridges.",
+        "type": "boolean"
+      },
+      "weld_tolerance": {
+        "default": 0.0,
+        "description": "World-meter tolerance for joining duplicated seam vertices. Zero uses a scale-dependent float-precision tolerance; not a gap-filling radius.",
+        "max": 0.10000000149011612,
+        "min": 0.0,
+        "type": "number"
+      }
+    }
+  },
+  "transform": {
+    "description": "Translate, rotate and uniformly scale paths, points or meshes.",
+    "output": "same",
+    "parameters": {
+      "input": {
+        "description": "Name of an upstream node.",
+        "kinds": [
+          "skeleton",
+          "points",
+          "mesh"
+        ],
+        "required": true,
+        "type": "reference"
+      },
+      "rotation": {
+        "default": [
+          0,
+          0,
+          0
+        ],
+        "description": "XYZ Euler rotation in degrees, applied X then Y then Z.",
+        "max": 100000,
+        "min": -100000,
+        "type": "vec3"
+      },
+      "scale": {
+        "default": 1.0,
+        "description": "Positive uniform scale; no mirroring.",
+        "max": 10000.0,
+        "min": 9.999999747378752e-06,
+        "type": "number"
+      },
+      "translation": {
+        "default": [
+          0,
+          0,
+          0
+        ],
+        "description": "World translation in meters.",
+        "max": 100000,
+        "min": -100000,
+        "type": "vec3"
+      }
+    }
+  },
+  "trunk": {
+    "description": "Create a stem, trunk, culm, root or stalk as a sampled growth path.",
+    "output": "skeleton",
+    "parameters": {
+      "bend": {
+        "default": [
+          0,
+          0,
+          0
+        ],
+        "description": "Quadratic displacement at the tip in world meters.",
+        "max": 100000,
+        "min": -100000,
+        "type": "vec3"
+      },
+      "direction": {
+        "default": [
+          0,
+          1,
+          0
+        ],
+        "description": "Nonzero initial direction.",
+        "max": 100000,
+        "min": -100000,
+        "type": "vec3"
+      },
+      "flare": {
+        "default": 0.25,
+        "description": "Additional fractional base radius, fading over flare_length.",
+        "max": 5.0,
+        "min": 0.0,
+        "type": "number"
+      },
+      "flare_length": {
+        "default": 0.25,
+        "description": "Fraction of stem length over which the base flare fades.",
+        "max": 1.0,
+        "min": 0.0010000000474974513,
+        "type": "number"
+      },
+      "flare_power": {
+        "default": 2.0,
+        "description": "Power of the flare falloff; higher values concentrate it near the base.",
+        "max": 8.0,
+        "min": 0.10000000149011612,
+        "type": "number"
+      },
+      "length": {
+        "default": 4,
+        "description": "Path length in meters.",
+        "max": 10000.0,
+        "min": 9.999999747378752e-06,
+        "type": "number"
+      },
+      "noise": {
+        "default": 0.03999999910593033,
+        "description": "Seeded directional variation per step.",
+        "max": 2.0,
+        "min": 0.0,
+        "type": "number"
+      },
+      "noise_profile": {
+        "default": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "description": "Piecewise-linear [normalized length, multiplier] keys. Fades new directional perturbations, not bends already accumulated. Supply 2..32 keys, strictly increasing from position 0 to 1; bounds apply to multipliers.",
+        "max": 1.0,
+        "min": 0.0,
+        "type": "profile"
+      },
+      "origin": {
+        "default": [
+          0,
+          0,
+          0
+        ],
+        "description": "Root position in meters.",
+        "max": 100000,
+        "min": -100000,
+        "type": "vec3"
+      },
+      "radius": {
+        "default": 0.2,
+        "description": "Base radius in meters.",
+        "max": 10000.0,
+        "min": 9.999999747378752e-06,
+        "type": "number"
+      },
+      "radius_profile": {
+        "default": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "description": "Piecewise-linear radius multiplier over normalized length, applied after taper and flare. Supply 2..32 keys, strictly increasing from position 0 to 1; bounds apply to multipliers.",
+        "max": 10.0,
+        "min": 0.0010000000474974513,
+        "type": "profile"
+      },
+      "seed": {
+        "description": "Optional node seed, independent of the root seed. Node name still identifies its random stream.",
+        "max": 2147483647.0,
+        "min": -2147483648.0,
+        "type": "integer"
+      },
+      "segments": {
+        "default": 12,
+        "description": "Longitudinal growth steps.",
+        "max": 512.0,
+        "min": 1.0,
+        "type": "integer"
+      },
+      "taper": {
+        "default": 0.8999999761581421,
+        "description": "Fraction of radius lost at the tip; tip remains nonzero.",
+        "max": 0.9990000128746033,
+        "min": 0.0,
+        "type": "number"
+      }
+    }
+  },
+  "tube": {
+    "description": "Sweep rings over paths with transported frames, seam UVs and separate cap materials.",
+    "output": "mesh",
+    "parameters": {
+      "cap_material": {
+        "default": "cut",
+        "description": "End material name.",
+        "type": "material"
+      },
+      "caps": {
+        "default": true,
+        "description": "Close both ends with separate normals and disk UVs.",
+        "type": "boolean"
+      },
+      "input": {
+        "description": "Name of an upstream node.",
+        "kinds": [
+          "skeleton"
+        ],
+        "required": true,
+        "type": "reference"
+      },
+      "material": {
+        "default": "bark",
+        "description": "Side material name.",
+        "type": "material"
+      },
+      "node_spacing": {
+        "default": 0.0,
+        "description": "Meters between bamboo-like raised rings; 0 disables.",
+        "max": 10000.0,
+        "min": 0.0,
+        "type": "number"
+      },
+      "node_strength": {
+        "default": 0.15000000596046448,
+        "description": "Raised ring radius fraction. Requires adequate path segments.",
+        "max": 2.0,
+        "min": 0.0,
+        "type": "number"
+      },
+      "noise_octaves": {
+        "default": 3,
+        "description": "Noise layers with doubled frequency and halved amplitude, normalized to stay within radius_noise.",
+        "max": 6.0,
+        "min": 1.0,
+        "type": "integer"
+      },
+      "noise_profile": {
+        "default": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "description": "Piecewise-linear radial-noise multiplier over normalized arc length. Use zero at an end to remove displacement there. Supply 2..32 keys, strictly increasing from position 0 to 1; bounds apply to multipliers.",
+        "max": 1.0,
+        "min": 0.0,
+        "type": "profile"
+      },
+      "noise_scale": {
+        "default": 1.0,
+        "description": "Surface-noise frequency in cycles per world meter; independent of tessellation.",
+        "max": 10000.0,
+        "min": 9.999999747378752e-06,
+        "type": "number"
+      },
+      "radius_noise": {
+        "default": 0.0,
+        "description": "Seeded coherent radial surface noise as a fraction of the swept radius. Zero preserves the original surface.",
+        "max": 0.800000011920929,
+        "min": 0.0,
+        "type": "number"
+      },
+      "ridge_depth": {
+        "default": 0.07999999821186066,
+        "description": "Fractional radial modulation.",
+        "max": 0.800000011920929,
+        "min": 0.0,
+        "type": "number"
+      },
+      "ridge_profile": {
+        "default": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "description": "Piecewise-linear ridge-depth multiplier over normalized arc length. Fade basal lobes up the trunk. Supply 2..32 keys, strictly increasing from position 0 to 1; bounds apply to multipliers.",
+        "max": 1.0,
+        "min": 0.0,
+        "type": "profile"
+      },
+      "ridges": {
+        "default": 0,
+        "description": "Longitudinal bark grooves around the circumference.",
+        "max": 128.0,
+        "min": 0.0,
+        "type": "integer"
+      },
+      "seed": {
+        "description": "Optional node seed, independent of the root seed. Node name still identifies its random stream.",
+        "max": 2147483647.0,
+        "min": -2147483648.0,
+        "type": "integer"
+      },
+      "sides": {
+        "default": 8,
+        "description": "Radial sides. Lower values provide cheaper geometry.",
+        "max": 128.0,
+        "min": 3.0,
+        "type": "integer"
+      },
+      "stride": {
+        "default": 1,
+        "description": "Use every Nth path sample, always retaining both ends, for structural LOD.",
+        "max": 512.0,
+        "min": 1.0,
+        "type": "integer"
+      },
+      "uv_scale": {
+        "default": [
+          1,
+          1
+        ],
+        "description": "[circumference repeats, longitudinal repeats per meter].",
+        "max": 10000.0,
+        "min": 9.999999747378752e-06,
+        "type": "pair"
+      }
+    }
+  },
+  "wind": {
+    "description": "Write normalized height bending weight and stable phase into GLB custom _WIND attribute.",
+    "output": "mesh",
+    "parameters": {
+      "base": {
+        "default": 0.0,
+        "description": "World Y where bending weight starts.",
+        "max": 100000.0,
+        "min": -100000.0,
+        "type": "number"
+      },
+      "exponent": {
+        "default": 1.5,
+        "description": "Weight curve exponent.",
+        "max": 16.0,
+        "min": 0.009999999776482582,
+        "type": "number"
+      },
+      "height": {
+        "default": 4.0,
+        "description": "Height interval for weight 0..1.",
+        "max": 10000.0,
+        "min": 9.999999747378752e-06,
+        "type": "number"
+      },
+      "input": {
+        "description": "Name of an upstream node.",
+        "kinds": [
+          "mesh"
+        ],
+        "required": true,
+        "type": "reference"
+      },
+      "seed": {
+        "description": "Optional node seed, independent of the root seed. Node name still identifies its random stream.",
+        "max": 2147483647.0,
+        "min": -2147483648.0,
+        "type": "integer"
+      },
+      "strength": {
+        "default": 1.0,
+        "description": "Maximum bending weight. This is metadata, not a wind simulation.",
+        "max": 1.0,
+        "min": 0.0,
+        "type": "number"
+      }
+    }
+  }
+}

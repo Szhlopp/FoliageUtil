@@ -1,0 +1,70 @@
+{
+  "size": 2048,
+  "seed": 724,
+  "tile": true,
+  "imports": {
+    "birch": "birch-source.texutil.json"
+  },
+  "nodes": {
+    "normal": {
+      "op": "normal",
+      "input": "birch.height",
+      "strength": 0.026,
+      "convention": "opengl",
+      "edge": "repeat"
+    },
+    "end-normal": {
+      "op": "normal",
+      "input": "birch.end-height",
+      "strength": 0.009,
+      "convention": "opengl",
+      "edge": "clamp"
+    },
+    "zero": {
+      "op": "constant",
+      "value": 0
+    },
+    "one": {
+      "op": "constant",
+      "value": 1
+    },
+    "metallic-roughness": {
+      "op": "pack",
+      "r": "one",
+      "g": "birch.roughness",
+      "b": "zero"
+    },
+    "young-color": {
+      "op": "ramp",
+      "input": "birch.paper-mottle",
+      "stops": [
+        [
+          0,
+          "#3a3023"
+        ],
+        [
+          0.5,
+          "#66533b"
+        ],
+        [
+          1,
+          "#9b845d"
+        ]
+      ]
+    }
+  },
+  "outputs": {
+    "bark-color.png": "birch.color",
+    "bark-normal.png": {
+      "node": "normal",
+      "bits": 16
+    },
+    "bark-metallic-roughness.png": "metallic-roughness",
+    "young-color.png": "young-color",
+    "cut-color.png": "birch.end-color",
+    "cut-normal.png": {
+      "node": "end-normal",
+      "bits": 16
+    }
+  }
+}

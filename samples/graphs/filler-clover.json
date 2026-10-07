@@ -1,0 +1,1837 @@
+{
+  "version": 1,
+  "name": "Low clover patch",
+  "description": "Reusable meadow or field foliage in meters, with generated geometry and two fitted CardBake profiles.",
+  "seed": 643,
+  "units": "meters",
+  "materials": {
+    "leaf": {
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "base_color_texture": "../assets/filler/leaf-color.png",
+      "normal_texture": "../assets/filler/leaf-normal.png",
+      "metallic_roughness_texture": "../assets/filler/leaf-metallic-roughness.png",
+      "roughness": 1,
+      "translucency": 0.16,
+      "double_sided": true
+    },
+    "grass": {
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "base_color_texture": "../assets/filler/grass-color.png",
+      "normal_texture": "../assets/filler/grass-normal.png",
+      "metallic_roughness_texture": "../assets/filler/grass-metallic-roughness.png",
+      "roughness": 1,
+      "translucency": 0.16,
+      "double_sided": true
+    },
+    "stem": {
+      "base_color": [
+        0.1,
+        0.15,
+        0.028,
+        1
+      ],
+      "roughness": 0.8,
+      "double_sided": true
+    },
+    "wood": {
+      "base_color": [
+        0.105,
+        0.071,
+        0.03,
+        1
+      ],
+      "roughness": 0.9
+    }
+  },
+  "nodes": {
+    "leaflet": {
+      "op": "leaf",
+      "shape": "oval",
+      "length": 0.073,
+      "width": 0.061,
+      "curl": 0.06,
+      "fold": 0.12,
+      "segments": 12,
+      "width_segments": 4,
+      "material": "leaf",
+      "width_profile": [
+        [
+          0,
+          0
+        ],
+        [
+          0.15,
+          0.28
+        ],
+        [
+          0.35,
+          0.72
+        ],
+        [
+          0.62,
+          1
+        ],
+        [
+          0.82,
+          0.96
+        ],
+        [
+          0.94,
+          0.63
+        ],
+        [
+          1,
+          0
+        ]
+      ]
+    },
+    "leaflet_guide": {
+      "op": "curve",
+      "points": [
+        [
+          0,
+          0.0,
+          0.0
+        ],
+        [
+          0,
+          0.006083,
+          3e-05
+        ],
+        [
+          0,
+          0.012167,
+          0.000122
+        ],
+        [
+          0,
+          0.01825,
+          0.000274
+        ],
+        [
+          0,
+          0.024333,
+          0.000487
+        ],
+        [
+          0,
+          0.030417,
+          0.00076
+        ],
+        [
+          0,
+          0.0365,
+          0.001095
+        ],
+        [
+          0,
+          0.042583,
+          0.00149
+        ],
+        [
+          0,
+          0.048667,
+          0.001947
+        ],
+        [
+          0,
+          0.05475,
+          0.002464
+        ],
+        [
+          0,
+          0.060833,
+          0.003042
+        ],
+        [
+          0,
+          0.066917,
+          0.00368
+        ],
+        [
+          0,
+          0.073,
+          0.00438
+        ]
+      ],
+      "radius": 0.001,
+      "taper": 0.8
+    },
+    "stem_0": {
+      "op": "curve",
+      "points": [
+        [
+          0.0,
+          0,
+          0.0
+        ],
+        [
+          -0.002245,
+          0.051519,
+          0.000273
+        ],
+        [
+          -0.004491,
+          0.103037,
+          0.000547
+        ]
+      ],
+      "radius": 0.0015,
+      "taper": 0.3
+    },
+    "petiole_0_0": {
+      "op": "curve",
+      "points": [
+        [
+          -0.004491,
+          0.103037,
+          0.000547
+        ],
+        [
+          -0.004491,
+          0.103037,
+          -0.011453
+        ]
+      ],
+      "radius": 0.0009,
+      "taper": 0.25
+    },
+    "leaf_0_0": {
+      "op": "transform",
+      "input": "leaflet",
+      "rotation": [
+        -75,
+        0,
+        0
+      ],
+      "translation": [
+        -0.004491,
+        0.103037,
+        -0.011453
+      ],
+      "scale": 0.987657
+    },
+    "guide_0_0": {
+      "op": "transform",
+      "input": "leaflet_guide",
+      "rotation": [
+        -75,
+        0,
+        0
+      ],
+      "translation": [
+        -0.004491,
+        0.103037,
+        -0.011453
+      ],
+      "scale": 0.987657
+    },
+    "petiole_0_1": {
+      "op": "curve",
+      "points": [
+        [
+          -0.004491,
+          0.103037,
+          0.000547
+        ],
+        [
+          -0.014883,
+          0.103037,
+          0.006547
+        ]
+      ],
+      "radius": 0.0009,
+      "taper": 0.25
+    },
+    "leaf_0_1": {
+      "op": "transform",
+      "input": "leaflet",
+      "rotation": [
+        -75,
+        120,
+        0
+      ],
+      "translation": [
+        -0.014883,
+        0.103037,
+        0.006547
+      ],
+      "scale": 1.103686
+    },
+    "guide_0_1": {
+      "op": "transform",
+      "input": "leaflet_guide",
+      "rotation": [
+        -75,
+        120,
+        0
+      ],
+      "translation": [
+        -0.014883,
+        0.103037,
+        0.006547
+      ],
+      "scale": 1.103686
+    },
+    "petiole_0_2": {
+      "op": "curve",
+      "points": [
+        [
+          -0.004491,
+          0.103037,
+          0.000547
+        ],
+        [
+          0.005901,
+          0.103037,
+          0.006547
+        ]
+      ],
+      "radius": 0.0009,
+      "taper": 0.25
+    },
+    "leaf_0_2": {
+      "op": "transform",
+      "input": "leaflet",
+      "rotation": [
+        -75,
+        240,
+        0
+      ],
+      "translation": [
+        0.005901,
+        0.103037,
+        0.006547
+      ],
+      "scale": 0.912627
+    },
+    "guide_0_2": {
+      "op": "transform",
+      "input": "leaflet_guide",
+      "rotation": [
+        -75,
+        240,
+        0
+      ],
+      "translation": [
+        0.005901,
+        0.103037,
+        0.006547
+      ],
+      "scale": 0.912627
+    },
+    "stem_1": {
+      "op": "curve",
+      "points": [
+        [
+          -0.031708,
+          0,
+          0.029045
+        ],
+        [
+          -0.034195,
+          0.045593,
+          0.022931
+        ],
+        [
+          -0.036683,
+          0.091185,
+          0.016817
+        ]
+      ],
+      "radius": 0.0015,
+      "taper": 0.3
+    },
+    "petiole_1_0": {
+      "op": "curve",
+      "points": [
+        [
+          -0.036683,
+          0.091185,
+          0.016817
+        ],
+        [
+          -0.042501,
+          0.091185,
+          0.006322
+        ]
+      ],
+      "radius": 0.0009,
+      "taper": 0.25
+    },
+    "leaf_1_0": {
+      "op": "transform",
+      "input": "leaflet",
+      "rotation": [
+        -75,
+        29,
+        0
+      ],
+      "translation": [
+        -0.042501,
+        0.091185,
+        0.006322
+      ],
+      "scale": 0.939439
+    },
+    "guide_1_0": {
+      "op": "transform",
+      "input": "leaflet_guide",
+      "rotation": [
+        -75,
+        29,
+        0
+      ],
+      "translation": [
+        -0.042501,
+        0.091185,
+        0.006322
+      ],
+      "scale": 0.939439
+    },
+    "petiole_1_1": {
+      "op": "curve",
+      "points": [
+        [
+          -0.036683,
+          0.091185,
+          0.016817
+        ],
+        [
+          -0.042864,
+          0.091185,
+          0.027103
+        ]
+      ],
+      "radius": 0.0009,
+      "taper": 0.25
+    },
+    "leaf_1_1": {
+      "op": "transform",
+      "input": "leaflet",
+      "rotation": [
+        -75,
+        149,
+        0
+      ],
+      "translation": [
+        -0.042864,
+        0.091185,
+        0.027103
+      ],
+      "scale": 1.100859
+    },
+    "guide_1_1": {
+      "op": "transform",
+      "input": "leaflet_guide",
+      "rotation": [
+        -75,
+        149,
+        0
+      ],
+      "translation": [
+        -0.042864,
+        0.091185,
+        0.027103
+      ],
+      "scale": 1.100859
+    },
+    "petiole_1_2": {
+      "op": "curve",
+      "points": [
+        [
+          -0.036683,
+          0.091185,
+          0.016817
+        ],
+        [
+          -0.024685,
+          0.091185,
+          0.017027
+        ]
+      ],
+      "radius": 0.0009,
+      "taper": 0.25
+    },
+    "leaf_1_2": {
+      "op": "transform",
+      "input": "leaflet",
+      "rotation": [
+        -75,
+        269,
+        0
+      ],
+      "translation": [
+        -0.024685,
+        0.091185,
+        0.017027
+      ],
+      "scale": 0.961595
+    },
+    "guide_1_2": {
+      "op": "transform",
+      "input": "leaflet_guide",
+      "rotation": [
+        -75,
+        269,
+        0
+      ],
+      "translation": [
+        -0.024685,
+        0.091185,
+        0.017027
+      ],
+      "scale": 0.961595
+    },
+    "stem_2": {
+      "op": "curve",
+      "points": [
+        [
+          0.005321,
+          0,
+          -0.060578
+        ],
+        [
+          0.00331,
+          0.061902,
+          -0.066917
+        ],
+        [
+          0.001299,
+          0.123804,
+          -0.073256
+        ]
+      ],
+      "radius": 0.0015,
+      "taper": 0.3
+    },
+    "petiole_2_0": {
+      "op": "curve",
+      "points": [
+        [
+          0.001299,
+          0.123804,
+          -0.073256
+        ],
+        [
+          -0.008877,
+          0.123804,
+          -0.079615
+        ]
+      ],
+      "radius": 0.0009,
+      "taper": 0.25
+    },
+    "leaf_2_0": {
+      "op": "transform",
+      "input": "leaflet",
+      "rotation": [
+        -75,
+        58,
+        0
+      ],
+      "translation": [
+        -0.008877,
+        0.123804,
+        -0.079615
+      ],
+      "scale": 0.944731
+    },
+    "guide_2_0": {
+      "op": "transform",
+      "input": "leaflet_guide",
+      "rotation": [
+        -75,
+        58,
+        0
+      ],
+      "translation": [
+        -0.008877,
+        0.123804,
+        -0.079615
+      ],
+      "scale": 0.944731
+    },
+    "petiole_2_1": {
+      "op": "curve",
+      "points": [
+        [
+          0.001299,
+          0.123804,
+          -0.073256
+        ],
+        [
+          0.00088,
+          0.123804,
+          -0.061263
+        ]
+      ],
+      "radius": 0.0009,
+      "taper": 0.25
+    },
+    "leaf_2_1": {
+      "op": "transform",
+      "input": "leaflet",
+      "rotation": [
+        -75,
+        178,
+        0
+      ],
+      "translation": [
+        0.00088,
+        0.123804,
+        -0.061263
+      ],
+      "scale": 0.840201
+    },
+    "guide_2_1": {
+      "op": "transform",
+      "input": "leaflet_guide",
+      "rotation": [
+        -75,
+        178,
+        0
+      ],
+      "translation": [
+        0.00088,
+        0.123804,
+        -0.061263
+      ],
+      "scale": 0.840201
+    },
+    "petiole_2_2": {
+      "op": "curve",
+      "points": [
+        [
+          0.001299,
+          0.123804,
+          -0.073256
+        ],
+        [
+          0.011894,
+          0.123804,
+          -0.078889
+        ]
+      ],
+      "radius": 0.0009,
+      "taper": 0.25
+    },
+    "leaf_2_2": {
+      "op": "transform",
+      "input": "leaflet",
+      "rotation": [
+        -75,
+        298,
+        0
+      ],
+      "translation": [
+        0.011894,
+        0.123804,
+        -0.078889
+      ],
+      "scale": 0.937765
+    },
+    "guide_2_2": {
+      "op": "transform",
+      "input": "leaflet_guide",
+      "rotation": [
+        -75,
+        298,
+        0
+      ],
+      "translation": [
+        0.011894,
+        0.123804,
+        -0.078889
+      ],
+      "scale": 0.937765
+    },
+    "stem_3": {
+      "op": "curve",
+      "points": [
+        [
+          0.045309,
+          0,
+          0.059111
+        ],
+        [
+          0.053412,
+          0.044016,
+          0.061001
+        ],
+        [
+          0.061516,
+          0.088032,
+          0.062891
+        ]
+      ],
+      "radius": 0.0015,
+      "taper": 0.3
+    },
+    "petiole_3_0": {
+      "op": "curve",
+      "points": [
+        [
+          0.061516,
+          0.088032,
+          0.062891
+        ],
+        [
+          0.049532,
+          0.088032,
+          0.062263
+        ]
+      ],
+      "radius": 0.0009,
+      "taper": 0.25
+    },
+    "leaf_3_0": {
+      "op": "transform",
+      "input": "leaflet",
+      "rotation": [
+        -75,
+        87,
+        0
+      ],
+      "translation": [
+        0.049532,
+        0.088032,
+        0.062263
+      ],
+      "scale": 1.044117
+    },
+    "guide_3_0": {
+      "op": "transform",
+      "input": "leaflet_guide",
+      "rotation": [
+        -75,
+        87,
+        0
+      ],
+      "translation": [
+        0.049532,
+        0.088032,
+        0.062263
+      ],
+      "scale": 1.044117
+    },
+    "petiole_3_1": {
+      "op": "curve",
+      "points": [
+        [
+          0.061516,
+          0.088032,
+          0.062891
+        ],
+        [
+          0.066964,
+          0.088032,
+          0.073583
+        ]
+      ],
+      "radius": 0.0009,
+      "taper": 0.25
+    },
+    "leaf_3_1": {
+      "op": "transform",
+      "input": "leaflet",
+      "rotation": [
+        -75,
+        207,
+        0
+      ],
+      "translation": [
+        0.066964,
+        0.088032,
+        0.073583
+      ],
+      "scale": 1.136874
+    },
+    "guide_3_1": {
+      "op": "transform",
+      "input": "leaflet_guide",
+      "rotation": [
+        -75,
+        207,
+        0
+      ],
+      "translation": [
+        0.066964,
+        0.088032,
+        0.073583
+      ],
+      "scale": 1.136874
+    },
+    "petiole_3_2": {
+      "op": "curve",
+      "points": [
+        [
+          0.061516,
+          0.088032,
+          0.062891
+        ],
+        [
+          0.068051,
+          0.088032,
+          0.052827
+        ]
+      ],
+      "radius": 0.0009,
+      "taper": 0.25
+    },
+    "leaf_3_2": {
+      "op": "transform",
+      "input": "leaflet",
+      "rotation": [
+        -75,
+        327,
+        0
+      ],
+      "translation": [
+        0.068051,
+        0.088032,
+        0.052827
+      ],
+      "scale": 0.841944
+    },
+    "guide_3_2": {
+      "op": "transform",
+      "input": "leaflet_guide",
+      "rotation": [
+        -75,
+        327,
+        0
+      ],
+      "translation": [
+        0.068051,
+        0.088032,
+        0.052827
+      ],
+      "scale": 0.841944
+    },
+    "stem_4": {
+      "op": "curve",
+      "points": [
+        [
+          -0.084683,
+          0,
+          -0.014992
+        ],
+        [
+          -0.088644,
+          0.051527,
+          -0.021306
+        ],
+        [
+          -0.092606,
+          0.103053,
+          -0.02762
+        ]
+      ],
+      "radius": 0.0015,
+      "taper": 0.3
+    },
+    "petiole_4_0": {
+      "op": "curve",
+      "points": [
+        [
+          -0.092606,
+          0.103053,
+          -0.02762
+        ],
+        [
+          -0.103391,
+          0.103053,
+          -0.02236
+        ]
+      ],
+      "radius": 0.0009,
+      "taper": 0.25
+    },
+    "leaf_4_0": {
+      "op": "transform",
+      "input": "leaflet",
+      "rotation": [
+        -75,
+        116,
+        0
+      ],
+      "translation": [
+        -0.103391,
+        0.103053,
+        -0.02236
+      ],
+      "scale": 1.11886
+    },
+    "guide_4_0": {
+      "op": "transform",
+      "input": "leaflet_guide",
+      "rotation": [
+        -75,
+        116,
+        0
+      ],
+      "translation": [
+        -0.103391,
+        0.103053,
+        -0.02236
+      ],
+      "scale": 1.11886
+    },
+    "petiole_4_1": {
+      "op": "curve",
+      "points": [
+        [
+          -0.092606,
+          0.103053,
+          -0.02762
+        ],
+        [
+          -0.082657,
+          0.103053,
+          -0.02091
+        ]
+      ],
+      "radius": 0.0009,
+      "taper": 0.25
+    },
+    "leaf_4_1": {
+      "op": "transform",
+      "input": "leaflet",
+      "rotation": [
+        -75,
+        236,
+        0
+      ],
+      "translation": [
+        -0.082657,
+        0.103053,
+        -0.02091
+      ],
+      "scale": 1.06243
+    },
+    "guide_4_1": {
+      "op": "transform",
+      "input": "leaflet_guide",
+      "rotation": [
+        -75,
+        236,
+        0
+      ],
+      "translation": [
+        -0.082657,
+        0.103053,
+        -0.02091
+      ],
+      "scale": 1.06243
+    },
+    "petiole_4_2": {
+      "op": "curve",
+      "points": [
+        [
+          -0.092606,
+          0.103053,
+          -0.02762
+        ],
+        [
+          -0.091769,
+          0.103053,
+          -0.039591
+        ]
+      ],
+      "radius": 0.0009,
+      "taper": 0.25
+    },
+    "leaf_4_2": {
+      "op": "transform",
+      "input": "leaflet",
+      "rotation": [
+        -75,
+        356,
+        0
+      ],
+      "translation": [
+        -0.091769,
+        0.103053,
+        -0.039591
+      ],
+      "scale": 1.065423
+    },
+    "guide_4_2": {
+      "op": "transform",
+      "input": "leaflet_guide",
+      "rotation": [
+        -75,
+        356,
+        0
+      ],
+      "translation": [
+        -0.091769,
+        0.103053,
+        -0.039591
+      ],
+      "scale": 1.065423
+    },
+    "stem_5": {
+      "op": "curve",
+      "points": [
+        [
+          0.081137,
+          0,
+          -0.051592
+        ],
+        [
+          0.087849,
+          0.064747,
+          -0.044171
+        ],
+        [
+          0.09456,
+          0.129495,
+          -0.03675
+        ]
+      ],
+      "radius": 0.0015,
+      "taper": 0.3
+    },
+    "petiole_5_0": {
+      "op": "curve",
+      "points": [
+        [
+          0.09456,
+          0.129495,
+          -0.03675
+        ],
+        [
+          0.087677,
+          0.129495,
+          -0.026921
+        ]
+      ],
+      "radius": 0.0009,
+      "taper": 0.25
+    },
+    "leaf_5_0": {
+      "op": "transform",
+      "input": "leaflet",
+      "rotation": [
+        -75,
+        145,
+        0
+      ],
+      "translation": [
+        0.087677,
+        0.129495,
+        -0.026921
+      ],
+      "scale": 0.899358
+    },
+    "guide_5_0": {
+      "op": "transform",
+      "input": "leaflet_guide",
+      "rotation": [
+        -75,
+        145,
+        0
+      ],
+      "translation": [
+        0.087677,
+        0.129495,
+        -0.026921
+      ],
+      "scale": 0.899358
+    },
+    "petiole_5_1": {
+      "op": "curve",
+      "points": [
+        [
+          0.09456,
+          0.129495,
+          -0.03675
+        ],
+        [
+          0.106515,
+          0.129495,
+          -0.035705
+        ]
+      ],
+      "radius": 0.0009,
+      "taper": 0.25
+    },
+    "leaf_5_1": {
+      "op": "transform",
+      "input": "leaflet",
+      "rotation": [
+        -75,
+        265,
+        0
+      ],
+      "translation": [
+        0.106515,
+        0.129495,
+        -0.035705
+      ],
+      "scale": 0.939583
+    },
+    "guide_5_1": {
+      "op": "transform",
+      "input": "leaflet_guide",
+      "rotation": [
+        -75,
+        265,
+        0
+      ],
+      "translation": [
+        0.106515,
+        0.129495,
+        -0.035705
+      ],
+      "scale": 0.939583
+    },
+    "petiole_5_2": {
+      "op": "curve",
+      "points": [
+        [
+          0.09456,
+          0.129495,
+          -0.03675
+        ],
+        [
+          0.089489,
+          0.129495,
+          -0.047626
+        ]
+      ],
+      "radius": 0.0009,
+      "taper": 0.25
+    },
+    "leaf_5_2": {
+      "op": "transform",
+      "input": "leaflet",
+      "rotation": [
+        -75,
+        385,
+        0
+      ],
+      "translation": [
+        0.089489,
+        0.129495,
+        -0.047626
+      ],
+      "scale": 0.830236
+    },
+    "guide_5_2": {
+      "op": "transform",
+      "input": "leaflet_guide",
+      "rotation": [
+        -75,
+        385,
+        0
+      ],
+      "translation": [
+        0.089489,
+        0.129495,
+        -0.047626
+      ],
+      "scale": 0.830236
+    },
+    "stem_6": {
+      "op": "curve",
+      "points": [
+        [
+          -0.027366,
+          0,
+          0.101711
+        ],
+        [
+          -0.032839,
+          0.039021,
+          0.105218
+        ],
+        [
+          -0.038311,
+          0.078043,
+          0.108725
+        ]
+      ],
+      "radius": 0.0015,
+      "taper": 0.3
+    },
+    "petiole_6_0": {
+      "op": "curve",
+      "points": [
+        [
+          -0.038311,
+          0.078043,
+          0.108725
+        ],
+        [
+          -0.039566,
+          0.078043,
+          0.120659
+        ]
+      ],
+      "radius": 0.0009,
+      "taper": 0.25
+    },
+    "leaf_6_0": {
+      "op": "transform",
+      "input": "leaflet",
+      "rotation": [
+        -75,
+        174,
+        0
+      ],
+      "translation": [
+        -0.039566,
+        0.078043,
+        0.120659
+      ],
+      "scale": 1.129473
+    },
+    "guide_6_0": {
+      "op": "transform",
+      "input": "leaflet_guide",
+      "rotation": [
+        -75,
+        174,
+        0
+      ],
+      "translation": [
+        -0.039566,
+        0.078043,
+        0.120659
+      ],
+      "scale": 1.129473
+    },
+    "petiole_6_1": {
+      "op": "curve",
+      "points": [
+        [
+          -0.038311,
+          0.078043,
+          0.108725
+        ],
+        [
+          -0.027349,
+          0.078043,
+          0.103844
+        ]
+      ],
+      "radius": 0.0009,
+      "taper": 0.25
+    },
+    "leaf_6_1": {
+      "op": "transform",
+      "input": "leaflet",
+      "rotation": [
+        -75,
+        294,
+        0
+      ],
+      "translation": [
+        -0.027349,
+        0.078043,
+        0.103844
+      ],
+      "scale": 0.842394
+    },
+    "guide_6_1": {
+      "op": "transform",
+      "input": "leaflet_guide",
+      "rotation": [
+        -75,
+        294,
+        0
+      ],
+      "translation": [
+        -0.027349,
+        0.078043,
+        0.103844
+      ],
+      "scale": 0.842394
+    },
+    "petiole_6_2": {
+      "op": "curve",
+      "points": [
+        [
+          -0.038311,
+          0.078043,
+          0.108725
+        ],
+        [
+          -0.048019,
+          0.078043,
+          0.101672
+        ]
+      ],
+      "radius": 0.0009,
+      "taper": 0.25
+    },
+    "leaf_6_2": {
+      "op": "transform",
+      "input": "leaflet",
+      "rotation": [
+        -75,
+        414,
+        0
+      ],
+      "translation": [
+        -0.048019,
+        0.078043,
+        0.101672
+      ],
+      "scale": 0.965056
+    },
+    "guide_6_2": {
+      "op": "transform",
+      "input": "leaflet_guide",
+      "rotation": [
+        -75,
+        414,
+        0
+      ],
+      "translation": [
+        -0.048019,
+        0.078043,
+        0.101672
+      ],
+      "scale": 0.965056
+    },
+    "stem_7": {
+      "op": "curve",
+      "points": [
+        [
+          -0.05241,
+          0,
+          -0.100976
+        ],
+        [
+          -0.043364,
+          0.0369,
+          -0.096799
+        ],
+        [
+          -0.034318,
+          0.073801,
+          -0.092621
+        ]
+      ],
+      "radius": 0.0015,
+      "taper": 0.3
+    },
+    "petiole_7_0": {
+      "op": "curve",
+      "points": [
+        [
+          -0.034318,
+          0.073801,
+          -0.092621
+        ],
+        [
+          -0.029629,
+          0.073801,
+          -0.081575
+        ]
+      ],
+      "radius": 0.0009,
+      "taper": 0.25
+    },
+    "leaf_7_0": {
+      "op": "transform",
+      "input": "leaflet",
+      "rotation": [
+        -75,
+        203,
+        0
+      ],
+      "translation": [
+        -0.029629,
+        0.073801,
+        -0.081575
+      ],
+      "scale": 1.002476
+    },
+    "guide_7_0": {
+      "op": "transform",
+      "input": "leaflet_guide",
+      "rotation": [
+        -75,
+        203,
+        0
+      ],
+      "translation": [
+        -0.029629,
+        0.073801,
+        -0.081575
+      ],
+      "scale": 1.002476
+    },
+    "petiole_7_1": {
+      "op": "curve",
+      "points": [
+        [
+          -0.034318,
+          0.073801,
+          -0.092621
+        ],
+        [
+          -0.027096,
+          0.073801,
+          -0.102205
+        ]
+      ],
+      "radius": 0.0009,
+      "taper": 0.25
+    },
+    "leaf_7_1": {
+      "op": "transform",
+      "input": "leaflet",
+      "rotation": [
+        -75,
+        323,
+        0
+      ],
+      "translation": [
+        -0.027096,
+        0.073801,
+        -0.102205
+      ],
+      "scale": 0.911304
+    },
+    "guide_7_1": {
+      "op": "transform",
+      "input": "leaflet_guide",
+      "rotation": [
+        -75,
+        323,
+        0
+      ],
+      "translation": [
+        -0.027096,
+        0.073801,
+        -0.102205
+      ],
+      "scale": 0.911304
+    },
+    "petiole_7_2": {
+      "op": "curve",
+      "points": [
+        [
+          -0.034318,
+          0.073801,
+          -0.092621
+        ],
+        [
+          -0.046228,
+          0.073801,
+          -0.094084
+        ]
+      ],
+      "radius": 0.0009,
+      "taper": 0.25
+    },
+    "leaf_7_2": {
+      "op": "transform",
+      "input": "leaflet",
+      "rotation": [
+        -75,
+        443,
+        0
+      ],
+      "translation": [
+        -0.046228,
+        0.073801,
+        -0.094084
+      ],
+      "scale": 0.880348
+    },
+    "guide_7_2": {
+      "op": "transform",
+      "input": "leaflet_guide",
+      "rotation": [
+        -75,
+        443,
+        0
+      ],
+      "translation": [
+        -0.046228,
+        0.073801,
+        -0.094084
+      ],
+      "scale": 0.880348
+    },
+    "stem_8": {
+      "op": "curve",
+      "points": [
+        [
+          0.11423,
+          0,
+          0.041755
+        ],
+        [
+          0.109287,
+          0.046914,
+          0.032046
+        ],
+        [
+          0.104344,
+          0.093829,
+          0.022337
+        ]
+      ],
+      "radius": 0.0015,
+      "taper": 0.3
+    },
+    "petiole_8_0": {
+      "op": "curve",
+      "points": [
+        [
+          0.104344,
+          0.093829,
+          0.022337
+        ],
+        [
+          0.1138,
+          0.093829,
+          0.029725
+        ]
+      ],
+      "radius": 0.0009,
+      "taper": 0.25
+    },
+    "leaf_8_0": {
+      "op": "transform",
+      "input": "leaflet",
+      "rotation": [
+        -75,
+        232,
+        0
+      ],
+      "translation": [
+        0.1138,
+        0.093829,
+        0.029725
+      ],
+      "scale": 1.119379
+    },
+    "guide_8_0": {
+      "op": "transform",
+      "input": "leaflet_guide",
+      "rotation": [
+        -75,
+        232,
+        0
+      ],
+      "translation": [
+        0.1138,
+        0.093829,
+        0.029725
+      ],
+      "scale": 1.119379
+    },
+    "petiole_8_1": {
+      "op": "curve",
+      "points": [
+        [
+          0.104344,
+          0.093829,
+          0.022337
+        ],
+        [
+          0.106014,
+          0.093829,
+          0.010454
+        ]
+      ],
+      "radius": 0.0009,
+      "taper": 0.25
+    },
+    "leaf_8_1": {
+      "op": "transform",
+      "input": "leaflet",
+      "rotation": [
+        -75,
+        352,
+        0
+      ],
+      "translation": [
+        0.106014,
+        0.093829,
+        0.010454
+      ],
+      "scale": 0.924521
+    },
+    "guide_8_1": {
+      "op": "transform",
+      "input": "leaflet_guide",
+      "rotation": [
+        -75,
+        352,
+        0
+      ],
+      "translation": [
+        0.106014,
+        0.093829,
+        0.010454
+      ],
+      "scale": 0.924521
+    },
+    "petiole_8_2": {
+      "op": "curve",
+      "points": [
+        [
+          0.104344,
+          0.093829,
+          0.022337
+        ],
+        [
+          0.093218,
+          0.093829,
+          0.026832
+        ]
+      ],
+      "radius": 0.0009,
+      "taper": 0.25
+    },
+    "leaf_8_2": {
+      "op": "transform",
+      "input": "leaflet",
+      "rotation": [
+        -75,
+        472,
+        0
+      ],
+      "translation": [
+        0.093218,
+        0.093829,
+        0.026832
+      ],
+      "scale": 0.852549
+    },
+    "guide_8_2": {
+      "op": "transform",
+      "input": "leaflet_guide",
+      "rotation": [
+        -75,
+        472,
+        0
+      ],
+      "translation": [
+        0.093218,
+        0.093829,
+        0.026832
+      ],
+      "scale": 0.852549
+    },
+    "bake_source": {
+      "op": "merge",
+      "inputs": [
+        "leaf_0_0",
+        "leaf_0_1",
+        "leaf_0_2",
+        "leaf_1_0",
+        "leaf_1_1",
+        "leaf_1_2",
+        "leaf_2_0",
+        "leaf_2_1",
+        "leaf_2_2",
+        "leaf_3_0",
+        "leaf_3_1",
+        "leaf_3_2",
+        "leaf_4_0",
+        "leaf_4_1",
+        "leaf_4_2",
+        "leaf_5_0",
+        "leaf_5_1",
+        "leaf_5_2",
+        "leaf_6_0",
+        "leaf_6_1",
+        "leaf_6_2",
+        "leaf_7_0",
+        "leaf_7_1",
+        "leaf_7_2",
+        "leaf_8_0",
+        "leaf_8_1",
+        "leaf_8_2"
+      ]
+    },
+    "guides": {
+      "op": "merge",
+      "inputs": [
+        "guide_0_0",
+        "guide_0_1",
+        "guide_0_2",
+        "guide_1_0",
+        "guide_1_1",
+        "guide_1_2",
+        "guide_2_0",
+        "guide_2_1",
+        "guide_2_2",
+        "guide_3_0",
+        "guide_3_1",
+        "guide_3_2",
+        "guide_4_0",
+        "guide_4_1",
+        "guide_4_2",
+        "guide_5_0",
+        "guide_5_1",
+        "guide_5_2",
+        "guide_6_0",
+        "guide_6_1",
+        "guide_6_2",
+        "guide_7_0",
+        "guide_7_1",
+        "guide_7_2",
+        "guide_8_0",
+        "guide_8_1",
+        "guide_8_2"
+      ]
+    },
+    "stem_paths": {
+      "op": "merge",
+      "inputs": [
+        "stem_0",
+        "petiole_0_0",
+        "petiole_0_1",
+        "petiole_0_2",
+        "stem_1",
+        "petiole_1_0",
+        "petiole_1_1",
+        "petiole_1_2",
+        "stem_2",
+        "petiole_2_0",
+        "petiole_2_1",
+        "petiole_2_2",
+        "stem_3",
+        "petiole_3_0",
+        "petiole_3_1",
+        "petiole_3_2",
+        "stem_4",
+        "petiole_4_0",
+        "petiole_4_1",
+        "petiole_4_2",
+        "stem_5",
+        "petiole_5_0",
+        "petiole_5_1",
+        "petiole_5_2",
+        "stem_6",
+        "petiole_6_0",
+        "petiole_6_1",
+        "petiole_6_2",
+        "stem_7",
+        "petiole_7_0",
+        "petiole_7_1",
+        "petiole_7_2",
+        "stem_8",
+        "petiole_8_0",
+        "petiole_8_1",
+        "petiole_8_2"
+      ]
+    },
+    "stems": {
+      "op": "tube",
+      "input": "stem_paths",
+      "sides": 3,
+      "stride": 1,
+      "material": "stem",
+      "cap_material": "stem",
+      "caps": false
+    },
+    "stems_low": {
+      "op": "tube",
+      "input": "stem_paths",
+      "sides": 3,
+      "stride": 2,
+      "material": "stem",
+      "cap_material": "stem",
+      "caps": false
+    },
+    "source": {
+      "op": "merge",
+      "inputs": [
+        "bake_source",
+        "stems"
+      ]
+    },
+    "wind": {
+      "op": "wind",
+      "input": "source",
+      "height": 0.16,
+      "strength": 0.65,
+      "exponent": 1.4
+    },
+    "bake_source_wind": {
+      "op": "wind",
+      "input": "bake_source",
+      "height": 0.16,
+      "strength": 0.65,
+      "exponent": 1.4
+    },
+    "keep_wind": {
+      "op": "wind",
+      "input": "stems",
+      "height": 0.16,
+      "strength": 0.65,
+      "exponent": 1.4
+    },
+    "keep_low_wind": {
+      "op": "wind",
+      "input": "stems_low",
+      "height": 0.16,
+      "strength": 0.65,
+      "exponent": 1.4
+    }
+  },
+  "outputs": {
+    "filler-clover.glb": "wind"
+  },
+  "card_bakes": {
+    "Cards": {
+      "source": "bake_source_wind",
+      "paths": "guides",
+      "output": "filler-clover-cards.glb",
+      "segments": 3,
+      "planes": 1,
+      "cell_width": 64,
+      "cell_height": 128,
+      "atlas_size": 512,
+      "padding": 3,
+      "samples": 3,
+      "margin": 0.003,
+      "max_distance": 0.005,
+      "alpha_cutoff": 0.3,
+      "translucency": 0.16,
+      "memory_mb": 256,
+      "keep": "keep_wind"
+    },
+    "CardsLow": {
+      "source": "bake_source_wind",
+      "paths": "guides",
+      "output": "filler-clover-cards-low.glb",
+      "segments": 2,
+      "planes": 1,
+      "cell_width": 32,
+      "cell_height": 64,
+      "atlas_size": 256,
+      "padding": 2,
+      "samples": 3,
+      "margin": 0.003,
+      "max_distance": 0.005,
+      "alpha_cutoff": 0.3,
+      "translucency": 0.16,
+      "memory_mb": 256,
+      "keep": "keep_low_wind"
+    }
+  }
+}

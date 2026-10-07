@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "seed": 42,
+  "name": "Sprite atlas card variation",
+  "description": "Top: fixed atlas cell 0. Middle: all twelve cells in row-major order. Bottom: seeded random cells plus independent size variation and curved cards.",
+  "materials": {
+    "stencil": {
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "roughness": 1,
+      "alpha_mode": "MASK",
+      "double_sided": true,
+      "base_color_texture": "../assets/spritesheets/leaves.atlas.assets/color.png",
+      "normal_texture": "../assets/spritesheets/leaves.atlas.assets/normal.png",
+      "metallic_roughness_texture": "../assets/spritesheets/leaves.atlas.assets/metallic-roughness.png"
+    }
+  },
+  "nodes": {
+    "line": {
+      "op": "curve",
+      "points": [
+        [
+          -0.55,
+          0,
+          0
+        ],
+        [
+          0.55,
+          0,
+          0
+        ]
+      ],
+      "radius": 1e-05,
+      "taper": 0
+    },
+    "sites": {
+      "op": "scatter",
+      "input": "line",
+      "count": 12,
+      "range": [
+        0,
+        1
+      ],
+      "angle": 0,
+      "jitter": 0,
+      "scale": [
+        1,
+        1
+      ],
+      "offset": -1e-05
+    },
+    "facing": {
+      "op": "orient",
+      "input": "sites",
+      "mode": "fixed",
+      "direction": [
+        0,
+        0,
+        1
+      ]
+    },
+    "flat": {
+      "op": "card",
+      "width": 0.075,
+      "height": 0.12,
+      "material": "stencil"
+    },
+    "curved": {
+      "op": "card",
+      "width": 0.075,
+      "height": 0.12,
+      "segments": 8,
+      "width_segments": 4,
+      "curl": -0.14,
+      "fold": -0.22,
+      "twist": 12,
+      "material": "stencil"
+    },
+    "identical": {
+      "op": "instance",
+      "input": "flat",
+      "points": "facing",
+      "color_variation": 0,
+      "atlas": "../assets/spritesheets/leaves.atlas.json",
+      "atlas_mode": "fixed",
+      "scale_jitter": [
+        0,
+        0,
+        0
+      ]
+    },
+    "sized": {
+      "op": "instance",
+      "input": "flat",
+      "points": "facing",
+      "color_variation": 0,
+      "scale_jitter": [
+        0,
+        0,
+        0
+      ],
+      "atlas": "../assets/spritesheets/leaves.atlas.json",
+      "atlas_mode": "cycle"
+    },
+    "molded": {
+      "op": "instance",
+      "input": "curved",
+      "points": "facing",
+      "color_variation": 0,
+      "scale_jitter": [
+        0.16,
+        0.12,
+        0.08
+      ],
+      "atlas": "../assets/spritesheets/leaves.atlas.json",
+      "atlas_mode": "random"
+    },
+    "top": {
+      "op": "transform",
+      "input": "identical",
+      "translation": [
+        0,
+        0.32,
+        0
+      ]
+    },
+    "middle": {
+      "op": "transform",
+      "input": "sized",
+      "translation": [
+        0,
+        0.16,
+        0
+      ]
+    },
+    "comparison": {
+      "op": "merge",
+      "inputs": [
+        "top",
+        "middle",
+        "molded"
+      ]
+    }
+  },
+  "outputs": {
+    "cards-spritesheet.glb": "comparison",
+    "cards-spritesheet.obj": "comparison"
+  }
+}

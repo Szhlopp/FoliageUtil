@@ -1,0 +1,92 @@
+{
+  "layers": {
+    "sakura": {
+      "scene": "../out/sakura/sakura.blend",
+      "output": "../out/publication/layers/sakura.png",
+      "size": [
+        1200,
+        1200
+      ]
+    },
+    "willow": {
+      "scene": "../out/weeping-willow/weeping-willow.blend",
+      "output": "../out/publication/layers/willow.png",
+      "size": [
+        1100,
+        1100
+      ]
+    },
+    "sunflower": {
+      "scene": "../out/sunflower/final.blend",
+      "output": "../out/publication/layers/sunflower.png",
+      "size": [
+        950,
+        950
+      ]
+    },
+    "rose": {
+      "scene": "../out/rose-atlas/rose.blend",
+      "output": "../out/publication/layers/rose.png",
+      "size": [
+        900,
+        900
+      ]
+    },
+    "birch": {
+      "scene": "../out/birch/birch.blend",
+      "output": "../out/publication/layers/birch.png",
+      "size": [
+        1000,
+        1000
+      ]
+    },
+    "bamboo": {
+      "scene": "../out/bamboo/bamboo.blend",
+      "output": "../out/publication/layers/bamboo.png",
+      "size": [
+        1000,
+        1000
+      ]
+    },
+    "wheat": {
+      "scene": "../out/wheat/wheat.blend",
+      "output": "../out/publication/layers/wheat.png",
+      "size": [
+        850,
+        850
+      ]
+    },
+    "growth": {
+      "scene": "../out/growth-tree/comparison.blend",
+      "output": "../out/publication/layers/growth.png",
+      "size": [
+        1600,
+        550
+      ]
+    },
+    "willow-bake": {
+      "scene": "../out/willow-card-bake-final/comparison.blend",
+      "output": "../out/publication/layers/willow-bake.png",
+      "size": [
+        1800,
+        765
+      ]
+    },
+    "rose-detail": {
+      "scene": "../out/rose-atlas/closeup.blend",
+      "output": "../out/publication/layers/rose-detail.png",
+      "size": [
+        1000,
+        1000
+      ]
+    },
+    "sunflower-detail": {
+      "scene": "../out/sunflower/final-closeup.blend",
+      "output": "../out/publication/layers/sunflower-detail.png",
+      "size": [
+        1000,
+        1000
+      ]
+    }
+  }
+}

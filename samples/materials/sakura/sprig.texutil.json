@@ -1,0 +1,436 @@
+{
+  "size": [
+    384,
+    480
+  ],
+  "seed": 823,
+  "tile": false,
+  "imports": {
+    "flower": "blossom.texutil.json"
+  },
+  "nodes": {
+    "stem-stamp": {
+      "op": "shape",
+      "type": "capsule",
+      "size": [
+        1,
+        0.95
+      ],
+      "color": "#6e6550"
+    },
+    "stems": {
+      "op": "stamp",
+      "input": "stem-stamp",
+      "points": [
+        {
+          "position": [
+            0.5,
+            0.8825
+          ],
+          "size": [
+            0.3312499999999999,
+            0.012
+          ],
+          "angle": -90.0
+        },
+        {
+          "position": [
+            0.485,
+            0.62
+          ],
+          "size": [
+            0.32638167840735177,
+            0.012
+          ],
+          "angle": -95.27389595735178
+        },
+        {
+          "position": [
+            0.46499999999999997,
+            0.37
+          ],
+          "size": [
+            0.30016662039607267,
+            0.012
+          ],
+          "angle": -91.90915243299636
+        },
+        {
+          "position": [
+            0.475,
+            0.185
+          ],
+          "size": [
+            0.16524602869660743,
+            0.012
+          ],
+          "angle": -79.54009090707089
+        },
+        {
+          "position": [
+            0.375,
+            0.305
+          ],
+          "size": [
+            0.26553013011709237,
+            0.009
+          ],
+          "angle": -142.2669544058117
+        },
+        {
+          "position": [
+            0.59,
+            0.34500000000000003
+          ],
+          "size": [
+            0.2735073125165029,
+            0.009
+          ],
+          "angle": -36.450923179581316
+        },
+        {
+          "position": [
+            0.44999999999999996,
+            0.5349999999999999
+          ],
+          "size": [
+            0.1732231220132001,
+            0.009
+          ],
+          "angle": -110.26569747094752
+        },
+        {
+          "position": [
+            0.625,
+            0.6950000000000001
+          ],
+          "size": [
+            0.33242480352705334,
+            0.009
+          ],
+          "angle": -29.26386459854104
+        },
+        {
+          "position": [
+            0.38,
+            0.7849999999999999
+          ],
+          "size": [
+            0.25769410160110373,
+            0.009
+          ],
+          "angle": -140.9061411137705
+        },
+        {
+          "position": [
+            0.53,
+            0.87
+          ],
+          "size": [
+            0.1600781059358213,
+            0.009
+          ],
+          "angle": -51.34019174590994
+        }
+      ],
+      "mode": "over"
+    },
+    "flowers": {
+      "op": "stamp",
+      "input": "flower.color",
+      "points": [
+        {
+          "position": [
+            0.27,
+            0.24
+          ],
+          "size": [
+            0.45,
+            0.36000000000000004
+          ],
+          "angle": -18
+        },
+        {
+          "position": [
+            0.7,
+            0.28
+          ],
+          "size": [
+            0.47,
+            0.376
+          ],
+          "angle": 35
+        },
+        {
+          "position": [
+            0.42,
+            0.47
+          ],
+          "size": [
+            0.48,
+            0.384
+          ],
+          "angle": 14
+        },
+        {
+          "position": [
+            0.77,
+            0.63
+          ],
+          "size": [
+            0.42,
+            0.336
+          ],
+          "angle": 52
+        },
+        {
+          "position": [
+            0.28,
+            0.72
+          ],
+          "size": [
+            0.46,
+            0.36800000000000005
+          ],
+          "angle": -5
+        },
+        {
+          "position": [
+            0.58,
+            0.82
+          ],
+          "size": [
+            0.34,
+            0.272
+          ],
+          "angle": 30
+        }
+      ],
+      "mode": "over"
+    },
+    "flowers-height": {
+      "op": "stamp",
+      "input": "flower.height",
+      "points": [
+        {
+          "position": [
+            0.27,
+            0.24
+          ],
+          "size": [
+            0.45,
+            0.36000000000000004
+          ],
+          "angle": -18
+        },
+        {
+          "position": [
+            0.7,
+            0.28
+          ],
+          "size": [
+            0.47,
+            0.376
+          ],
+          "angle": 35
+        },
+        {
+          "position": [
+            0.42,
+            0.47
+          ],
+          "size": [
+            0.48,
+            0.384
+          ],
+          "angle": 14
+        },
+        {
+          "position": [
+            0.77,
+            0.63
+          ],
+          "size": [
+            0.42,
+            0.336
+          ],
+          "angle": 52
+        },
+        {
+          "position": [
+            0.28,
+            0.72
+          ],
+          "size": [
+            0.46,
+            0.36800000000000005
+          ],
+          "angle": -5
+        },
+        {
+          "position": [
+            0.58,
+            0.82
+          ],
+          "size": [
+            0.34,
+            0.272
+          ],
+          "angle": 30
+        }
+      ],
+      "mode": "max"
+    },
+    "bud-stamp": {
+      "op": "shape",
+      "type": "circle",
+      "size": [
+        0.62,
+        0.92
+      ],
+      "color": "#c85d8e"
+    },
+    "buds": {
+      "op": "stamp",
+      "input": "bud-stamp",
+      "points": [
+        {
+          "position": [
+            0.5,
+            0.1
+          ],
+          "size": [
+            0.055,
+            0.064
+          ],
+          "angle": 12
+        },
+        {
+          "position": [
+            0.54,
+            0.15
+          ],
+          "size": [
+            0.049,
+            0.054
+          ],
+          "angle": 32
+        }
+      ],
+      "mode": "over"
+    },
+    "stems-buds": {
+      "op": "blend",
+      "a": "stems",
+      "b": "buds",
+      "mode": "over",
+      "opacity": 1
+    },
+    "sprig": {
+      "op": "blend",
+      "a": "stems-buds",
+      "b": "flowers",
+      "mode": "over",
+      "opacity": 1
+    },
+    "drift-x": {
+      "op": "simplex",
+      "scale": 3,
+      "fractal": "fbm",
+      "octaves": 3
+    },
+    "drift-y": {
+      "op": "simplex",
+      "scale": 4,
+      "fractal": "fbm",
+      "octaves": 3
+    },
+    "warped": {
+      "op": "warp",
+      "input": "sprig",
+      "x": "drift-x",
+      "y": "drift-y",
+      "strength": 0.008,
+      "edge": "transparent"
+    },
+    "tint-noise": {
+      "op": "simplex",
+      "scale": 1.7,
+      "fractal": "fbm",
+      "octaves": 3
+    },
+    "tint": {
+      "op": "ramp",
+      "input": "tint-noise",
+      "interpolation": "smooth",
+      "stops": [
+        [
+          0,
+          "#efcadb"
+        ],
+        [
+          0.4,
+          "#fff0f5"
+        ],
+        [
+          1,
+          "#ffffff"
+        ]
+      ]
+    },
+    "color": {
+      "op": "math",
+      "input": "warped",
+      "b": "tint",
+      "mode": "multiply"
+    },
+    "height": {
+      "op": "warp",
+      "input": "flowers-height",
+      "x": "drift-x",
+      "y": "drift-y",
+      "strength": 0.008,
+      "edge": "clamp"
+    },
+    "normal": {
+      "op": "normal",
+      "input": "height",
+      "strength": 0.006,
+      "convention": "opengl",
+      "edge": "clamp"
+    },
+    "roughness": {
+      "op": "levels",
+      "input": "tint-noise",
+      "out": [
+        0.48,
+        0.58
+      ]
+    },
+    "one": {
+      "op": "constant",
+      "value": 1
+    },
+    "zero": {
+      "op": "constant",
+      "value": 0
+    },
+    "metallic-roughness": {
+      "op": "pack",
+      "r": "one",
+      "g": "roughness",
+      "b": "zero"
+    }
+  },
+  "outputs": {
+    "color.png": {
+      "node": "color",
+      "alpha": true
+    },
+    "normal.png": {
+      "node": "normal",
+      "bits": 16
+    },
+    "metallic-roughness.png": "metallic-roughness"
+  }
+}

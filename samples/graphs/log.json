@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "name": "log",
+  "description": "Fallen log with bark sides, separate cut-end slots and short branch stubs.",
+  "seed": 42,
+  "units": "meters",
+  "materials": {},
+  "nodes": {
+    "log": {
+      "op": "trunk",
+      "length": 2.8,
+      "radius": 0.3,
+      "direction": [
+        1,
+        0,
+        0
+      ],
+      "origin": [
+        -1.4,
+        0.34,
+        0
+      ],
+      "segments": 20,
+      "taper": 0.18,
+      "flare": 0.08,
+      "noise": 0.02
+    },
+    "stubs": {
+      "op": "branch",
+      "input": "log",
+      "count": 4,
+      "length": 0.16,
+      "length_decay": 0,
+      "radius_scale": 0.3,
+      "angle": 70,
+      "angle_jitter": 15,
+      "taper": 0.3,
+      "segments": 3
+    },
+    "paths": {
+      "op": "merge",
+      "inputs": [
+        "log",
+        "stubs"
+      ]
+    },
+    "mesh": {
+      "op": "tube",
+      "input": "paths",
+      "sides": 16,
+      "ridges": 7,
+      "ridge_depth": 0.04
+    }
+  },
+  "outputs": {
+    "log.glb": "mesh",
+    "log.obj": "mesh"
+  }
+}

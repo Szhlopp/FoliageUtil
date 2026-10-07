@@ -1,0 +1,708 @@
+{
+  "version": 1,
+  "seed": 42,
+  "units": "meters",
+  "name": "Sakura overlapping developmental growth",
+  "description": "Seeded sakura with tip extension, independent thickening, support-triggered branches and baby flowering sprigs. All stages overlap; mature geometry matches sakura.json.",
+  "materials": {
+    "cherry_bark": {
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "base_color_texture": "../assets/sakura/bark-color.png",
+      "normal_texture": "../assets/sakura/bark-normal.png",
+      "metallic_roughness_texture": "../assets/sakura/bark-metallic-roughness.png",
+      "roughness": 1,
+      "metallic": 0,
+      "double_sided": false
+    },
+    "cherry_young": {
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "base_color_texture": "../assets/sakura/young-color.png",
+      "normal_texture": "../assets/sakura/young-normal.png",
+      "metallic_roughness_texture": "../assets/sakura/young-metallic-roughness.png",
+      "roughness": 1,
+      "metallic": 0,
+      "double_sided": false
+    },
+    "blossom_sprigs": {
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "base_color_texture": "../assets/sakura/sprigs.atlas.assets/color.png",
+      "normal_texture": "../assets/sakura/sprigs.atlas.assets/normal.png",
+      "metallic_roughness_texture": "../assets/sakura/sprigs.atlas.assets/metallic-roughness.png",
+      "roughness": 1,
+      "metallic": 0,
+      "alpha_mode": "MASK",
+      "alpha_cutoff": 0.45,
+      "double_sided": true,
+      "translucency": 0.2
+    }
+  },
+  "nodes": {
+    "trunk": {
+      "op": "trunk",
+      "origin": [
+        0,
+        -0.1,
+        0
+      ],
+      "length": 5.7,
+      "radius": 0.5,
+      "segments": 52,
+      "taper": 0.66,
+      "flare": 0.7,
+      "flare_length": 0.24,
+      "noise": 0.14,
+      "bend": [
+        0.42,
+        0,
+        0.18
+      ],
+      "radius_profile": [
+        [
+          0,
+          1
+        ],
+        [
+          0.65,
+          1
+        ],
+        [
+          0.85,
+          0.72
+        ],
+        [
+          1,
+          0.045
+        ]
+      ]
+    },
+    "roots": {
+      "op": "roots",
+      "input": "trunk",
+      "count": 6,
+      "attachment": 0.08,
+      "length": 1.8,
+      "length_variation": 0.3,
+      "radius_scale": 0.47,
+      "radius_variation": 0.24,
+      "ground_height": 0,
+      "surface_at": 0.48,
+      "bury_depth": 0.16,
+      "noise": 0.1,
+      "segments": 22
+    },
+    "arms_raw": {
+      "op": "branch",
+      "input": "trunk",
+      "count": 12,
+      "range": [
+        0.35,
+        0.98
+      ],
+      "length": 4.7,
+      "length_decay": 0.32,
+      "length_variation": 0.22,
+      "angle": 65,
+      "angle_jitter": 18,
+      "radius_scale": 0.77,
+      "taper": 0.87,
+      "segments": 28,
+      "noise": 0.19,
+      "bend": [
+        0,
+        0.25,
+        0
+      ]
+    },
+    "arms": {
+      "op": "grow",
+      "input": "arms_raw",
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "strength": 0.31,
+      "interpolation": "spherical",
+      "strength_profile": [
+        [
+          0,
+          0
+        ],
+        [
+          0.45,
+          0
+        ],
+        [
+          0.78,
+          0.45
+        ],
+        [
+          1,
+          1
+        ]
+      ]
+    },
+    "sprays_raw": {
+      "op": "branch",
+      "input": "arms",
+      "count": 7,
+      "range": [
+        0.2,
+        1
+      ],
+      "length": 1.95,
+      "length_decay": 0.15,
+      "length_variation": 0.28,
+      "angle": 53,
+      "angle_jitter": 26,
+      "radius_scale": 0.32,
+      "taper": 0.83,
+      "segments": 20,
+      "noise": 0.2
+    },
+    "sprays": {
+      "op": "grow",
+      "input": "sprays_raw",
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "strength": 0.53,
+      "interpolation": "spherical",
+      "strength_profile": [
+        [
+          0,
+          0
+        ],
+        [
+          0.22,
+          0
+        ],
+        [
+          0.62,
+          0.42
+        ],
+        [
+          1,
+          1
+        ]
+      ]
+    },
+    "twigs_raw": {
+      "op": "branch",
+      "input": "sprays",
+      "count": 8,
+      "range": [
+        0.12,
+        1
+      ],
+      "length": 1.22,
+      "length_decay": 0.12,
+      "length_variation": 0.3,
+      "angle": 47,
+      "angle_jitter": 24,
+      "radius_scale": 0.26,
+      "taper": 0.77,
+      "segments": 16,
+      "noise": 0.18
+    },
+    "twigs": {
+      "op": "grow",
+      "input": "twigs_raw",
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "strength": 0.86,
+      "interpolation": "spherical",
+      "strength_profile": [
+        [
+          0,
+          0
+        ],
+        [
+          0.2,
+          0.18
+        ],
+        [
+          0.6,
+          0.87
+        ],
+        [
+          1,
+          1
+        ]
+      ]
+    },
+    "trunk_mesh": {
+      "op": "tube",
+      "input": "trunk",
+      "sides": 36,
+      "ridges": 7,
+      "ridge_depth": 0.08,
+      "ridge_profile": [
+        [
+          0,
+          1
+        ],
+        [
+          0.28,
+          0.25
+        ],
+        [
+          1,
+          0.12
+        ]
+      ],
+      "radius_noise": 0.13,
+      "noise_scale": 1.8,
+      "uv_scale": [
+        2,
+        0.9
+      ],
+      "material": "cherry_bark",
+      "cap_material": "cherry_bark"
+    },
+    "root_mesh": {
+      "op": "tube",
+      "input": "roots",
+      "sides": 12,
+      "ridges": 3,
+      "ridge_depth": 0.055,
+      "radius_noise": 0.06,
+      "uv_scale": [
+        1,
+        1.2
+      ],
+      "material": "cherry_bark",
+      "cap_material": "cherry_bark"
+    },
+    "arm_mesh": {
+      "op": "tube",
+      "input": "arms",
+      "sides": 12,
+      "radius_noise": 0.055,
+      "uv_scale": [
+        1,
+        1.3
+      ],
+      "material": "cherry_bark",
+      "cap_material": "cherry_bark"
+    },
+    "spray_mesh": {
+      "op": "tube",
+      "input": "sprays",
+      "sides": 7,
+      "uv_scale": [
+        1,
+        1.5
+      ],
+      "material": "cherry_young",
+      "cap_material": "cherry_young"
+    },
+    "wood_parts": {
+      "op": "merge",
+      "inputs": [
+        "trunk_mesh",
+        "root_mesh",
+        "arm_mesh",
+        "spray_mesh"
+      ]
+    },
+    "wood": {
+      "op": "solidify",
+      "input": "wood_parts"
+    },
+    "twig_mesh": {
+      "op": "tube",
+      "input": "twigs",
+      "sides": 4,
+      "stride": 2,
+      "uv_scale": [
+        1,
+        1.8
+      ],
+      "material": "cherry_young",
+      "cap_material": "cherry_young"
+    },
+    "flower_sites": {
+      "op": "scatter",
+      "input": "twigs",
+      "count": 13,
+      "range": [
+        0.06,
+        1
+      ],
+      "distribution": "alternate",
+      "azimuth": 151,
+      "angle": 58,
+      "jitter": 0.38,
+      "scale": [
+        0.72,
+        1.18
+      ],
+      "proximity_mesh": "twig_mesh",
+      "max_distance": 0.014,
+      "snap_to_mesh": true
+    },
+    "flower_angles": {
+      "op": "orient",
+      "input": "flower_sites",
+      "mode": "keep",
+      "rotation_jitter": [
+        22,
+        56,
+        20
+      ]
+    },
+    "sprig_card": {
+      "op": "card",
+      "width": 0.2,
+      "height": 0.25,
+      "planes": 2,
+      "segments": 3,
+      "width_segments": 2,
+      "curl": 0.09,
+      "fold": 0.16,
+      "twist": 12,
+      "material": "blossom_sprigs"
+    },
+    "flowers": {
+      "op": "instance",
+      "input": "sprig_card",
+      "points": "flower_angles",
+      "atlas": "../assets/sakura/sprigs.atlas.json",
+      "atlas_mode": "random",
+      "scale_jitter": [
+        0.16,
+        0.2,
+        0.09
+      ],
+      "color_variation": 0.09
+    },
+    "canopy": {
+      "op": "merge",
+      "inputs": [
+        "twig_mesh",
+        "flowers"
+      ]
+    },
+    "tree": {
+      "op": "merge",
+      "inputs": [
+        "wood",
+        "canopy"
+      ]
+    },
+    "wind": {
+      "op": "wind",
+      "input": "tree",
+      "height": 8.5,
+      "strength": 0.5,
+      "exponent": 1.4
+    },
+    "bake_canopy_wind": {
+      "op": "wind",
+      "input": "canopy",
+      "height": 8.5,
+      "strength": 0.5,
+      "exponent": 1.4
+    },
+    "bake_wood_wind": {
+      "op": "wind",
+      "input": "wood",
+      "height": 8.5,
+      "strength": 0.5,
+      "exponent": 1.4
+    }
+  },
+  "outputs": {
+    "sakura-growth.glb": "wind"
+  },
+  "growth": {
+    "mode": "developmental",
+    "steps": 32,
+    "stages": {
+      "trunk": {
+        "start": 0,
+        "end": 1,
+        "length_profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.2,
+            0.5
+          ],
+          [
+            0.72,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "radius_profile": [
+          [
+            0,
+            0.055
+          ],
+          [
+            0.18,
+            0.18
+          ],
+          [
+            0.65,
+            0.65
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      },
+      "roots": {
+        "start": 0,
+        "end": 1,
+        "length_profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.55,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "radius_profile": [
+          [
+            0,
+            0.1
+          ],
+          [
+            0.4,
+            0.45
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      },
+      "arms_raw": {
+        "start": 0.12,
+        "end": 1,
+        "attachment_delay": 0.01,
+        "length_profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.48,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "radius_profile": [
+          [
+            0,
+            0.1
+          ],
+          [
+            0.4,
+            0.35
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      },
+      "sprays_raw": {
+        "start": 0.2,
+        "end": 1,
+        "attachment_delay": 0.01,
+        "length_profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.5,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "radius_profile": [
+          [
+            0,
+            0.14
+          ],
+          [
+            0.4,
+            0.4
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      },
+      "twigs_raw": {
+        "start": 0.28,
+        "end": 1,
+        "attachment_delay": 0.015,
+        "length_profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.52,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "radius_profile": [
+          [
+            0,
+            0.18
+          ],
+          [
+            0.35,
+            0.46
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      },
+      "flowers": {
+        "start": 0.3,
+        "end": 1,
+        "attachment_delay": 0.02,
+        "scale_profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.12,
+            0.18
+          ],
+          [
+            0.35,
+            0.5
+          ],
+          [
+            0.7,
+            0.9
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      }
+    }
+  },
+  "card_bakes": {
+    "FloweringShoots": {
+      "source": "bake_canopy_wind",
+      "paths": "twigs",
+      "keep": "bake_wood_wind",
+      "output": "sakura-card-baked.glb",
+      "segments": 4,
+      "planes": 2,
+      "cell_width": 64,
+      "cell_height": 256,
+      "atlas_size": 2048,
+      "padding": 4,
+      "samples": 2,
+      "margin": 0.01,
+      "max_distance": 0.18,
+      "alpha_cutoff": 0.45,
+      "translucency": 0.2,
+      "memory_mb": 1024
+    }
+  },
+  "exports": {
+    "Animation": {
+      "type": "alembic",
+      "output": "sakura-animation",
+      "source": "wind",
+      "frames": 192,
+      "fps": 24
+    },
+    "GeometryStages": {
+      "type": "stages",
+      "output": "sakura-geometry-stages",
+      "source": "wind",
+      "steps": 8
+    },
+    "CardStages": {
+      "type": "stages",
+      "output": "sakura-card-stages",
+      "source": "wind",
+      "steps": 8,
+      "geometry": "card_bake",
+      "card_bake": "FloweringShoots"
+    },
+    "MixedStages": {
+      "type": "stages",
+      "output": "sakura-mixed-stages",
+      "source": "wind",
+      "steps": 8,
+      "geometry": "card_bake",
+      "card_bake": "FloweringShoots",
+      "stage_overrides": {
+        "0": {
+          "geometry": "mesh"
+        },
+        "1": {
+          "geometry": "mesh"
+        },
+        "2": {
+          "geometry": "mesh"
+        },
+        "3": {
+          "geometry": "mesh"
+        }
+      }
+    }
+  }
+}

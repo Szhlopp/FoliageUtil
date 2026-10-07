@@ -1,0 +1,213 @@
+{
+  "version": 1,
+  "name": "gems",
+  "description": "Editable faceted diamond, ruby and emerald studies with pointed/stepped profiles and standard glTF transmission, IOR and volume materials. These stylized cuts do not simulate spectral dispersion.",
+  "seed": 42,
+  "units": "meters",
+  "materials": {
+    "diamond": {
+      "base_color": [
+        0.96,
+        0.985,
+        1,
+        1
+      ],
+      "roughness": 0.09,
+      "metallic": 0,
+      "double_sided": false,
+      "transmission": 1,
+      "ior": 2.42,
+      "thickness": 1
+    },
+    "ruby": {
+      "base_color": [
+        0.72,
+        0.022,
+        0.055,
+        1
+      ],
+      "roughness": 0.09,
+      "metallic": 0,
+      "double_sided": false,
+      "transmission": 0.93,
+      "ior": 1.77,
+      "thickness": 0.8,
+      "attenuation_color": [
+        0.8,
+        0.07,
+        0.12
+      ],
+      "attenuation_distance": 0.8
+    },
+    "emerald": {
+      "base_color": [
+        0.035,
+        0.48,
+        0.19,
+        1
+      ],
+      "roughness": 0.09,
+      "metallic": 0,
+      "double_sided": false,
+      "transmission": 0.88,
+      "ior": 1.58,
+      "thickness": 0.9
+    }
+  },
+  "nodes": {
+    "diamond": {
+      "op": "crystal",
+      "radius": 0.64,
+      "height": 0.84,
+      "sides": 8,
+      "radius_profile": [
+        [
+          0,
+          0
+        ],
+        [
+          0.56,
+          1
+        ],
+        [
+          0.61,
+          1
+        ],
+        [
+          0.82,
+          0.79
+        ],
+        [
+          1,
+          0.48
+        ]
+      ],
+      "material": "diamond"
+    },
+    "ruby": {
+      "op": "crystal",
+      "radius": 0.58,
+      "height": 0.72,
+      "sides": 8,
+      "radius_profile": [
+        [
+          0,
+          0.15
+        ],
+        [
+          0.37,
+          0.9
+        ],
+        [
+          0.46,
+          1
+        ],
+        [
+          0.53,
+          1
+        ],
+        [
+          0.76,
+          0.78
+        ],
+        [
+          1,
+          0.57
+        ]
+      ],
+      "material": "ruby"
+    },
+    "emerald": {
+      "op": "crystal",
+      "radius": 0.46,
+      "height": 0.92,
+      "sides": 6,
+      "radius_profile": [
+        [
+          0,
+          0.38
+        ],
+        [
+          0.2,
+          0.78
+        ],
+        [
+          0.3,
+          1
+        ],
+        [
+          0.65,
+          1
+        ],
+        [
+          0.86,
+          0.76
+        ],
+        [
+          1,
+          0.55
+        ]
+      ],
+      "material": "emerald"
+    },
+    "diamond_placed": {
+      "op": "transform",
+      "input": "diamond",
+      "translation": [
+        -1.6,
+        0.02,
+        0
+      ],
+      "rotation": [
+        0,
+        22,
+        0
+      ],
+      "scale": 1
+    },
+    "ruby_placed": {
+      "op": "transform",
+      "input": "ruby",
+      "translation": [
+        0,
+        0.02,
+        0
+      ],
+      "rotation": [
+        0,
+        10,
+        0
+      ],
+      "scale": 1
+    },
+    "emerald_placed": {
+      "op": "transform",
+      "input": "emerald",
+      "translation": [
+        1.4,
+        0.02,
+        0
+      ],
+      "rotation": [
+        0,
+        20,
+        0
+      ],
+      "scale": 1
+    },
+    "gems": {
+      "op": "merge",
+      "inputs": [
+        "diamond_placed",
+        "ruby_placed",
+        "emerald_placed"
+      ]
+    }
+  },
+  "outputs": {
+    "gems.glb": "gems",
+    "diamond.glb": "diamond",
+    "ruby.glb": "ruby",
+    "emerald.glb": "emerald"
+  }
+}

@@ -1,0 +1,273 @@
+{
+  "version": 1,
+  "seed": 42,
+  "units": "meters",
+  "name": "Silver birch",
+  "description": "Slender pale trunk and boughs from the existing TexUtil birch log material, three branch generations with drooping outer twigs, and twelve seeded toothed leaf sprites on curved cards.",
+  "materials": {
+    "birch_bark": {
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "base_color_texture": "../assets/birch/bark-color.png",
+      "normal_texture": "../assets/birch/bark-normal.png",
+      "metallic_roughness_texture": "../assets/birch/bark-metallic-roughness.png",
+      "roughness": 1,
+      "double_sided": false
+    },
+    "birch_young": {
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "base_color_texture": "../assets/birch/young-color.png",
+      "roughness": 0.65,
+      "double_sided": false
+    },
+    "birch_cut": {
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "base_color_texture": "../assets/birch/cut-color.png",
+      "normal_texture": "../assets/birch/cut-normal.png",
+      "roughness": 0.75,
+      "double_sided": false
+    },
+    "birch_leaf": {
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "base_color_texture": "../assets/birch/leaves.atlas.assets/color.png",
+      "normal_texture": "../assets/birch/leaves.atlas.assets/normal.png",
+      "metallic_roughness_texture": "../assets/birch/leaves.atlas.assets/metallic-roughness.png",
+      "roughness": 1,
+      "double_sided": true,
+      "alpha_mode": "MASK",
+      "alpha_cutoff": 0.5,
+      "translucency": 0.2
+    }
+  },
+  "nodes": {
+    "trunk": {
+      "op": "trunk",
+      "length": 7.6,
+      "radius": 0.13,
+      "segments": 56,
+      "taper": 0.988,
+      "bend": [
+        0.24,
+        0,
+        0.12
+      ],
+      "noise": 0.11,
+      "flare": 0.45
+    },
+    "boughs": {
+      "op": "branch",
+      "input": "trunk",
+      "count": 23,
+      "range": [
+        0.29,
+        0.97
+      ],
+      "distribution": "alternate",
+      "azimuth": 137.50776,
+      "length": 3.8,
+      "length_decay": 0.78,
+      "length_variation": 0.24,
+      "radius_scale": 0.34,
+      "taper": 0.91,
+      "angle": 54,
+      "angle_jitter": 17,
+      "bend": [
+        0,
+        0.38,
+        0
+      ],
+      "segments": 18,
+      "noise": 0.16
+    },
+    "branchlets": {
+      "op": "branch",
+      "input": "boughs",
+      "count": 10,
+      "range": [
+        0.18,
+        0.97
+      ],
+      "distribution": "alternate",
+      "azimuth": 137.50776,
+      "length": 1.25,
+      "length_decay": 0.55,
+      "length_variation": 0.3,
+      "radius_scale": 0.32,
+      "taper": 0.88,
+      "angle": 52,
+      "angle_jitter": 22,
+      "bend": [
+        0,
+        -0.25,
+        0
+      ],
+      "segments": 10,
+      "noise": 0.15
+    },
+    "twigs": {
+      "op": "branch",
+      "input": "branchlets",
+      "count": 6,
+      "range": [
+        0.18,
+        0.98
+      ],
+      "distribution": "alternate",
+      "azimuth": 165,
+      "length": 0.54,
+      "length_decay": 0.36,
+      "length_variation": 0.32,
+      "radius_scale": 0.28,
+      "taper": 0.85,
+      "angle": 48,
+      "angle_jitter": 25,
+      "bend": [
+        0,
+        -0.25,
+        0
+      ],
+      "segments": 7,
+      "noise": 0.16
+    },
+    "trunk_mesh": {
+      "op": "tube",
+      "input": "trunk",
+      "sides": 20,
+      "ridges": 7,
+      "ridge_depth": 0.035,
+      "uv_scale": [
+        1,
+        0.72
+      ],
+      "material": "birch_bark",
+      "cap_material": "birch_cut"
+    },
+    "bough_mesh": {
+      "op": "tube",
+      "input": "boughs",
+      "sides": 10,
+      "ridges": 5,
+      "ridge_depth": 0.03,
+      "uv_scale": [
+        1,
+        0.9
+      ],
+      "material": "birch_bark",
+      "cap_material": "birch_young"
+    },
+    "branchlet_mesh": {
+      "op": "tube",
+      "input": "branchlets",
+      "sides": 6,
+      "uv_scale": [
+        1,
+        2
+      ],
+      "material": "birch_young",
+      "cap_material": "birch_young"
+    },
+    "twig_mesh": {
+      "op": "tube",
+      "input": "twigs",
+      "sides": 4,
+      "uv_scale": [
+        1,
+        3
+      ],
+      "material": "birch_young",
+      "cap_material": "birch_young"
+    },
+    "leaf_sites": {
+      "op": "scatter",
+      "input": "twigs",
+      "count": 10,
+      "range": [
+        0.14,
+        1
+      ],
+      "distribution": "alternate",
+      "azimuth": 167,
+      "angle": 58,
+      "jitter": 0.22,
+      "scale": [
+        0.8,
+        1.25
+      ]
+    },
+    "leaf_angles": {
+      "op": "orient",
+      "input": "leaf_sites",
+      "mode": "keep",
+      "rotation_jitter": [
+        24,
+        35,
+        20
+      ]
+    },
+    "leaf_card": {
+      "op": "card",
+      "width": 0.075,
+      "height": 0.1,
+      "segments": 3,
+      "width_segments": 2,
+      "pivot": "base",
+      "curl": -0.14,
+      "fold": 0.15,
+      "twist": 8,
+      "material": "birch_leaf"
+    },
+    "leaves": {
+      "op": "instance",
+      "input": "leaf_card",
+      "points": "leaf_angles",
+      "atlas": "../assets/birch/leaves.atlas.json",
+      "atlas_mode": "random",
+      "scale_jitter": [
+        0.15,
+        0.15,
+        0.1
+      ],
+      "color_variation": 0.16
+    },
+    "tree": {
+      "op": "merge",
+      "inputs": [
+        "trunk_mesh",
+        "bough_mesh",
+        "branchlet_mesh",
+        "twig_mesh",
+        "leaves"
+      ]
+    },
+    "wind": {
+      "op": "wind",
+      "input": "tree",
+      "height": 8.1,
+      "exponent": 1.25,
+      "strength": 0.75
+    }
+  },
+  "outputs": {
+    "birch.glb": "wind",
+    "birch.obj": "wind"
+  }
+}

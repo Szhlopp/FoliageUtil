@@ -1,0 +1,713 @@
+{
+  "version": 1,
+  "name": "Loose hedgerow bush",
+  "description": "Common game-environment bush with retained multi-stem wood and fitted leafy-shoot Cards / CardsLow profiles.",
+  "seed": 441,
+  "units": "meters",
+  "materials": {
+    "leaf": {
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "base_color_texture": "../assets/filler/leaf-color.png",
+      "normal_texture": "../assets/filler/leaf-normal.png",
+      "metallic_roughness_texture": "../assets/filler/leaf-metallic-roughness.png",
+      "roughness": 1,
+      "translucency": 0.16,
+      "double_sided": true
+    },
+    "grass": {
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "base_color_texture": "../assets/filler/grass-color.png",
+      "normal_texture": "../assets/filler/grass-normal.png",
+      "metallic_roughness_texture": "../assets/filler/grass-metallic-roughness.png",
+      "roughness": 1,
+      "translucency": 0.16,
+      "double_sided": true
+    },
+    "stem": {
+      "base_color": [
+        0.1,
+        0.15,
+        0.028,
+        1
+      ],
+      "roughness": 0.8,
+      "double_sided": true
+    },
+    "wood": {
+      "base_color": [
+        0.105,
+        0.071,
+        0.03,
+        1
+      ],
+      "roughness": 0.9
+    }
+  },
+  "nodes": {
+    "main_0": {
+      "op": "curve",
+      "points": [
+        [
+          0.020581,
+          0.0,
+          0.004172
+        ],
+        [
+          0.054907,
+          0.073138,
+          0.01113
+        ],
+        [
+          0.096756,
+          0.146277,
+          0.019613
+        ],
+        [
+          0.142008,
+          0.219415,
+          0.028786
+        ],
+        [
+          0.189623,
+          0.292553,
+          0.038438
+        ],
+        [
+          0.239075,
+          0.365691,
+          0.048463
+        ],
+        [
+          0.290043,
+          0.43883,
+          0.058795
+        ],
+        [
+          0.342307,
+          0.511968,
+          0.069389
+        ],
+        [
+          0.395707,
+          0.585106,
+          0.080214
+        ],
+        [
+          0.45012,
+          0.658245,
+          0.091244
+        ],
+        [
+          0.505449,
+          0.731383,
+          0.10246
+        ]
+      ],
+      "radius": 0.011,
+      "taper": 0.9
+    },
+    "main_1": {
+      "op": "curve",
+      "points": [
+        [
+          -0.017995,
+          0.0,
+          0.010826
+        ],
+        [
+          -0.045725,
+          0.088229,
+          0.027508
+        ],
+        [
+          -0.079532,
+          0.176458,
+          0.047846
+        ],
+        [
+          -0.116089,
+          0.264687,
+          0.069839
+        ],
+        [
+          -0.154555,
+          0.352916,
+          0.09298
+        ],
+        [
+          -0.194505,
+          0.441145,
+          0.117014
+        ],
+        [
+          -0.23568,
+          0.529374,
+          0.141784
+        ],
+        [
+          -0.277902,
+          0.617603,
+          0.167185
+        ],
+        [
+          -0.321041,
+          0.705832,
+          0.193137
+        ],
+        [
+          -0.364999,
+          0.794061,
+          0.219582
+        ],
+        [
+          -0.409696,
+          0.88229,
+          0.246472
+        ]
+      ],
+      "radius": 0.011,
+      "taper": 0.9
+    },
+    "main_2": {
+      "op": "curve",
+      "points": [
+        [
+          0.005957,
+          0.0,
+          -0.020137
+        ],
+        [
+          0.015999,
+          0.0817,
+          -0.054084
+        ],
+        [
+          0.028241,
+          0.1634,
+          -0.09547
+        ],
+        [
+          0.04148,
+          0.2451,
+          -0.140222
+        ],
+        [
+          0.055409,
+          0.3268,
+          -0.187311
+        ],
+        [
+          0.069876,
+          0.4085,
+          -0.236217
+        ],
+        [
+          0.084787,
+          0.4902,
+          -0.286623
+        ],
+        [
+          0.100076,
+          0.5719,
+          -0.338309
+        ],
+        [
+          0.115698,
+          0.6536,
+          -0.391119
+        ],
+        [
+          0.131616,
+          0.7353,
+          -0.444931
+        ],
+        [
+          0.147803,
+          0.817,
+          -0.499649
+        ]
+      ],
+      "radius": 0.011,
+      "taper": 0.9
+    },
+    "main_3": {
+      "op": "curve",
+      "points": [
+        [
+          0.009209,
+          0.0,
+          0.018873
+        ],
+        [
+          0.025205,
+          0.081123,
+          0.051653
+        ],
+        [
+          0.044706,
+          0.162246,
+          0.091616
+        ],
+        [
+          0.065794,
+          0.243369,
+          0.13483
+        ],
+        [
+          0.087982,
+          0.324492,
+          0.1803
+        ],
+        [
+          0.111027,
+          0.405615,
+          0.227526
+        ],
+        [
+          0.134778,
+          0.486738,
+          0.276198
+        ],
+        [
+          0.159133,
+          0.567861,
+          0.326108
+        ],
+        [
+          0.184017,
+          0.648984,
+          0.377103
+        ],
+        [
+          0.209373,
+          0.730107,
+          0.429065
+        ],
+        [
+          0.235156,
+          0.81123,
+          0.481902
+        ]
+      ],
+      "radius": 0.011,
+      "taper": 0.9
+    },
+    "main_4": {
+      "op": "curve",
+      "points": [
+        [
+          -0.019539,
+          0.0,
+          -0.007696
+        ],
+        [
+          -0.0522,
+          0.076644,
+          -0.020561
+        ],
+        [
+          -0.092018,
+          0.153288,
+          -0.036244
+        ],
+        [
+          -0.135075,
+          0.229931,
+          -0.053204
+        ],
+        [
+          -0.180381,
+          0.306575,
+          -0.071049
+        ],
+        [
+          -0.227435,
+          0.383219,
+          -0.089583
+        ],
+        [
+          -0.275931,
+          0.459863,
+          -0.108684
+        ],
+        [
+          -0.32566,
+          0.536507,
+          -0.128272
+        ],
+        [
+          -0.376469,
+          0.613151,
+          -0.148285
+        ],
+        [
+          -0.428243,
+          0.689794,
+          -0.168678
+        ],
+        [
+          -0.480888,
+          0.766438,
+          -0.189414
+        ]
+      ],
+      "radius": 0.011,
+      "taper": 0.9
+    },
+    "main_5": {
+      "op": "curve",
+      "points": [
+        [
+          0.019606,
+          0.0,
+          -0.007523
+        ],
+        [
+          0.04307,
+          0.079862,
+          -0.016526
+        ],
+        [
+          0.071677,
+          0.159724,
+          -0.027502
+        ],
+        [
+          0.102609,
+          0.239586,
+          -0.039371
+        ],
+        [
+          0.135157,
+          0.319448,
+          -0.051859
+        ],
+        [
+          0.168962,
+          0.39931,
+          -0.064829
+        ],
+        [
+          0.203802,
+          0.479172,
+          -0.078197
+        ],
+        [
+          0.239528,
+          0.559034,
+          -0.091905
+        ],
+        [
+          0.27603,
+          0.638896,
+          -0.105911
+        ],
+        [
+          0.313225,
+          0.718758,
+          -0.120182
+        ],
+        [
+          0.351046,
+          0.79862,
+          -0.134694
+        ]
+      ],
+      "radius": 0.011,
+      "taper": 0.9
+    },
+    "main_6": {
+      "op": "curve",
+      "points": [
+        [
+          -0.009376,
+          0.0,
+          0.018791
+        ],
+        [
+          -0.024499,
+          0.078685,
+          0.049097
+        ],
+        [
+          -0.042935,
+          0.15737,
+          0.086046
+        ],
+        [
+          -0.062871,
+          0.236056,
+          0.125999
+        ],
+        [
+          -0.083849,
+          0.314741,
+          0.168039
+        ],
+        [
+          -0.105635,
+          0.393426,
+          0.211701
+        ],
+        [
+          -0.12809,
+          0.472111,
+          0.256702
+        ],
+        [
+          -0.151115,
+          0.550797,
+          0.302846
+        ],
+        [
+          -0.174641,
+          0.629482,
+          0.349994
+        ],
+        [
+          -0.198613,
+          0.708167,
+          0.398036
+        ],
+        [
+          -0.222988,
+          0.786852,
+          0.446886
+        ]
+      ],
+      "radius": 0.011,
+      "taper": 0.9
+    },
+    "structure": {
+      "op": "merge",
+      "inputs": [
+        "main_0",
+        "main_1",
+        "main_2",
+        "main_3",
+        "main_4",
+        "main_5",
+        "main_6"
+      ]
+    },
+    "wood": {
+      "op": "tube",
+      "input": "structure",
+      "sides": 5,
+      "stride": 2,
+      "material": "wood",
+      "cap_material": "wood"
+    },
+    "wood_low": {
+      "op": "tube",
+      "input": "structure",
+      "sides": 4,
+      "stride": 4,
+      "material": "wood",
+      "cap_material": "wood"
+    },
+    "guides": {
+      "op": "branch",
+      "input": "structure",
+      "count": 4,
+      "range": [
+        0.23,
+        0.98
+      ],
+      "length": 0.4,
+      "length_decay": 0.35,
+      "length_variation": 0.23,
+      "angle": 57,
+      "angle_jitter": 15,
+      "azimuth": 137.5,
+      "segments": 8,
+      "radius_scale": 0.28,
+      "taper": 0.91,
+      "noise": 0.025,
+      "bend": [
+        0,
+        0.07,
+        0
+      ]
+    },
+    "twigs": {
+      "op": "tube",
+      "input": "guides",
+      "sides": 3,
+      "stride": 1,
+      "material": "stem",
+      "cap_material": "stem"
+    },
+    "leaf": {
+      "op": "leaf",
+      "shape": "oval",
+      "length": 0.115,
+      "width": 0.085,
+      "curl": 0.16,
+      "fold": 0.12,
+      "segments": 14,
+      "width_segments": 4,
+      "material": "leaf",
+      "edge_wave": 0.15,
+      "edge_frequency": 5,
+      "width_profile": [
+        [
+          0,
+          0
+        ],
+        [
+          0.13,
+          0.35
+        ],
+        [
+          0.27,
+          0.8
+        ],
+        [
+          0.39,
+          0.65
+        ],
+        [
+          0.53,
+          1
+        ],
+        [
+          0.64,
+          0.72
+        ],
+        [
+          0.79,
+          0.66
+        ],
+        [
+          1,
+          0
+        ]
+      ]
+    },
+    "sites": {
+      "op": "scatter",
+      "input": "guides",
+      "count": 15,
+      "range": [
+        0.05,
+        1
+      ],
+      "distribution": "alternate",
+      "angle": 57,
+      "azimuth": 137.5,
+      "jitter": 0.18,
+      "scale": [
+        0.68,
+        1.15
+      ],
+      "proximity_mesh": "twigs",
+      "max_distance": 0.005,
+      "snap_to_mesh": true
+    },
+    "leaves": {
+      "op": "instance",
+      "input": "leaf",
+      "points": "sites",
+      "color_variation": 0.23,
+      "scale_jitter": [
+        0.17,
+        0.15,
+        0.1
+      ]
+    },
+    "bake_source": {
+      "op": "merge",
+      "inputs": [
+        "twigs",
+        "leaves"
+      ]
+    },
+    "source": {
+      "op": "merge",
+      "inputs": [
+        "wood",
+        "bake_source"
+      ]
+    },
+    "wind": {
+      "op": "wind",
+      "input": "source",
+      "height": 1.31,
+      "strength": 0.65,
+      "exponent": 1.4
+    },
+    "bake_source_wind": {
+      "op": "wind",
+      "input": "bake_source",
+      "height": 1.31,
+      "strength": 0.65,
+      "exponent": 1.4
+    },
+    "keep_wind": {
+      "op": "wind",
+      "input": "wood",
+      "height": 1.31,
+      "strength": 0.65,
+      "exponent": 1.4
+    },
+    "keep_low_wind": {
+      "op": "wind",
+      "input": "wood_low",
+      "height": 1.31,
+      "strength": 0.65,
+      "exponent": 1.4
+    }
+  },
+  "outputs": {
+    "bush-hedgerow.glb": "wind"
+  },
+  "card_bakes": {
+    "Cards": {
+      "source": "bake_source_wind",
+      "paths": "guides",
+      "output": "bush-hedgerow-cards.glb",
+      "segments": 4,
+      "planes": 2,
+      "cell_width": 128,
+      "cell_height": 128,
+      "atlas_size": 1024,
+      "padding": 3,
+      "samples": 3,
+      "margin": 0.003,
+      "max_distance": 0.012,
+      "alpha_cutoff": 0.3,
+      "translucency": 0.16,
+      "memory_mb": 256,
+      "keep": "keep_wind"
+    },
+    "CardsLow": {
+      "source": "bake_source_wind",
+      "paths": "guides",
+      "output": "bush-hedgerow-cards-low.glb",
+      "segments": 2,
+      "planes": 2,
+      "cell_width": 64,
+      "cell_height": 64,
+      "atlas_size": 512,
+      "padding": 2,
+      "samples": 3,
+      "margin": 0.003,
+      "max_distance": 0.012,
+      "alpha_cutoff": 0.3,
+      "translucency": 0.16,
+      "memory_mb": 256,
+      "keep": "keep_low_wind"
+    }
+  }
+}

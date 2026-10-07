@@ -1,0 +1,388 @@
+{
+  "size": 256,
+  "seed": 91,
+  "tile": false,
+  "nodes": {
+    "u": {
+      "op": "gradient",
+      "angle": 0
+    },
+    "v": {
+      "op": "gradient",
+      "angle": 90
+    },
+    "u_center": {
+      "op": "math",
+      "input": "u",
+      "mode": "subtract",
+      "value": 0.5
+    },
+    "distance": {
+      "op": "math",
+      "input": "u_center",
+      "mode": "abs"
+    },
+    "width": {
+      "op": "ramp",
+      "input": "v",
+      "stops": [
+        [
+          0,
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        [
+          0.04,
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        [
+          0.13,
+          [
+            0.035,
+            0.035,
+            0.035,
+            1
+          ]
+        ],
+        [
+          0.25,
+          [
+            0.12,
+            0.12,
+            0.12,
+            1
+          ]
+        ],
+        [
+          0.43,
+          [
+            0.265,
+            0.265,
+            0.265,
+            1
+          ]
+        ],
+        [
+          0.62,
+          [
+            0.4,
+            0.4,
+            0.4,
+            1
+          ]
+        ],
+        [
+          0.73,
+          [
+            0.3,
+            0.3,
+            0.3,
+            1
+          ]
+        ],
+        [
+          0.85,
+          [
+            0.012,
+            0.012,
+            0.012,
+            1
+          ]
+        ],
+        [
+          0.97,
+          [
+            0.008,
+            0.008,
+            0.008,
+            1
+          ]
+        ],
+        [
+          0.99,
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        [
+          1,
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ]
+      ]
+    },
+    "teeth": {
+      "op": "stripes",
+      "angle": 90,
+      "count": 25,
+      "wave": "saw"
+    },
+    "teeth_center": {
+      "op": "math",
+      "input": "teeth",
+      "mode": "subtract",
+      "value": 0.5
+    },
+    "teeth_scale": {
+      "op": "math",
+      "input": "teeth_center",
+      "mode": "multiply",
+      "value": 0.13
+    },
+    "teeth_factor": {
+      "op": "math",
+      "input": "teeth_scale",
+      "mode": "add",
+      "value": 1
+    },
+    "toothed_width": {
+      "op": "math",
+      "input": "width",
+      "b": "teeth_factor",
+      "mode": "multiply"
+    },
+    "inside": {
+      "op": "math",
+      "input": "toothed_width",
+      "b": "distance",
+      "mode": "subtract"
+    },
+    "mask": {
+      "op": "levels",
+      "input": "inside",
+      "in": [
+        0,
+        0.004
+      ]
+    },
+    "outline": {
+      "op": "ramp",
+      "input": "mask",
+      "stops": [
+        [
+          0,
+          [
+            1,
+            1,
+            1,
+            0
+          ]
+        ],
+        [
+          1,
+          [
+            1,
+            1,
+            1,
+            1
+          ]
+        ]
+      ]
+    },
+    "edge_x": {
+      "op": "simplex",
+      "scale": 4,
+      "fractal": "fbm",
+      "octaves": 2
+    },
+    "edge_y": {
+      "op": "simplex",
+      "scale": 6,
+      "fractal": "fbm",
+      "octaves": 2
+    },
+    "silhouette": {
+      "op": "warp",
+      "input": "outline",
+      "x": "edge_x",
+      "y": "edge_y",
+      "strength": 0.01,
+      "edge": "transparent"
+    },
+    "vein_v": {
+      "op": "math",
+      "input": "v",
+      "mode": "multiply",
+      "value": 8
+    },
+    "vein_u": {
+      "op": "math",
+      "input": "distance",
+      "mode": "multiply",
+      "value": 8.5
+    },
+    "vein_phase": {
+      "op": "math",
+      "input": "vein_v",
+      "b": "vein_u",
+      "mode": "add"
+    },
+    "vein_period": {
+      "op": "math",
+      "input": "vein_phase",
+      "mode": "fract"
+    },
+    "secondaries": {
+      "op": "levels",
+      "input": "vein_period",
+      "in": [
+        0,
+        0.1
+      ],
+      "out": [
+        1,
+        0
+      ]
+    },
+    "midrib": {
+      "op": "shape",
+      "type": "box",
+      "center": [
+        0.5,
+        0.53
+      ],
+      "size": [
+        0.008,
+        0.88
+      ],
+      "softness": 0.4
+    },
+    "veins": {
+      "op": "math",
+      "input": "secondaries",
+      "b": "midrib",
+      "mode": "max"
+    },
+    "veins_warped": {
+      "op": "warp",
+      "input": "veins",
+      "x": "edge_x",
+      "y": "edge_y",
+      "strength": 0.006,
+      "edge": "clamp"
+    },
+    "pigment": {
+      "op": "simplex",
+      "scale": 2.1,
+      "fractal": "fbm",
+      "octaves": 2
+    },
+    "pigment_color": {
+      "op": "ramp",
+      "input": "pigment",
+      "stops": [
+        [
+          0,
+          "#173e0d"
+        ],
+        [
+          0.4,
+          "#40661b"
+        ],
+        [
+          0.72,
+          "#648d29"
+        ],
+        [
+          1,
+          "#a2b646"
+        ]
+      ]
+    },
+    "vein_color": {
+      "op": "constant",
+      "value": "#8ea641"
+    },
+    "color_detail": {
+      "op": "blend",
+      "a": "pigment_color",
+      "b": "vein_color",
+      "mode": "mix",
+      "mask": "veins_warped",
+      "opacity": 0.38
+    },
+    "color": {
+      "op": "math",
+      "input": "silhouette",
+      "b": "color_detail",
+      "mode": "multiply"
+    },
+    "grain": {
+      "op": "simplex",
+      "scale": 45,
+      "fractal": "fbm",
+      "octaves": 3
+    },
+    "height_fine": {
+      "op": "levels",
+      "input": "grain",
+      "out": [
+        0.485,
+        0.515
+      ]
+    },
+    "height": {
+      "op": "blend",
+      "a": "height_fine",
+      "b": "veins_warped",
+      "mode": "add",
+      "opacity": 0.018
+    },
+    "normal": {
+      "op": "normal",
+      "input": "height",
+      "strength": 0.005,
+      "convention": "opengl",
+      "edge": "clamp"
+    },
+    "roughness": {
+      "op": "levels",
+      "input": "grain",
+      "out": [
+        0.4,
+        0.6
+      ]
+    },
+    "zero": {
+      "op": "constant",
+      "value": 0
+    },
+    "one": {
+      "op": "constant",
+      "value": 1
+    },
+    "metallic_roughness": {
+      "op": "pack",
+      "r": "one",
+      "g": "roughness",
+      "b": "zero"
+    }
+  },
+  "outputs": {
+    "color.png": {
+      "node": "color",
+      "alpha": true
+    },
+    "normal.png": {
+      "node": "normal",
+      "bits": 16
+    },
+    "metallic-roughness.png": "metallic_roughness"
+  }
+}

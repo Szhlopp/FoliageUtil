@@ -1,0 +1,593 @@
+{
+  "version": 1,
+  "name": "pine-upright",
+  "description": "Upright pine with a straight leader, tapered whorled crown, and paired geometry needles.",
+  "seed": 42,
+  "units": "meters",
+  "materials": {
+    "pine_bark": {
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "roughness": 1,
+      "double_sided": false,
+      "base_color_texture": "../assets/pine/bark-color.png",
+      "normal_texture": "../assets/pine/bark-normal.png",
+      "metallic_roughness_texture": "../assets/pine/bark-metallic-roughness.png"
+    },
+    "pine_twig": {
+      "base_color": [
+        0.16,
+        0.105,
+        0.048,
+        1
+      ],
+      "roughness": 0.88,
+      "double_sided": false
+    },
+    "pine_needles": {
+      "base_color": [
+        0.016,
+        0.052,
+        0.009,
+        1
+      ],
+      "roughness": 0.62,
+      "double_sided": true,
+      "translucency": 0.1
+    },
+    "pine_tips": {
+      "base_color": [
+        0.047,
+        0.105,
+        0.016,
+        1
+      ],
+      "roughness": 0.64,
+      "double_sided": true,
+      "translucency": 0.14
+    }
+  },
+  "nodes": {
+    "trunk": {
+      "op": "trunk",
+      "origin": [
+        0,
+        -0.07,
+        0
+      ],
+      "length": 8.8,
+      "radius": 0.23,
+      "segments": 64,
+      "taper": 0.975,
+      "flare": 0.7,
+      "flare_length": 0.12,
+      "flare_power": 1.8,
+      "noise": 0.017,
+      "noise_profile": [
+        [
+          0,
+          0
+        ],
+        [
+          0.3,
+          0.15
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "bend": [
+        0.05,
+        0,
+        0.035
+      ]
+    },
+    "roots": {
+      "op": "roots",
+      "input": "trunk",
+      "count": 6,
+      "attachment": 0.016,
+      "length": 0.75,
+      "length_variation": 0.25,
+      "radius_scale": 0.4,
+      "radius_variation": 0.2,
+      "segments": 16,
+      "surface_at": 0.55,
+      "bury_depth": 0.09,
+      "taper": 0.97,
+      "noise": 0.05
+    },
+    "lower_boughs": {
+      "op": "branch",
+      "input": "trunk",
+      "count": 25,
+      "distribution": "whorled",
+      "whorl": 5,
+      "range": [
+        0.18,
+        0.52
+      ],
+      "length": 3.5,
+      "length_decay": 0.87,
+      "length_variation": 0.15,
+      "radius_scale": 0.42,
+      "taper": 0.97,
+      "angle": 96,
+      "angle_jitter": 8,
+      "azimuth": 39,
+      "segments": 24,
+      "noise": 0.045,
+      "bend": [
+        0,
+        0.3,
+        0
+      ]
+    },
+    "upper_boughs": {
+      "op": "branch",
+      "input": "trunk",
+      "count": 30,
+      "distribution": "whorled",
+      "whorl": 5,
+      "range": [
+        0.59,
+        0.965
+      ],
+      "length": 4.0,
+      "length_decay": 0.985,
+      "length_variation": 0.16,
+      "radius_scale": 0.42,
+      "taper": 0.97,
+      "angle": 69,
+      "angle_jitter": 9,
+      "azimuth": 51,
+      "segments": 18,
+      "noise": 0.04,
+      "bend": [
+        0,
+        0.12,
+        0
+      ]
+    },
+    "lower_laterals": {
+      "op": "branch",
+      "input": "lower_boughs",
+      "count": 11,
+      "range": [
+        0.12,
+        0.99
+      ],
+      "distribution": "alternate",
+      "azimuth": 160,
+      "length": 0.8,
+      "length_decay": 0.45,
+      "length_variation": 0.28,
+      "radius_scale": 0.28,
+      "taper": 0.92,
+      "angle": 58,
+      "angle_jitter": 16,
+      "segments": 9,
+      "noise": 0.08,
+      "bend": [
+        0,
+        0.1,
+        0
+      ]
+    },
+    "upper_laterals": {
+      "op": "branch",
+      "input": "upper_boughs",
+      "count": 9,
+      "range": [
+        0.12,
+        0.99
+      ],
+      "distribution": "alternate",
+      "azimuth": 160,
+      "length": 0.32,
+      "length_decay": 0.65,
+      "length_variation": 0.28,
+      "radius_scale": 0.28,
+      "taper": 0.92,
+      "angle": 58,
+      "angle_jitter": 16,
+      "segments": 9,
+      "noise": 0.08,
+      "bend": [
+        0,
+        0.1,
+        0
+      ]
+    },
+    "laterals": {
+      "op": "merge",
+      "inputs": [
+        "lower_laterals",
+        "upper_laterals"
+      ]
+    },
+    "shoot_guides": {
+      "op": "merge",
+      "inputs": [
+        "lower_shoot_guides",
+        "upper_shoot_guides"
+      ]
+    },
+    "shoots": {
+      "op": "grow",
+      "input": "shoot_guides",
+      "direction": [
+        0,
+        1,
+        0
+      ],
+      "interpolation": "spherical",
+      "strength": 0.32,
+      "strength_profile": [
+        [
+          0,
+          0
+        ],
+        [
+          0.35,
+          0.25
+        ],
+        [
+          1,
+          1
+        ]
+      ]
+    },
+    "trunk_mesh": {
+      "op": "tube",
+      "input": "trunk",
+      "sides": 28,
+      "ridges": 7,
+      "ridge_depth": 0.13,
+      "ridge_profile": [
+        [
+          0,
+          1
+        ],
+        [
+          0.15,
+          0.4
+        ],
+        [
+          1,
+          0.08
+        ]
+      ],
+      "radius_noise": 0.045,
+      "noise_scale": 3,
+      "noise_profile": [
+        [
+          0,
+          0.3
+        ],
+        [
+          0.15,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "uv_scale": [
+        1.5,
+        0.7
+      ],
+      "material": "pine_bark",
+      "cap_material": "pine_bark"
+    },
+    "root_mesh": {
+      "op": "tube",
+      "input": "roots",
+      "sides": 10,
+      "uv_scale": [
+        0.6,
+        1.1
+      ],
+      "material": "pine_bark",
+      "cap_material": "pine_bark"
+    },
+    "bough_paths": {
+      "op": "merge",
+      "inputs": [
+        "lower_boughs",
+        "upper_boughs"
+      ]
+    },
+    "bough_mesh": {
+      "op": "tube",
+      "input": "bough_paths",
+      "sides": 12,
+      "uv_scale": [
+        0.65,
+        0.8
+      ],
+      "material": "pine_bark",
+      "cap_material": "pine_bark"
+    },
+    "lateral_mesh": {
+      "op": "tube",
+      "input": "laterals",
+      "sides": 6,
+      "material": "pine_twig",
+      "cap_material": "pine_twig"
+    },
+    "wood_shells": {
+      "op": "merge",
+      "inputs": [
+        "trunk_mesh",
+        "root_mesh",
+        "bough_mesh",
+        "lateral_mesh"
+      ]
+    },
+    "wood": {
+      "op": "solidify",
+      "input": "wood_shells",
+      "require_connected": true
+    },
+    "shoot_mesh": {
+      "op": "tube",
+      "input": "shoots",
+      "sides": 4,
+      "material": "pine_twig",
+      "cap_material": "pine_twig"
+    },
+    "needle": {
+      "op": "leaf",
+      "shape": "needle",
+      "length": 0.2,
+      "width": 0.007,
+      "segments": 2,
+      "width_segments": 2,
+      "curl": 0.085,
+      "fold": 0.55,
+      "material": "pine_needles"
+    },
+    "paired_needle": {
+      "op": "transform",
+      "input": "needle",
+      "rotation": [
+        6,
+        28,
+        9
+      ],
+      "scale": 0.93
+    },
+    "fascicle": {
+      "op": "merge",
+      "inputs": [
+        "needle",
+        "paired_needle"
+      ]
+    },
+    "needle_sites": {
+      "op": "scatter",
+      "input": "shoots",
+      "count": 36,
+      "distribution": "alternate",
+      "range": [
+        0.08,
+        0.96
+      ],
+      "angle": 57,
+      "jitter": 0.7,
+      "scale": [
+        0.74,
+        1.25
+      ],
+      "proximity_mesh": "shoot_mesh",
+      "max_distance": 0.012,
+      "snap_to_mesh": true
+    },
+    "needles": {
+      "op": "instance",
+      "input": "fascicle",
+      "points": "needle_sites",
+      "color_variation": 0.28,
+      "scale_jitter": [
+        0.15,
+        0.13,
+        0.08
+      ]
+    },
+    "tip_needle": {
+      "op": "leaf",
+      "shape": "needle",
+      "length": 0.12,
+      "width": 0.005,
+      "segments": 2,
+      "width_segments": 2,
+      "curl": 0.06,
+      "fold": 0.5,
+      "material": "pine_tips"
+    },
+    "tip_sites": {
+      "op": "scatter",
+      "input": "shoots",
+      "count": 10,
+      "distribution": "alternate",
+      "range": [
+        0.78,
+        1
+      ],
+      "angle": 29,
+      "jitter": 0.35,
+      "scale": [
+        0.75,
+        1.15
+      ],
+      "proximity_mesh": "shoot_mesh",
+      "max_distance": 0.012,
+      "snap_to_mesh": true
+    },
+    "tip_needles": {
+      "op": "instance",
+      "input": "tip_needle",
+      "points": "tip_sites",
+      "color_variation": 0.2
+    },
+    "tree": {
+      "op": "merge",
+      "inputs": [
+        "wood",
+        "shoot_mesh",
+        "needles",
+        "tip_needles"
+      ]
+    },
+    "wind": {
+      "op": "wind",
+      "input": "tree",
+      "height": 9.2
+    },
+    "lower_shoot_guides": {
+      "op": "branch",
+      "input": "lower_laterals",
+      "count": 5,
+      "range": [
+        0.3,
+        0.98
+      ],
+      "length": 0.46,
+      "length_decay": 0.22,
+      "length_variation": 0.3,
+      "radius_scale": 0.42,
+      "taper": 0.8,
+      "angle": 45,
+      "angle_jitter": 15,
+      "segments": 5,
+      "noise": 0.065,
+      "bend": [
+        0,
+        0.08,
+        0
+      ]
+    },
+    "upper_shoot_guides": {
+      "op": "branch",
+      "input": "upper_laterals",
+      "count": 3,
+      "range": [
+        0.3,
+        0.98
+      ],
+      "length": 0.25,
+      "length_decay": 0.22,
+      "length_variation": 0.3,
+      "radius_scale": 0.42,
+      "taper": 0.8,
+      "angle": 45,
+      "angle_jitter": 15,
+      "segments": 5,
+      "noise": 0.065,
+      "bend": [
+        0,
+        0.08,
+        0
+      ]
+    },
+    "bake_canopy": {
+      "op": "merge",
+      "inputs": [
+        "lateral_mesh",
+        "shoot_mesh",
+        "needles",
+        "tip_needles"
+      ]
+    },
+    "bake_canopy_wind": {
+      "op": "wind",
+      "input": "bake_canopy",
+      "height": 9.2
+    },
+    "bake_wood_shells": {
+      "op": "merge",
+      "inputs": [
+        "trunk_mesh",
+        "root_mesh",
+        "bough_mesh"
+      ]
+    },
+    "bake_wood": {
+      "op": "solidify",
+      "input": "bake_wood_shells",
+      "require_connected": true
+    },
+    "bake_wood_wind": {
+      "op": "wind",
+      "input": "bake_wood",
+      "height": 9.2
+    },
+    "bake_shoot_canopy": {
+      "op": "merge",
+      "inputs": [
+        "shoot_mesh",
+        "needles",
+        "tip_needles"
+      ]
+    },
+    "bake_shoot_canopy_wind": {
+      "op": "wind",
+      "input": "bake_shoot_canopy",
+      "height": 9.2
+    },
+    "bake_full_wood_wind": {
+      "op": "wind",
+      "input": "wood",
+      "height": 9.2
+    }
+  },
+  "outputs": {
+    "pine-upright.glb": "wind",
+    "pine-upright-wood.glb": "wood"
+  },
+  "card_bakes": {
+    "NeedleShoots": {
+      "source": "bake_shoot_canopy_wind",
+      "paths": "shoots",
+      "keep": "bake_full_wood_wind",
+      "output": "pine-upright-card-baked.glb",
+      "segments": 3,
+      "planes": 2,
+      "cell_width": 64,
+      "cell_height": 96,
+      "atlas_size": 2048,
+      "padding": 3,
+      "samples": 3,
+      "margin": 0.008,
+      "max_distance": 0.025,
+      "alpha_cutoff": 0.3,
+      "translucency": 0.1,
+      "memory_mb": 1024
+    },
+    "NeedleSprays": {
+      "source": "bake_canopy_wind",
+      "paths": "laterals",
+      "keep": "bake_wood_wind",
+      "output": "pine-upright-card-baked-low.glb",
+      "segments": 4,
+      "planes": 2,
+      "cell_width": 128,
+      "cell_height": 128,
+      "atlas_size": 2048,
+      "padding": 4,
+      "samples": 3,
+      "margin": 0.012,
+      "max_distance": 0.65,
+      "alpha_cutoff": 0.3,
+      "translucency": 0.1,
+      "memory_mb": 1024
+    }
+  }
+}

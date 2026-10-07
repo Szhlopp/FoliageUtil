@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "name": "reeds",
+  "description": "",
+  "seed": 42,
+  "units": "meters",
+  "materials": {
+    "stem": {
+      "base_color": [
+        0.13,
+        0.23,
+        0.035,
+        1
+      ]
+    },
+    "petal": {
+      "base_color": [
+        0.65,
+        0.075,
+        0.19,
+        1
+      ]
+    },
+    "gold": {
+      "base_color": [
+        0.65,
+        0.38,
+        0.045,
+        1
+      ]
+    }
+  },
+  "nodes": {
+    "stalk": {
+      "op": "trunk",
+      "length": 1.8,
+      "radius": 0.011,
+      "segments": 16,
+      "taper": 0.4,
+      "bend": [
+        0.18,
+        0,
+        0.08
+      ],
+      "flare": 0
+    },
+    "stem": {
+      "op": "tube",
+      "input": "stalk",
+      "sides": 5,
+      "material": "stem",
+      "cap_material": "stem"
+    },
+    "attachments": {
+      "op": "scatter",
+      "input": "stalk",
+      "count": 4,
+      "range": [
+        0.1,
+        0.65
+      ],
+      "angle": 25,
+      "distribution": "opposite"
+    },
+    "blade": {
+      "op": "leaf",
+      "shape": "lanceolate",
+      "length": 0.9,
+      "width": 0.045,
+      "curl": 0.65,
+      "fold": 0.4,
+      "segments": 10
+    },
+    "blades": {
+      "op": "instance",
+      "input": "blade",
+      "points": "attachments"
+    },
+    "head": {
+      "op": "ellipsoid",
+      "radii": [
+        0.045,
+        0.22,
+        0.045
+      ],
+      "rings": 10,
+      "sides": 8,
+      "material": "bark"
+    },
+    "tip": {
+      "op": "scatter",
+      "input": "stalk",
+      "distribution": "tip",
+      "count": 1,
+      "angle": 0,
+      "scale": [
+        1,
+        1
+      ]
+    },
+    "heads": {
+      "op": "instance",
+      "input": "head",
+      "points": "tip"
+    },
+    "reed": {
+      "op": "merge",
+      "inputs": [
+        "stem",
+        "blades",
+        "heads"
+      ]
+    },
+    "bases": {
+      "op": "scatter",
+      "count": 18,
+      "radius": 0.7,
+      "scale": [
+        0.65,
+        1.2
+      ]
+    },
+    "clump": {
+      "op": "instance",
+      "input": "reed",
+      "points": "bases"
+    },
+    "wind": {
+      "op": "wind",
+      "input": "clump",
+      "height": 2
+    }
+  },
+  "outputs": {
+    "reeds.glb": "wind",
+    "reeds.obj": "wind"
+  }
+}

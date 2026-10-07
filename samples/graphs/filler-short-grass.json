@@ -1,0 +1,1113 @@
+{
+  "version": 1,
+  "name": "Short meadow grass",
+  "description": "Reusable meadow or field foliage in meters, with generated geometry and two fitted CardBake profiles.",
+  "seed": 431,
+  "units": "meters",
+  "materials": {
+    "leaf": {
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "base_color_texture": "../assets/filler/leaf-color.png",
+      "normal_texture": "../assets/filler/leaf-normal.png",
+      "metallic_roughness_texture": "../assets/filler/leaf-metallic-roughness.png",
+      "roughness": 1,
+      "translucency": 0.16,
+      "double_sided": true
+    },
+    "grass": {
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "base_color_texture": "../assets/filler/grass-color.png",
+      "normal_texture": "../assets/filler/grass-normal.png",
+      "metallic_roughness_texture": "../assets/filler/grass-metallic-roughness.png",
+      "roughness": 1,
+      "translucency": 0.16,
+      "double_sided": true
+    },
+    "stem": {
+      "base_color": [
+        0.1,
+        0.15,
+        0.028,
+        1
+      ],
+      "roughness": 0.8,
+      "double_sided": true
+    },
+    "wood": {
+      "base_color": [
+        0.105,
+        0.071,
+        0.03,
+        1
+      ],
+      "roughness": 0.9
+    }
+  },
+  "nodes": {
+    "blade": {
+      "op": "leaf",
+      "shape": "lanceolate",
+      "length": 0.31,
+      "width": 0.018,
+      "curl": 0.39,
+      "fold": 0.32,
+      "segments": 16,
+      "width_segments": 2,
+      "material": "grass"
+    },
+    "blade_guide": {
+      "op": "curve",
+      "points": [
+        [
+          0,
+          0.0,
+          0.0
+        ],
+        [
+          0,
+          0.019375,
+          0.000472
+        ],
+        [
+          0,
+          0.03875,
+          0.001889
+        ],
+        [
+          0,
+          0.058125,
+          0.00425
+        ],
+        [
+          0,
+          0.0775,
+          0.007556
+        ],
+        [
+          0,
+          0.096875,
+          0.011807
+        ],
+        [
+          0,
+          0.11625,
+          0.017002
+        ],
+        [
+          0,
+          0.135625,
+          0.023141
+        ],
+        [
+          0,
+          0.155,
+          0.030225
+        ],
+        [
+          0,
+          0.174375,
+          0.038254
+        ],
+        [
+          0,
+          0.19375,
+          0.047227
+        ],
+        [
+          0,
+          0.213125,
+          0.057144
+        ],
+        [
+          0,
+          0.2325,
+          0.068006
+        ],
+        [
+          0,
+          0.251875,
+          0.079813
+        ],
+        [
+          0,
+          0.27125,
+          0.092564
+        ],
+        [
+          0,
+          0.290625,
+          0.10626
+        ],
+        [
+          0,
+          0.31,
+          0.1209
+        ]
+      ],
+      "radius": 0.001,
+      "taper": 0.8
+    },
+    "blade_0": {
+      "op": "transform",
+      "input": "blade",
+      "rotation": [
+        28.062193,
+        0.0,
+        2.291077
+      ],
+      "translation": [
+        0.030191,
+        0,
+        0.0
+      ],
+      "scale": 0.995279
+    },
+    "guide_0": {
+      "op": "transform",
+      "input": "blade_guide",
+      "rotation": [
+        28.062193,
+        0.0,
+        2.291077
+      ],
+      "translation": [
+        0.030191,
+        0,
+        0.0
+      ],
+      "scale": 0.995279
+    },
+    "blade_1": {
+      "op": "transform",
+      "input": "blade",
+      "rotation": [
+        -1.855222,
+        137.507579,
+        0.238029
+      ],
+      "translation": [
+        -0.004455,
+        0,
+        0.004081
+      ],
+      "scale": 0.799592
+    },
+    "guide_1": {
+      "op": "transform",
+      "input": "blade_guide",
+      "rotation": [
+        -1.855222,
+        137.507579,
+        0.238029
+      ],
+      "translation": [
+        -0.004455,
+        0,
+        0.004081
+      ],
+      "scale": 0.799592
+    },
+    "blade_2": {
+      "op": "transform",
+      "input": "blade",
+      "rotation": [
+        5.84549,
+        275.015158,
+        2.656342
+      ],
+      "translation": [
+        0.000961,
+        0,
+        -0.010956
+      ],
+      "scale": 0.863957
+    },
+    "guide_2": {
+      "op": "transform",
+      "input": "blade_guide",
+      "rotation": [
+        5.84549,
+        275.015158,
+        2.656342
+      ],
+      "translation": [
+        0.000961,
+        0,
+        -0.010956
+      ],
+      "scale": 0.863957
+    },
+    "blade_3": {
+      "op": "transform",
+      "input": "blade",
+      "rotation": [
+        16.866404,
+        412.522737,
+        1.702936
+      ],
+      "translation": [
+        0.009676,
+        0,
+        0.012621
+      ],
+      "scale": 0.981272
+    },
+    "guide_3": {
+      "op": "transform",
+      "input": "blade_guide",
+      "rotation": [
+        16.866404,
+        412.522737,
+        1.702936
+      ],
+      "translation": [
+        0.009676,
+        0,
+        0.012621
+      ],
+      "scale": 0.981272
+    },
+    "blade_4": {
+      "op": "transform",
+      "input": "blade",
+      "rotation": [
+        -1.464671,
+        550.030316,
+        1.246405
+      ],
+      "translation": [
+        -0.030146,
+        0,
+        -0.005332
+      ],
+      "scale": 0.770668
+    },
+    "guide_4": {
+      "op": "transform",
+      "input": "blade_guide",
+      "rotation": [
+        -1.464671,
+        550.030316,
+        1.246405
+      ],
+      "translation": [
+        -0.030146,
+        0,
+        -0.005332
+      ],
+      "scale": 0.770668
+    },
+    "blade_5": {
+      "op": "transform",
+      "input": "blade",
+      "rotation": [
+        -0.86635,
+        687.537895,
+        0.923304
+      ],
+      "translation": [
+        0.022583,
+        0,
+        -0.014366
+      ],
+      "scale": 0.820996
+    },
+    "guide_5": {
+      "op": "transform",
+      "input": "blade_guide",
+      "rotation": [
+        -0.86635,
+        687.537895,
+        0.923304
+      ],
+      "translation": [
+        0.022583,
+        0,
+        -0.014366
+      ],
+      "scale": 0.820996
+    },
+    "blade_6": {
+      "op": "transform",
+      "input": "blade",
+      "rotation": [
+        25.557254,
+        825.045474,
+        0.095926
+      ],
+      "translation": [
+        -0.006409,
+        0,
+        0.023843
+      ],
+      "scale": 1.101711
+    },
+    "guide_6": {
+      "op": "transform",
+      "input": "blade_guide",
+      "rotation": [
+        25.557254,
+        825.045474,
+        0.095926
+      ],
+      "translation": [
+        -0.006409,
+        0,
+        0.023843
+      ],
+      "scale": 1.101711
+    },
+    "blade_7": {
+      "op": "transform",
+      "input": "blade",
+      "rotation": [
+        22.85243,
+        962.553053,
+        -0.540169
+      ],
+      "translation": [
+        -0.00699,
+        0,
+        -0.013457
+      ],
+      "scale": 1.090569
+    },
+    "guide_7": {
+      "op": "transform",
+      "input": "blade_guide",
+      "rotation": [
+        22.85243,
+        962.553053,
+        -0.540169
+      ],
+      "translation": [
+        -0.00699,
+        0,
+        -0.013457
+      ],
+      "scale": 1.090569
+    },
+    "blade_8": {
+      "op": "transform",
+      "input": "blade",
+      "rotation": [
+        30.074866,
+        1100.060632,
+        -3.285038
+      ],
+      "translation": [
+        0.027308,
+        0,
+        0.009972
+      ],
+      "scale": 0.856539
+    },
+    "guide_8": {
+      "op": "transform",
+      "input": "blade_guide",
+      "rotation": [
+        30.074866,
+        1100.060632,
+        -3.285038
+      ],
+      "translation": [
+        0.027308,
+        0,
+        0.009972
+      ],
+      "scale": 0.856539
+    },
+    "blade_9": {
+      "op": "transform",
+      "input": "blade",
+      "rotation": [
+        16.469478,
+        1237.568211,
+        -3.646154
+      ],
+      "translation": [
+        -0.017692,
+        0,
+        0.007303
+      ],
+      "scale": 0.888324
+    },
+    "guide_9": {
+      "op": "transform",
+      "input": "blade_guide",
+      "rotation": [
+        16.469478,
+        1237.568211,
+        -3.646154
+      ],
+      "translation": [
+        -0.017692,
+        0,
+        0.007303
+      ],
+      "scale": 0.888324
+    },
+    "blade_10": {
+      "op": "transform",
+      "input": "blade",
+      "rotation": [
+        10.44171,
+        1375.07579,
+        -0.619075
+      ],
+      "translation": [
+        0.009919,
+        0,
+        -0.021198
+      ],
+      "scale": 0.919756
+    },
+    "guide_10": {
+      "op": "transform",
+      "input": "blade_guide",
+      "rotation": [
+        10.44171,
+        1375.07579,
+        -0.619075
+      ],
+      "translation": [
+        0.009919,
+        0,
+        -0.021198
+      ],
+      "scale": 0.919756
+    },
+    "blade_11": {
+      "op": "transform",
+      "input": "blade",
+      "rotation": [
+        -5.846508,
+        1512.583369,
+        0.389229
+      ],
+      "translation": [
+        0.006212,
+        0,
+        0.019801
+      ],
+      "scale": 0.886959
+    },
+    "guide_11": {
+      "op": "transform",
+      "input": "blade_guide",
+      "rotation": [
+        -5.846508,
+        1512.583369,
+        0.389229
+      ],
+      "translation": [
+        0.006212,
+        0,
+        0.019801
+      ],
+      "scale": 0.886959
+    },
+    "blade_12": {
+      "op": "transform",
+      "input": "blade",
+      "rotation": [
+        30.536569,
+        1650.090948,
+        1.769599
+      ],
+      "translation": [
+        -0.011768,
+        0,
+        -0.006819
+      ],
+      "scale": 0.703705
+    },
+    "guide_12": {
+      "op": "transform",
+      "input": "blade_guide",
+      "rotation": [
+        30.536569,
+        1650.090948,
+        1.769599
+      ],
+      "translation": [
+        -0.011768,
+        0,
+        -0.006819
+      ],
+      "scale": 0.703705
+    },
+    "blade_13": {
+      "op": "transform",
+      "input": "blade",
+      "rotation": [
+        2.152749,
+        1787.598527,
+        0.896063
+      ],
+      "translation": [
+        0.029233,
+        0,
+        -0.006428
+      ],
+      "scale": 0.686993
+    },
+    "guide_13": {
+      "op": "transform",
+      "input": "blade_guide",
+      "rotation": [
+        2.152749,
+        1787.598527,
+        0.896063
+      ],
+      "translation": [
+        0.029233,
+        0,
+        -0.006428
+      ],
+      "scale": 0.686993
+    },
+    "blade_14": {
+      "op": "transform",
+      "input": "blade",
+      "rotation": [
+        -6.904841,
+        1925.106106,
+        -0.850689
+      ],
+      "translation": [
+        -0.011337,
+        0,
+        0.016127
+      ],
+      "scale": 0.692565
+    },
+    "guide_14": {
+      "op": "transform",
+      "input": "blade_guide",
+      "rotation": [
+        -6.904841,
+        1925.106106,
+        -0.850689
+      ],
+      "translation": [
+        -0.011337,
+        0,
+        0.016127
+      ],
+      "scale": 0.692565
+    },
+    "blade_15": {
+      "op": "transform",
+      "input": "blade",
+      "rotation": [
+        0.086072,
+        2062.613685,
+        -2.761578
+      ],
+      "translation": [
+        -0.002973,
+        0,
+        -0.022933
+      ],
+      "scale": 0.700259
+    },
+    "guide_15": {
+      "op": "transform",
+      "input": "blade_guide",
+      "rotation": [
+        0.086072,
+        2062.613685,
+        -2.761578
+      ],
+      "translation": [
+        -0.002973,
+        0,
+        -0.022933
+      ],
+      "scale": 0.700259
+    },
+    "blade_16": {
+      "op": "transform",
+      "input": "blade",
+      "rotation": [
+        28.512341,
+        2200.121264,
+        -1.288452
+      ],
+      "translation": [
+        0.013171,
+        0,
+        0.0111
+      ],
+      "scale": 0.602786
+    },
+    "guide_16": {
+      "op": "transform",
+      "input": "blade_guide",
+      "rotation": [
+        28.512341,
+        2200.121264,
+        -1.288452
+      ],
+      "translation": [
+        0.013171,
+        0,
+        0.0111
+      ],
+      "scale": 0.602786
+    },
+    "blade_17": {
+      "op": "transform",
+      "input": "blade",
+      "rotation": [
+        14.86203,
+        2337.628843,
+        -3.190509
+      ],
+      "translation": [
+        -0.016581,
+        0,
+        0.000687
+      ],
+      "scale": 0.689802
+    },
+    "guide_17": {
+      "op": "transform",
+      "input": "blade_guide",
+      "rotation": [
+        14.86203,
+        2337.628843,
+        -3.190509
+      ],
+      "translation": [
+        -0.016581,
+        0,
+        0.000687
+      ],
+      "scale": 0.689802
+    },
+    "blade_18": {
+      "op": "transform",
+      "input": "blade",
+      "rotation": [
+        3.500426,
+        2475.136422,
+        -1.331082
+      ],
+      "translation": [
+        0.01816,
+        0,
+        -0.018073
+      ],
+      "scale": 0.93188
+    },
+    "guide_18": {
+      "op": "transform",
+      "input": "blade_guide",
+      "rotation": [
+        3.500426,
+        2475.136422,
+        -1.331082
+      ],
+      "translation": [
+        0.01816,
+        0,
+        -0.018073
+      ],
+      "scale": 0.93188
+    },
+    "blade_19": {
+      "op": "transform",
+      "input": "blade",
+      "rotation": [
+        -1.890343,
+        2612.644001,
+        -0.082619
+      ],
+      "translation": [
+        -0.001055,
+        0,
+        0.022851
+      ],
+      "scale": 0.724784
+    },
+    "guide_19": {
+      "op": "transform",
+      "input": "blade_guide",
+      "rotation": [
+        -1.890343,
+        2612.644001,
+        -0.082619
+      ],
+      "translation": [
+        -0.001055,
+        0,
+        0.022851
+      ],
+      "scale": 0.724784
+    },
+    "blade_20": {
+      "op": "transform",
+      "input": "blade",
+      "rotation": [
+        11.775141,
+        2750.15158,
+        3.625488
+      ],
+      "translation": [
+        -0.005217,
+        0,
+        -0.00625
+      ],
+      "scale": 0.764088
+    },
+    "guide_20": {
+      "op": "transform",
+      "input": "blade_guide",
+      "rotation": [
+        11.775141,
+        2750.15158,
+        3.625488
+      ],
+      "translation": [
+        -0.005217,
+        0,
+        -0.00625
+      ],
+      "scale": 0.764088
+    },
+    "blade_21": {
+      "op": "transform",
+      "input": "blade",
+      "rotation": [
+        1.184088,
+        2887.659159,
+        0.131904
+      ],
+      "translation": [
+        0.024306,
+        0,
+        0.003269
+      ],
+      "scale": 0.591331
+    },
+    "guide_21": {
+      "op": "transform",
+      "input": "blade_guide",
+      "rotation": [
+        1.184088,
+        2887.659159,
+        0.131904
+      ],
+      "translation": [
+        0.024306,
+        0,
+        0.003269
+      ],
+      "scale": 0.591331
+    },
+    "blade_22": {
+      "op": "transform",
+      "input": "blade",
+      "rotation": [
+        0.624206,
+        3025.166738,
+        2.005211
+      ],
+      "translation": [
+        -0.00639,
+        0,
+        0.004447
+      ],
+      "scale": 1.03727
+    },
+    "guide_22": {
+      "op": "transform",
+      "input": "blade_guide",
+      "rotation": [
+        0.624206,
+        3025.166738,
+        2.005211
+      ],
+      "translation": [
+        -0.00639,
+        0,
+        0.004447
+      ],
+      "scale": 1.03727
+    },
+    "blade_23": {
+      "op": "transform",
+      "input": "blade",
+      "rotation": [
+        15.314267,
+        3162.674317,
+        0.134213
+      ],
+      "translation": [
+        0.003406,
+        0,
+        -0.015143
+      ],
+      "scale": 0.688601
+    },
+    "guide_23": {
+      "op": "transform",
+      "input": "blade_guide",
+      "rotation": [
+        15.314267,
+        3162.674317,
+        0.134213
+      ],
+      "translation": [
+        0.003406,
+        0,
+        -0.015143
+      ],
+      "scale": 0.688601
+    },
+    "blade_24": {
+      "op": "transform",
+      "input": "blade",
+      "rotation": [
+        -2.914144,
+        3300.181896,
+        -1.043228
+      ],
+      "translation": [
+        0.01161,
+        0,
+        0.020257
+      ],
+      "scale": 0.570597
+    },
+    "guide_24": {
+      "op": "transform",
+      "input": "blade_guide",
+      "rotation": [
+        -2.914144,
+        3300.181896,
+        -1.043228
+      ],
+      "translation": [
+        0.01161,
+        0,
+        0.020257
+      ],
+      "scale": 0.570597
+    },
+    "blade_25": {
+      "op": "transform",
+      "input": "blade",
+      "rotation": [
+        21.522801,
+        3437.689475,
+        -3.53855
+      ],
+      "translation": [
+        -0.026646,
+        0,
+        -0.008498
+      ],
+      "scale": 0.82212
+    },
+    "guide_25": {
+      "op": "transform",
+      "input": "blade_guide",
+      "rotation": [
+        21.522801,
+        3437.689475,
+        -3.53855
+      ],
+      "translation": [
+        -0.026646,
+        0,
+        -0.008498
+      ],
+      "scale": 0.82212
+    },
+    "blade_26": {
+      "op": "transform",
+      "input": "blade",
+      "rotation": [
+        2.219994,
+        3575.197054,
+        -3.798533
+      ],
+      "translation": [
+        0.009498,
+        0,
+        -0.004389
+      ],
+      "scale": 0.669366
+    },
+    "guide_26": {
+      "op": "transform",
+      "input": "blade_guide",
+      "rotation": [
+        2.219994,
+        3575.197054,
+        -3.798533
+      ],
+      "translation": [
+        0.009498,
+        0,
+        -0.004389
+      ],
+      "scale": 0.669366
+    },
+    "blade_27": {
+      "op": "transform",
+      "input": "blade",
+      "rotation": [
+        19.089806,
+        3712.704633,
+        3.957908
+      ],
+      "translation": [
+        -0.007034,
+        0,
+        0.016812
+      ],
+      "scale": 1.015931
+    },
+    "guide_27": {
+      "op": "transform",
+      "input": "blade_guide",
+      "rotation": [
+        19.089806,
+        3712.704633,
+        3.957908
+      ],
+      "translation": [
+        -0.007034,
+        0,
+        0.016812
+      ],
+      "scale": 1.015931
+    },
+    "source": {
+      "op": "merge",
+      "inputs": [
+        "blade_0",
+        "blade_1",
+        "blade_2",
+        "blade_3",
+        "blade_4",
+        "blade_5",
+        "blade_6",
+        "blade_7",
+        "blade_8",
+        "blade_9",
+        "blade_10",
+        "blade_11",
+        "blade_12",
+        "blade_13",
+        "blade_14",
+        "blade_15",
+        "blade_16",
+        "blade_17",
+        "blade_18",
+        "blade_19",
+        "blade_20",
+        "blade_21",
+        "blade_22",
+        "blade_23",
+        "blade_24",
+        "blade_25",
+        "blade_26",
+        "blade_27"
+      ]
+    },
+    "guides": {
+      "op": "merge",
+      "inputs": [
+        "guide_0",
+        "guide_1",
+        "guide_2",
+        "guide_3",
+        "guide_4",
+        "guide_5",
+        "guide_6",
+        "guide_7",
+        "guide_8",
+        "guide_9",
+        "guide_10",
+        "guide_11",
+        "guide_12",
+        "guide_13",
+        "guide_14",
+        "guide_15",
+        "guide_16",
+        "guide_17",
+        "guide_18",
+        "guide_19",
+        "guide_20",
+        "guide_21",
+        "guide_22",
+        "guide_23",
+        "guide_24",
+        "guide_25",
+        "guide_26",
+        "guide_27"
+      ]
+    },
+    "wind": {
+      "op": "wind",
+      "input": "source",
+      "height": 0.403,
+      "strength": 0.65,
+      "exponent": 1.4
+    }
+  },
+  "outputs": {
+    "filler-short-grass.glb": "wind"
+  },
+  "card_bakes": {
+    "Cards": {
+      "source": "wind",
+      "paths": "guides",
+      "output": "filler-short-grass-cards.glb",
+      "segments": 4,
+      "planes": 1,
+      "cell_width": 64,
+      "cell_height": 128,
+      "atlas_size": 512,
+      "padding": 3,
+      "samples": 3,
+      "margin": 0.003,
+      "max_distance": 0.004,
+      "alpha_cutoff": 0.3,
+      "translucency": 0.16,
+      "memory_mb": 256
+    },
+    "CardsLow": {
+      "source": "wind",
+      "paths": "guides",
+      "output": "filler-short-grass-cards-low.glb",
+      "segments": 3,
+      "planes": 1,
+      "cell_width": 32,
+      "cell_height": 64,
+      "atlas_size": 256,
+      "padding": 2,
+      "samples": 3,
+      "margin": 0.003,
+      "max_distance": 0.004,
+      "alpha_cutoff": 0.3,
+      "translucency": 0.16,
+      "memory_mb": 256
+    }
+  }
+}

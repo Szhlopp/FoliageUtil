@@ -1,0 +1,154 @@
+{
+  "version": 1,
+  "name": "rock-formation",
+  "description": "Four independently seeded weathered rocks form an overlapping stacked outcrop. solidify removes internal faces and verifies that the formation is connected.",
+  "seed": 42,
+  "units": "meters",
+  "materials": {
+    "sandstone": {
+      "base_color": [
+        0.45,
+        0.28,
+        0.14,
+        1
+      ],
+      "roughness": 0.88,
+      "double_sided": false
+    }
+  },
+  "nodes": {
+    "rock_0": {
+      "op": "rock",
+      "size": [
+        3.4,
+        1.65,
+        2.9
+      ],
+      "roundness": 0.42,
+      "noise": 0.21,
+      "subdivisions": 3,
+      "material": "sandstone",
+      "strata": 0.045,
+      "strata_frequency": 3
+    },
+    "placed_0": {
+      "op": "transform",
+      "input": "rock_0",
+      "translation": [
+        0,
+        0.64,
+        0
+      ],
+      "rotation": [
+        0,
+        12,
+        0
+      ],
+      "scale": 1
+    },
+    "rock_1": {
+      "op": "rock",
+      "size": [
+        2.5,
+        1.95,
+        2.25
+      ],
+      "roundness": 0.28,
+      "noise": 0.21,
+      "subdivisions": 3,
+      "material": "sandstone",
+      "strata": 0.045,
+      "strata_frequency": 3
+    },
+    "placed_1": {
+      "op": "transform",
+      "input": "rock_1",
+      "translation": [
+        0.12,
+        1.92,
+        0
+      ],
+      "rotation": [
+        4,
+        -12,
+        -6
+      ],
+      "scale": 1
+    },
+    "rock_2": {
+      "op": "rock",
+      "size": [
+        3.5,
+        1.2,
+        2.8
+      ],
+      "roundness": 0.32,
+      "noise": 0.21,
+      "subdivisions": 3,
+      "material": "sandstone",
+      "strata": 0.045,
+      "strata_frequency": 3
+    },
+    "placed_2": {
+      "op": "transform",
+      "input": "rock_2",
+      "translation": [
+        0.04,
+        3.23,
+        0.06
+      ],
+      "rotation": [
+        0,
+        23,
+        7
+      ],
+      "scale": 1
+    },
+    "rock_3": {
+      "op": "rock",
+      "size": [
+        1.5,
+        1.05,
+        1.6
+      ],
+      "roundness": 0.6,
+      "noise": 0.21,
+      "subdivisions": 3,
+      "material": "sandstone",
+      "strata": 0.045,
+      "strata_frequency": 3
+    },
+    "placed_3": {
+      "op": "transform",
+      "input": "rock_3",
+      "translation": [
+        0.28,
+        4.02,
+        0.06
+      ],
+      "rotation": [
+        0,
+        38,
+        -11
+      ],
+      "scale": 1
+    },
+    "assembly": {
+      "op": "merge",
+      "inputs": [
+        "placed_0",
+        "placed_1",
+        "placed_2",
+        "placed_3"
+      ]
+    },
+    "formation": {
+      "op": "solidify",
+      "input": "assembly",
+      "crease_angle": 38
+    }
+  },
+  "outputs": {
+    "rock-formation.glb": "formation"
+  }
+}

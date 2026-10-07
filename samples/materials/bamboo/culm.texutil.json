@@ -1,0 +1,262 @@
+{
+  "size": 1024,
+  "seed": 208,
+  "tile": true,
+  "nodes": {
+    "u": {
+      "op": "gradient",
+      "angle": 0
+    },
+    "v": {
+      "op": "gradient",
+      "angle": 90
+    },
+    "fiber": {
+      "op": "simplex",
+      "scale": 44,
+      "stretch": [
+        0.15,
+        3.0
+      ],
+      "fractal": "fbm",
+      "octaves": 3
+    },
+    "grain": {
+      "op": "simplex",
+      "scale": 90,
+      "fractal": "fbm",
+      "octaves": 2
+    },
+    "mottle": {
+      "op": "simplex",
+      "scale": 3.1,
+      "stretch": [
+        0.55,
+        1.8
+      ],
+      "fractal": "fbm",
+      "octaves": 3
+    },
+    "height": {
+      "op": "levels",
+      "input": "fiber",
+      "out": [
+        0.485,
+        0.515
+      ]
+    },
+    "band": {
+      "op": "ramp",
+      "input": "v",
+      "stops": [
+        [
+          0,
+          [
+            1,
+            1,
+            1,
+            1
+          ]
+        ],
+        [
+          0.016,
+          [
+            1,
+            1,
+            1,
+            1
+          ]
+        ],
+        [
+          0.043,
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        [
+          0.957,
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        [
+          0.984,
+          [
+            1,
+            1,
+            1,
+            1
+          ]
+        ],
+        [
+          1,
+          [
+            1,
+            1,
+            1,
+            1
+          ]
+        ]
+      ]
+    },
+    "seam": {
+      "op": "ramp",
+      "input": "v",
+      "stops": [
+        [
+          0,
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        [
+          0.038,
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        [
+          0.048,
+          [
+            1,
+            1,
+            1,
+            1
+          ]
+        ],
+        [
+          0.059,
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        [
+          1,
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ]
+      ]
+    },
+    "green": {
+      "op": "ramp",
+      "input": "mottle",
+      "stops": [
+        [
+          0,
+          "#305320"
+        ],
+        [
+          0.4,
+          "#638431"
+        ],
+        [
+          0.7,
+          "#899c48"
+        ],
+        [
+          1,
+          "#bbba6d"
+        ]
+      ]
+    },
+    "fiber_tint": {
+      "op": "levels",
+      "input": "fiber",
+      "out": [
+        0.88,
+        1
+      ]
+    },
+    "stem_color": {
+      "op": "math",
+      "input": "green",
+      "mode": "multiply",
+      "b": "fiber_tint"
+    },
+    "joint_color": {
+      "op": "constant",
+      "value": "#b8b187"
+    },
+    "dark_seam": {
+      "op": "constant",
+      "value": "#354721"
+    },
+    "banded": {
+      "op": "blend",
+      "a": "stem_color",
+      "b": "joint_color",
+      "mask": "band",
+      "mode": "mix",
+      "opacity": 0.9
+    },
+    "culm_color": {
+      "op": "blend",
+      "a": "banded",
+      "b": "dark_seam",
+      "mask": "seam",
+      "mode": "mix",
+      "opacity": 0.6
+    },
+    "normal": {
+      "op": "normal",
+      "input": "height",
+      "strength": 0.006,
+      "convention": "opengl",
+      "edge": "repeat"
+    },
+    "roughness": {
+      "op": "levels",
+      "input": "grain",
+      "out": [
+        0.36,
+        0.51
+      ]
+    },
+    "zero": {
+      "op": "constant",
+      "value": 0
+    },
+    "one": {
+      "op": "constant",
+      "value": 1
+    },
+    "metallic_roughness": {
+      "op": "pack",
+      "r": "one",
+      "g": "roughness",
+      "b": "zero"
+    }
+  },
+  "outputs": {
+    "culm-color.png": "culm_color",
+    "branch-color.png": "stem_color",
+    "normal.png": {
+      "node": "normal",
+      "bits": 16
+    },
+    "metallic-roughness.png": "metallic_roughness",
+    "height.png": {
+      "node": "height",
+      "bits": 16
+    }
+  }
+}

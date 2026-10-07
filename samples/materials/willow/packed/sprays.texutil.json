@@ -1,0 +1,18 @@
+{
+  "size": [
+    384,
+    1536
+  ],
+  "seed": 416,
+  "nodes": {},
+  "outputs": {
+    "sprays.atlas.json": {
+      "type": "spritesheet",
+      "source": "spray.texutil.json",
+      "columns": 3,
+      "rows": 2,
+      "count": 6,
+      "padding": 8
+    }
+  }
+}

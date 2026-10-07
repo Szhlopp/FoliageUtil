@@ -1,0 +1,138 @@
+{
+  "size": 256,
+  "seed": 220,
+  "nodes": {
+    "grain": {
+      "op": "simplex",
+      "scale": 50,
+      "stretch": [
+        0.3,
+        2
+      ],
+      "fractal": "fbm",
+      "octaves": 2
+    },
+    "pigment": {
+      "op": "simplex",
+      "scale": 2.5,
+      "stretch": [
+        0.7,
+        2
+      ],
+      "fractal": "fbm",
+      "octaves": 3
+    },
+    "parallel": {
+      "op": "stripes",
+      "count": 11,
+      "wave": "square",
+      "duty": 0.1
+    },
+    "midrib": {
+      "op": "shape",
+      "type": "box",
+      "center": [
+        0.5,
+        0.5
+      ],
+      "size": [
+        0.016,
+        1.1
+      ],
+      "softness": 0.4
+    },
+    "veins": {
+      "op": "blend",
+      "a": "midrib",
+      "b": "parallel",
+      "mode": "max",
+      "opacity": 0.28
+    },
+    "height_fine": {
+      "op": "levels",
+      "input": "grain",
+      "out": [
+        0.493,
+        0.507
+      ]
+    },
+    "height": {
+      "op": "blend",
+      "a": "height_fine",
+      "b": "veins",
+      "mode": "add",
+      "opacity": 0.018
+    },
+    "palette": {
+      "op": "ramp",
+      "input": "pigment",
+      "stops": [
+        [
+          0,
+          "#153e19"
+        ],
+        [
+          0.4,
+          "#32632a"
+        ],
+        [
+          0.72,
+          "#5b8636"
+        ],
+        [
+          1,
+          "#92a649"
+        ]
+      ]
+    },
+    "vein_color": {
+      "op": "constant",
+      "value": "#97ad58"
+    },
+    "color": {
+      "op": "blend",
+      "a": "palette",
+      "b": "vein_color",
+      "mask": "veins",
+      "mode": "mix",
+      "opacity": 0.23
+    },
+    "normal": {
+      "op": "normal",
+      "input": "height",
+      "strength": 0.005,
+      "convention": "opengl",
+      "edge": "clamp"
+    },
+    "roughness": {
+      "op": "levels",
+      "input": "grain",
+      "out": [
+        0.36,
+        0.5
+      ]
+    },
+    "zero": {
+      "op": "constant",
+      "value": 0
+    },
+    "one": {
+      "op": "constant",
+      "value": 1
+    },
+    "metallic_roughness": {
+      "op": "pack",
+      "r": "one",
+      "g": "roughness",
+      "b": "zero"
+    }
+  },
+  "outputs": {
+    "color.png": "color",
+    "normal.png": {
+      "node": "normal",
+      "bits": 16
+    },
+    "metallic-roughness.png": "metallic_roughness"
+  }
+}

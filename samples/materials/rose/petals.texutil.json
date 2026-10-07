@@ -1,0 +1,15 @@
+{
+  "size": 384,
+  "seed": 42,
+  "nodes": {},
+  "outputs": {
+    "petals.atlas.json": {
+      "type": "spritesheet",
+      "source": "petal-sprite.texutil.json",
+      "columns": 4,
+      "rows": 3,
+      "count": 12,
+      "padding": 6
+    }
+  }
+}

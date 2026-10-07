@@ -1,0 +1,114 @@
+{
+  "size": 512,
+  "seed": 42,
+  "tile": false,
+  "nodes": {
+    "grain": {
+      "op": "simplex",
+      "scale": 45,
+      "stretch": [
+        0.7,
+        2
+      ],
+      "fractal": "fbm",
+      "octaves": 3
+    },
+    "veins": {
+      "op": "stripes",
+      "count": 12,
+      "angle": 55
+    },
+    "vein_height": {
+      "op": "levels",
+      "input": "veins",
+      "gamma": 0.25,
+      "out": [
+        0,
+        0.12
+      ]
+    },
+    "height": {
+      "op": "blend",
+      "a": "grain",
+      "b": "vein_height",
+      "mode": "add",
+      "opacity": 0.4
+    },
+    "normal": {
+      "op": "normal",
+      "input": "height",
+      "strength": 0.001,
+      "convention": "opengl",
+      "edge": "clamp"
+    },
+    "color": {
+      "op": "ramp",
+      "input": "grain",
+      "stops": [
+        [
+          0,
+          "#152509"
+        ],
+        [
+          0.5,
+          "#2e4e14"
+        ],
+        [
+          1,
+          "#537923"
+        ]
+      ]
+    },
+    "roughness": {
+      "op": "levels",
+      "input": "grain",
+      "out": [
+        0.35,
+        0.48
+      ]
+    },
+    "zero": {
+      "op": "constant",
+      "value": 0
+    },
+    "one": {
+      "op": "constant",
+      "value": 1
+    },
+    "metallic_roughness": {
+      "op": "pack",
+      "r": "one",
+      "g": "roughness",
+      "b": "zero"
+    }
+  },
+  "outputs": {
+    "leaf-color.png": "color",
+    "leaf-normal.png": {
+      "node": "normal",
+      "bits": 16
+    },
+    "leaf-roughness.png": {
+      "node": "roughness",
+      "bits": 16
+    },
+    "leaf-metallic-roughness.png": "metallic_roughness",
+    "leaf.mtlx": {
+      "type": "materialx",
+      "name": "RoseLeaf",
+      "inputs": {
+        "base_color": {
+          "texture": "leaf-color.png"
+        },
+        "specular_roughness": {
+          "texture": "leaf-roughness.png"
+        },
+        "metalness": 0
+      },
+      "normal": {
+        "texture": "leaf-normal.png",
+        "convention": "opengl"
+      }
+    }
+  }
+}

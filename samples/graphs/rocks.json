@@ -1,0 +1,164 @@
+{
+  "version": 1,
+  "name": "rocks",
+  "description": "Three independently seeded stone prototypes: rounded granite, blocky stratified sandstone and a faceted slate shard. Shapes are reusable; instance does not regenerate each copy.",
+  "seed": 42,
+  "units": "meters",
+  "materials": {
+    "granite": {
+      "base_color": [
+        0.26,
+        0.29,
+        0.32,
+        1
+      ],
+      "roughness": 0.88,
+      "double_sided": false
+    },
+    "sandstone": {
+      "base_color": [
+        0.45,
+        0.28,
+        0.14,
+        1
+      ],
+      "roughness": 0.88,
+      "double_sided": false
+    },
+    "slate": {
+      "base_color": [
+        0.11,
+        0.16,
+        0.18,
+        1
+      ],
+      "roughness": 0.88,
+      "double_sided": false
+    },
+    "fresh_cut": {
+      "base_color": [
+        0.35,
+        0.3,
+        0.24,
+        1
+      ],
+      "roughness": 0.88,
+      "double_sided": false
+    }
+  },
+  "nodes": {
+    "boulder": {
+      "op": "rock",
+      "size": [
+        1.8,
+        1.3,
+        1.5
+      ],
+      "noise": 0.36,
+      "roundness": 0.8,
+      "subdivisions": 3,
+      "shading": "smooth",
+      "material": "granite"
+    },
+    "layered": {
+      "op": "rock",
+      "size": [
+        1.9,
+        1.45,
+        1.35
+      ],
+      "noise": 0.2,
+      "roundness": 0.27,
+      "strata": 0.085,
+      "strata_frequency": 5,
+      "subdivisions": 4,
+      "material": "sandstone"
+    },
+    "shard": {
+      "op": "rock",
+      "size": [
+        1.5,
+        1.8,
+        0.7
+      ],
+      "noise": 0.38,
+      "roundness": 0.5,
+      "subdivisions": 2,
+      "material": "slate"
+    },
+    "placed_boulder": {
+      "op": "transform",
+      "input": "boulder",
+      "translation": [
+        -2.3,
+        0.56,
+        0
+      ],
+      "rotation": [
+        0,
+        21,
+        0
+      ],
+      "scale": 1
+    },
+    "placed_layered": {
+      "op": "transform",
+      "input": "layered",
+      "translation": [
+        0,
+        0.6,
+        0
+      ],
+      "rotation": [
+        0,
+        -14,
+        0
+      ],
+      "scale": 1
+    },
+    "placed_shard": {
+      "op": "transform",
+      "input": "shard",
+      "translation": [
+        2.1,
+        0.72,
+        0
+      ],
+      "rotation": [
+        0,
+        34,
+        9
+      ],
+      "scale": 1
+    },
+    "study": {
+      "op": "merge",
+      "inputs": [
+        "placed_boulder",
+        "placed_layered",
+        "placed_shard"
+      ]
+    }
+  },
+  "outputs": {
+    "rocks.glb": "study",
+    "boulder.glb": "boulder",
+    "layered-rock.glb": "layered",
+    "slate.glb": "shard"
+  },
+  "lods": {
+    "Low": {
+      "overrides": {
+        "boulder": {
+          "subdivisions": 2
+        },
+        "layered": {
+          "subdivisions": 3
+        },
+        "shard": {
+          "subdivisions": 1
+        }
+      }
+    }
+  }
+}

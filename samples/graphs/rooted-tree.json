@@ -1,0 +1,564 @@
+{
+  "version": 1,
+  "name": "rooted-tree",
+  "description": "Broad rooted tree with a flared trunk, fading surface noise, and buttress roots. Closed wood shells fuse into one solid before leaves are added. TexUtil generates the deep fissured bark maps.",
+  "seed": 42,
+  "units": "meters",
+  "materials": {
+    "bark": {
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "roughness": 1,
+      "double_sided": false,
+      "base_color_texture": "../assets/rooted-tree/bark-color.png",
+      "normal_texture": "../assets/rooted-tree/bark-normal.png",
+      "metallic_roughness_texture": "../assets/rooted-tree/bark-metallic-roughness.png"
+    },
+    "cut": {
+      "base_color": [
+        0.27,
+        0.19,
+        0.12,
+        1
+      ],
+      "roughness": 0.85,
+      "double_sided": false
+    },
+    "leaf": {
+      "base_color": [
+        0.055,
+        0.16,
+        0.018,
+        1
+      ],
+      "roughness": 0.64,
+      "double_sided": true,
+      "translucency": 0.14
+    }
+  },
+  "nodes": {
+    "trunk": {
+      "op": "trunk",
+      "origin": [
+        0,
+        -0.12,
+        0
+      ],
+      "length": 5.8,
+      "radius": 0.85,
+      "segments": 96,
+      "taper": 0.64,
+      "flare": 0.9,
+      "flare_length": 0.34,
+      "flare_power": 1.7,
+      "noise": 0.1,
+      "noise_profile": [
+        [
+          0,
+          0
+        ],
+        [
+          0.18,
+          0.1
+        ],
+        [
+          0.55,
+          0.7
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "radius_profile": [
+        [
+          0,
+          1
+        ],
+        [
+          0.18,
+          1.05
+        ],
+        [
+          0.5,
+          0.96
+        ],
+        [
+          0.8,
+          1.1
+        ],
+        [
+          0.94,
+          0.4
+        ],
+        [
+          1,
+          0.04
+        ]
+      ],
+      "bend": [
+        0.12,
+        0,
+        0.18
+      ]
+    },
+    "buttress_roots": {
+      "op": "roots",
+      "input": "trunk",
+      "attachment": 0.29,
+      "count": 8,
+      "length": 4.4,
+      "length_variation": 0.24,
+      "angle": 0,
+      "angle_jitter": 10,
+      "ground_height": 0,
+      "surface_at": 0.6,
+      "bury_depth": 0.32,
+      "radius_scale": 0.72,
+      "radius_variation": 0.24,
+      "taper": 0.985,
+      "radius_profile": [
+        [
+          0,
+          1
+        ],
+        [
+          0.2,
+          1.12
+        ],
+        [
+          0.45,
+          0.9
+        ],
+        [
+          0.75,
+          0.65
+        ],
+        [
+          1,
+          0.45
+        ]
+      ],
+      "noise": 0.16,
+      "noise_scale": 0.65,
+      "noise_profile": [
+        [
+          0,
+          0
+        ],
+        [
+          0.2,
+          0.15
+        ],
+        [
+          0.6,
+          1
+        ],
+        [
+          1,
+          0.3
+        ]
+      ],
+      "segments": 64
+    },
+    "surface_roots": {
+      "op": "roots",
+      "input": "trunk",
+      "attachment": 0.09,
+      "count": 13,
+      "length": 3.6,
+      "length_variation": 0.35,
+      "angle": 17,
+      "angle_jitter": 15,
+      "surface_at": 0.48,
+      "ground_height": 0,
+      "bury_depth": 0.18,
+      "radius_scale": 0.16,
+      "radius_variation": 0.35,
+      "taper": 0.97,
+      "noise": 0.2,
+      "noise_scale": 0.8,
+      "noise_profile": [
+        [
+          0,
+          0
+        ],
+        [
+          0.3,
+          1
+        ],
+        [
+          0.8,
+          1
+        ],
+        [
+          1,
+          0.2
+        ]
+      ],
+      "segments": 48
+    },
+    "limbs": {
+      "op": "branch",
+      "input": "trunk",
+      "count": 7,
+      "range": [
+        0.48,
+        0.96
+      ],
+      "angle": 61,
+      "angle_jitter": 14,
+      "length": 4.6,
+      "length_decay": 0.12,
+      "length_variation": 0.22,
+      "radius_scale": 0.85,
+      "taper": 0.89,
+      "segments": 48,
+      "bend": [
+        0,
+        1.7,
+        0
+      ],
+      "noise": 0.22,
+      "noise_profile": [
+        [
+          0,
+          0
+        ],
+        [
+          0.3,
+          0.5
+        ],
+        [
+          1,
+          1
+        ]
+      ]
+    },
+    "branches": {
+      "op": "branch",
+      "input": "limbs",
+      "count": 6,
+      "range": [
+        0.3,
+        0.98
+      ],
+      "angle": 52,
+      "length": 2.3,
+      "length_decay": 0.2,
+      "radius_scale": 0.44,
+      "taper": 0.96,
+      "segments": 24,
+      "bend": [
+        0,
+        0.65,
+        0
+      ],
+      "noise": 0.18,
+      "noise_profile": [
+        [
+          0,
+          0
+        ],
+        [
+          0.3,
+          0.7
+        ],
+        [
+          1,
+          1
+        ]
+      ]
+    },
+    "twigs": {
+      "op": "branch",
+      "input": "branches",
+      "count": 5,
+      "range": [
+        0.3,
+        0.98
+      ],
+      "angle": 50,
+      "length": 1.05,
+      "length_decay": 0.2,
+      "radius_scale": 0.3,
+      "taper": 0.97,
+      "segments": 12,
+      "bend": [
+        0,
+        0.2,
+        0
+      ],
+      "noise": 0.14
+    },
+    "trunk_mesh": {
+      "op": "tube",
+      "input": "trunk",
+      "sides": 64,
+      "ridges": 8,
+      "ridge_depth": 0.27,
+      "ridge_profile": [
+        [
+          0,
+          1
+        ],
+        [
+          0.18,
+          0.9
+        ],
+        [
+          0.45,
+          0.18
+        ],
+        [
+          1,
+          0.04
+        ]
+      ],
+      "radius_noise": 0.18,
+      "noise_scale": 1.4,
+      "noise_octaves": 3,
+      "noise_profile": [
+        [
+          0,
+          0.75
+        ],
+        [
+          0.25,
+          1
+        ],
+        [
+          0.75,
+          0.65
+        ],
+        [
+          1,
+          0.15
+        ]
+      ],
+      "uv_scale": [
+        3,
+        0.6
+      ]
+    },
+    "buttress_mesh": {
+      "op": "tube",
+      "input": "buttress_roots",
+      "sides": 24,
+      "ridges": 3,
+      "ridge_depth": 0.1,
+      "ridge_profile": [
+        [
+          0,
+          0.2
+        ],
+        [
+          0.4,
+          1
+        ],
+        [
+          1,
+          0.1
+        ]
+      ],
+      "radius_noise": 0.12,
+      "noise_scale": 2.1,
+      "noise_profile": [
+        [
+          0,
+          0
+        ],
+        [
+          0.15,
+          1
+        ],
+        [
+          0.8,
+          0.7
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "uv_scale": [
+        1,
+        1
+      ]
+    },
+    "surface_root_mesh": {
+      "op": "tube",
+      "input": "surface_roots",
+      "sides": 12,
+      "radius_noise": 0.1,
+      "noise_scale": 3,
+      "noise_profile": [
+        [
+          0,
+          0
+        ],
+        [
+          0.3,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "uv_scale": [
+        1,
+        1
+      ]
+    },
+    "limb_mesh": {
+      "op": "tube",
+      "input": "limbs",
+      "sides": 24,
+      "ridges": 5,
+      "ridge_depth": 0.08,
+      "radius_noise": 0.14,
+      "noise_scale": 1.6,
+      "noise_profile": [
+        [
+          0,
+          0
+        ],
+        [
+          0.2,
+          1
+        ],
+        [
+          0.8,
+          0.65
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "uv_scale": [
+        2,
+        0.7
+      ]
+    },
+    "small_paths": {
+      "op": "merge",
+      "inputs": [
+        "branches",
+        "twigs"
+      ]
+    },
+    "small_wood": {
+      "op": "tube",
+      "input": "small_paths",
+      "sides": 10,
+      "radius_noise": 0.08,
+      "noise_scale": 3,
+      "noise_profile": [
+        [
+          0,
+          0
+        ],
+        [
+          0.2,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "uv_scale": [
+        1,
+        1
+      ]
+    },
+    "roots_mesh": {
+      "op": "merge",
+      "inputs": [
+        "buttress_mesh",
+        "surface_root_mesh"
+      ]
+    },
+    "trunk_roots": {
+      "op": "merge",
+      "inputs": [
+        "trunk_mesh",
+        "roots_mesh"
+      ]
+    },
+    "structure": {
+      "op": "merge",
+      "inputs": [
+        "trunk_roots",
+        "limb_mesh",
+        "small_wood"
+      ]
+    },
+    "leaf_sites": {
+      "op": "scatter",
+      "input": "twigs",
+      "count": 20,
+      "range": [
+        0.12,
+        1
+      ],
+      "angle": 60,
+      "scale": [
+        0.7,
+        1.25
+      ],
+      "offset": -0.002
+    },
+    "leaf": {
+      "op": "leaf",
+      "shape": "oval",
+      "length": 0.24,
+      "width": 0.13,
+      "segments": 7,
+      "width_segments": 4,
+      "curl": 0.12,
+      "fold": 0.18
+    },
+    "foliage": {
+      "op": "instance",
+      "input": "leaf",
+      "points": "leaf_sites",
+      "scale_jitter": [
+        0.12,
+        0.18,
+        0.08
+      ],
+      "color_variation": 0.28
+    },
+    "tree": {
+      "op": "merge",
+      "inputs": [
+        "solid_wood",
+        "foliage"
+      ]
+    },
+    "solid_wood": {
+      "op": "solidify",
+      "input": "structure"
+    },
+    "solid_base": {
+      "op": "solidify",
+      "input": "trunk_roots"
+    }
+  },
+  "outputs": {
+    "rooted-tree.glb": "tree",
+    "rooted-tree.obj": "tree",
+    "trunk-roots.glb": "solid_base",
+    "roots.glb": "roots_mesh",
+    "structure.glb": "solid_wood",
+    "solid-wood.glb": "solid_wood",
+    "solid-wood.obj": "solid_wood"
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "version": 1,
+  "size": 512,
+  "seed": 319,
+  "tile": false,
+  "imports": {
+    "leaf": "../sunflower/leaf.texutil.json"
+  },
+  "nodes": {
+    "vertical": {
+      "op": "gradient",
+      "angle": 90
+    },
+    "blade_palette": {
+      "op": "ramp",
+      "input": "vertical",
+      "stops": [
+        [
+          0,
+          "#7c8a39"
+        ],
+        [
+          0.16,
+          "#56772c"
+        ],
+        [
+          0.7,
+          "#376022"
+        ],
+        [
+          1,
+          "#666b35"
+        ]
+      ]
+    },
+    "fibers": {
+      "op": "stripes",
+      "count": 18,
+      "angle": 0,
+      "wave": "sine"
+    },
+    "fiber_value": {
+      "op": "levels",
+      "input": "fibers",
+      "out": [
+        0.72,
+        1
+      ]
+    },
+    "grass_color": {
+      "op": "blend",
+      "a": "blade_palette",
+      "b": "fiber_value",
+      "mode": "multiply",
+      "opacity": 0.3
+    },
+    "grass_height": {
+      "op": "levels",
+      "input": "fibers",
+      "out": [
+        0.49,
+        0.51
+      ]
+    },
+    "grass_normal": {
+      "op": "normal",
+      "input": "grass_height",
+      "strength": 0.008,
+      "convention": "opengl",
+      "edge": "clamp"
+    },
+    "grass_roughness": {
+      "op": "levels",
+      "input": "fibers",
+      "out": [
+        0.66,
+        0.77
+      ]
+    },
+    "grass_packed": {
+      "op": "pack",
+      "r": "leaf.one",
+      "g": "grass_roughness",
+      "b": "leaf.zero"
+    },
+    "leaf_palette": {
+      "op": "ramp",
+      "input": "leaf.pigment",
+      "stops": [
+        [
+          0,
+          "#42642b"
+        ],
+        [
+          0.5,
+          "#4b6e2e"
+        ],
+        [
+          1,
+          "#547935"
+        ]
+      ]
+    },
+    "vein_color": {
+      "op": "constant",
+      "value": "#6d853f"
+    },
+    "leaf_color": {
+      "op": "blend",
+      "a": "leaf_palette",
+      "b": "vein_color",
+      "mask": "leaf.veins",
+      "mode": "mix",
+      "opacity": 0.24
+    },
+    "leaf_normal": {
+      "op": "normal",
+      "input": "leaf.height",
+      "strength": 0.008,
+      "convention": "opengl",
+      "edge": "clamp"
+    }
+  },
+  "outputs": {
+    "grass-color.png": "grass_color",
+    "grass-normal.png": "grass_normal",
+    "grass-metallic-roughness.png": "grass_packed",
+    "leaf-color.png": "leaf_color",
+    "leaf-normal.png": "leaf_normal",
+    "leaf-metallic-roughness.png": "leaf.metallic_roughness",
+    "material-sheet.png": {
+      "type": "sheet",
+      "title": "Meadow filler | Grass and broadleaf",
+      "columns": 3,
+      "cell": 256,
+      "items": [
+        {
+          "node": "grass_height",
+          "label": "Blade height"
+        },
+        {
+          "node": "grass_normal",
+          "label": "Blade OpenGL normal"
+        },
+        {
+          "node": "grass_color",
+          "label": "Blade color"
+        },
+        {
+          "node": "leaf.height",
+          "label": "Leaf height"
+        },
+        {
+          "node": "leaf_normal",
+          "label": "Leaf OpenGL normal"
+        },
+        {
+          "node": "leaf_color",
+          "label": "Leaf color"
+        }
+      ]
+    }
+  }
+}

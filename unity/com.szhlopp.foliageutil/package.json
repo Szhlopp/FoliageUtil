@@ -1,0 +1,14 @@
+{
+  "name": "com.szhlopp.foliageutil",
+  "version": "0.1.0",
+  "displayName": "FoliageUtil",
+  "description": "Seeded live foliage generation using the native FoliageUtil engine.",
+  "unity": "2022.3",
+  "dependencies": {
+    "com.unity.modules.imageconversion": "1.0.0",
+    "com.unity.modules.jsonserialize": "1.0.0",
+    "com.unity.modules.imgui": "1.0.0"
+  },
+  "author": { "name": "Szhlopp" },
+  "license": "MIT"
+}

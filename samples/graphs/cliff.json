@@ -1,0 +1,160 @@
+{
+  "version": 1,
+  "name": "cliff",
+  "description": "Closed stratified cliff with a fused ledge, a weathered arch carved by subtraction, and a flat ground boundary made by intersection. Cut surfaces retain the cutter material.",
+  "seed": 42,
+  "units": "meters",
+  "materials": {
+    "sandstone": {
+      "base_color": [
+        0.45,
+        0.28,
+        0.14,
+        1
+      ],
+      "roughness": 0.88,
+      "double_sided": false
+    },
+    "fresh_cut": {
+      "base_color": [
+        0.35,
+        0.3,
+        0.24,
+        1
+      ],
+      "roughness": 0.88,
+      "double_sided": false
+    }
+  },
+  "nodes": {
+    "wall": {
+      "op": "rock",
+      "size": [
+        7,
+        5.5,
+        3.6
+      ],
+      "roundness": 0.18,
+      "noise": 0.22,
+      "strata": 0.065,
+      "strata_frequency": 5,
+      "subdivisions": 4,
+      "material": "sandstone"
+    },
+    "wall_raised": {
+      "op": "transform",
+      "input": "wall",
+      "translation": [
+        0,
+        2.45,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1
+    },
+    "ledge": {
+      "op": "rock",
+      "size": [
+        7.5,
+        1.1,
+        4.1
+      ],
+      "roundness": 0.22,
+      "noise": 0.24,
+      "subdivisions": 3,
+      "material": "sandstone"
+    },
+    "ledge_raised": {
+      "op": "transform",
+      "input": "ledge",
+      "translation": [
+        0.1,
+        3.7,
+        0.08
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1
+    },
+    "assembly": {
+      "op": "merge",
+      "inputs": [
+        "wall_raised",
+        "ledge_raised"
+      ]
+    },
+    "body": {
+      "op": "solidify",
+      "input": "assembly",
+      "crease_angle": 35
+    },
+    "cave": {
+      "op": "rock",
+      "size": [
+        2.65,
+        3.6,
+        7
+      ],
+      "roundness": 0.7,
+      "noise": 0.16,
+      "subdivisions": 3,
+      "material": "fresh_cut"
+    },
+    "cave_position": {
+      "op": "transform",
+      "input": "cave",
+      "translation": [
+        -0.45,
+        0.65,
+        0.2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1
+    },
+    "carved": {
+      "op": "boolean",
+      "input": "body",
+      "tool": "cave_position",
+      "operation": "difference",
+      "crease_angle": 35
+    },
+    "ground_clip": {
+      "op": "crystal",
+      "radius": 9,
+      "height": 9,
+      "sides": 4,
+      "radius_profile": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "material": "fresh_cut"
+    },
+    "cliff": {
+      "op": "boolean",
+      "input": "carved",
+      "tool": "ground_clip",
+      "operation": "intersection",
+      "crease_angle": 35
+    }
+  },
+  "outputs": {
+    "cliff.glb": "cliff"
+  }
+}

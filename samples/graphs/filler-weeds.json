@@ -1,0 +1,487 @@
+{
+  "version": 1,
+  "name": "Upright leafy field weeds",
+  "description": "Reusable meadow or field foliage in meters, with generated geometry and two fitted CardBake profiles.",
+  "seed": 865,
+  "units": "meters",
+  "materials": {
+    "leaf": {
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "base_color_texture": "../assets/filler/leaf-color.png",
+      "normal_texture": "../assets/filler/leaf-normal.png",
+      "metallic_roughness_texture": "../assets/filler/leaf-metallic-roughness.png",
+      "roughness": 1,
+      "translucency": 0.16,
+      "double_sided": true
+    },
+    "grass": {
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "base_color_texture": "../assets/filler/grass-color.png",
+      "normal_texture": "../assets/filler/grass-normal.png",
+      "metallic_roughness_texture": "../assets/filler/grass-metallic-roughness.png",
+      "roughness": 1,
+      "translucency": 0.16,
+      "double_sided": true
+    },
+    "stem": {
+      "base_color": [
+        0.1,
+        0.15,
+        0.028,
+        1
+      ],
+      "roughness": 0.8,
+      "double_sided": true
+    },
+    "wood": {
+      "base_color": [
+        0.105,
+        0.071,
+        0.03,
+        1
+      ],
+      "roughness": 0.9
+    }
+  },
+  "nodes": {
+    "stem_0": {
+      "op": "curve",
+      "points": [
+        [
+          0.043,
+          0.0,
+          0.0
+        ],
+        [
+          0.043937,
+          0.06125,
+          0.0
+        ],
+        [
+          0.04675,
+          0.1225,
+          0.0
+        ],
+        [
+          0.051437,
+          0.18375,
+          0.0
+        ],
+        [
+          0.058,
+          0.245,
+          0.0
+        ],
+        [
+          0.066437,
+          0.30625,
+          0.0
+        ],
+        [
+          0.07675,
+          0.3675,
+          0.0
+        ],
+        [
+          0.088938,
+          0.42875,
+          0.0
+        ],
+        [
+          0.103,
+          0.49,
+          0.0
+        ]
+      ],
+      "radius": 0.003,
+      "taper": 0.75
+    },
+    "stem_1": {
+      "op": "curve",
+      "points": [
+        [
+          -0.031708,
+          0.0,
+          0.029045
+        ],
+        [
+          -0.032399,
+          0.0475,
+          0.029678
+        ],
+        [
+          -0.034473,
+          0.095,
+          0.031578
+        ],
+        [
+          -0.03793,
+          0.1425,
+          0.034744
+        ],
+        [
+          -0.042769,
+          0.19,
+          0.039177
+        ],
+        [
+          -0.048991,
+          0.2375,
+          0.044876
+        ],
+        [
+          -0.056595,
+          0.285,
+          0.051842
+        ],
+        [
+          -0.065582,
+          0.3325,
+          0.060074
+        ],
+        [
+          -0.075952,
+          0.38,
+          0.069573
+        ]
+      ],
+      "radius": 0.003,
+      "taper": 0.75
+    },
+    "stem_2": {
+      "op": "curve",
+      "points": [
+        [
+          0.003762,
+          0.0,
+          -0.042835
+        ],
+        [
+          0.003844,
+          0.07125,
+          -0.043769
+        ],
+        [
+          0.004091,
+          0.1425,
+          -0.046571
+        ],
+        [
+          0.004501,
+          0.21375,
+          -0.05124
+        ],
+        [
+          0.005075,
+          0.285,
+          -0.057778
+        ],
+        [
+          0.005813,
+          0.35625,
+          -0.066183
+        ],
+        [
+          0.006716,
+          0.4275,
+          -0.076456
+        ],
+        [
+          0.007782,
+          0.49875,
+          -0.088596
+        ],
+        [
+          0.009012,
+          0.57,
+          -0.102605
+        ]
+      ],
+      "radius": 0.003,
+      "taper": 0.75
+    },
+    "stem_3": {
+      "op": "curve",
+      "points": [
+        [
+          0.026159,
+          0.0,
+          0.034128
+        ],
+        [
+          0.026729,
+          0.0525,
+          0.034872
+        ],
+        [
+          0.02844,
+          0.105,
+          0.037104
+        ],
+        [
+          0.031292,
+          0.1575,
+          0.040824
+        ],
+        [
+          0.035284,
+          0.21,
+          0.046033
+        ],
+        [
+          0.040417,
+          0.2625,
+          0.052729
+        ],
+        [
+          0.046691,
+          0.315,
+          0.060914
+        ],
+        [
+          0.054105,
+          0.3675,
+          0.070587
+        ],
+        [
+          0.06266,
+          0.42,
+          0.081748
+        ]
+      ],
+      "radius": 0.003,
+      "taper": 0.75
+    },
+    "stem_4": {
+      "op": "curve",
+      "points": [
+        [
+          -0.042342,
+          0.0,
+          -0.007496
+        ],
+        [
+          -0.043265,
+          0.065,
+          -0.007659
+        ],
+        [
+          -0.046034,
+          0.13,
+          -0.00815
+        ],
+        [
+          -0.05065,
+          0.195,
+          -0.008967
+        ],
+        [
+          -0.057112,
+          0.26,
+          -0.010111
+        ],
+        [
+          -0.06542,
+          0.325,
+          -0.011582
+        ],
+        [
+          -0.075575,
+          0.39,
+          -0.01338
+        ],
+        [
+          -0.087576,
+          0.455,
+          -0.015504
+        ],
+        [
+          -0.101423,
+          0.52,
+          -0.017956
+        ]
+      ],
+      "radius": 0.003,
+      "taper": 0.75
+    },
+    "guides": {
+      "op": "merge",
+      "inputs": [
+        "stem_0",
+        "stem_1",
+        "stem_2",
+        "stem_3",
+        "stem_4"
+      ]
+    },
+    "stems": {
+      "op": "tube",
+      "input": "guides",
+      "sides": 4,
+      "stride": 1,
+      "material": "stem",
+      "cap_material": "stem"
+    },
+    "leaf": {
+      "op": "leaf",
+      "shape": "oval",
+      "length": 0.146,
+      "width": 0.064,
+      "curl": 0.16,
+      "fold": 0.12,
+      "segments": 24,
+      "width_segments": 4,
+      "material": "leaf",
+      "edge_wave": 0.12,
+      "edge_frequency": 7,
+      "width_profile": [
+        [
+          0,
+          0
+        ],
+        [
+          0.12,
+          0.32
+        ],
+        [
+          0.2,
+          0.56
+        ],
+        [
+          0.25,
+          0.46
+        ],
+        [
+          0.34,
+          0.86
+        ],
+        [
+          0.39,
+          0.7
+        ],
+        [
+          0.49,
+          1
+        ],
+        [
+          0.55,
+          0.76
+        ],
+        [
+          0.65,
+          0.85
+        ],
+        [
+          0.71,
+          0.62
+        ],
+        [
+          0.82,
+          0.56
+        ],
+        [
+          0.88,
+          0.36
+        ],
+        [
+          1,
+          0
+        ]
+      ]
+    },
+    "sites": {
+      "op": "scatter",
+      "input": "guides",
+      "count": 12,
+      "distribution": "opposite",
+      "range": [
+        0.16,
+        0.98
+      ],
+      "angle": 58,
+      "azimuth": 86,
+      "jitter": 0.18,
+      "scale": [
+        0.67,
+        1.06
+      ],
+      "proximity_mesh": "stems",
+      "max_distance": 0.006,
+      "snap_to_mesh": true
+    },
+    "leaves": {
+      "op": "instance",
+      "input": "leaf",
+      "points": "sites",
+      "color_variation": 0.2,
+      "scale_jitter": [
+        0.12,
+        0.15,
+        0.08
+      ]
+    },
+    "source": {
+      "op": "merge",
+      "inputs": [
+        "stems",
+        "leaves"
+      ]
+    },
+    "wind": {
+      "op": "wind",
+      "input": "source",
+      "height": 0.72,
+      "strength": 0.65,
+      "exponent": 1.4
+    }
+  },
+  "outputs": {
+    "filler-weeds.glb": "wind"
+  },
+  "card_bakes": {
+    "Cards": {
+      "source": "wind",
+      "paths": "guides",
+      "output": "filler-weeds-cards.glb",
+      "segments": 4,
+      "planes": 2,
+      "cell_width": 64,
+      "cell_height": 256,
+      "atlas_size": 512,
+      "padding": 3,
+      "samples": 3,
+      "margin": 0.003,
+      "max_distance": 0.01,
+      "alpha_cutoff": 0.3,
+      "translucency": 0.16,
+      "memory_mb": 256
+    },
+    "CardsLow": {
+      "source": "wind",
+      "paths": "guides",
+      "output": "filler-weeds-cards-low.glb",
+      "segments": 2,
+      "planes": 2,
+      "cell_width": 32,
+      "cell_height": 128,
+      "atlas_size": 256,
+      "padding": 2,
+      "samples": 3,
+      "margin": 0.003,
+      "max_distance": 0.01,
+      "alpha_cutoff": 0.3,
+      "translucency": 0.16,
+      "memory_mb": 256
+    }
+  }
+}

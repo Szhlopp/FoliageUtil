@@ -1,0 +1,369 @@
+{
+  "version": 1,
+  "size": 2048,
+  "seed": 1318,
+  "tile": true,
+  "imports": {
+    "shared": "../rooted-tree/bark.texutil.json"
+  },
+  "nodes": {
+    "furrows": {
+      "op": "voronoi",
+      "scale": 30,
+      "stretch": [
+        1,
+        10
+      ],
+      "feature": "edges",
+      "seed": 1318
+    },
+    "warped-furrows": {
+      "op": "warp",
+      "input": "furrows",
+      "x": "shared.bend",
+      "y": "shared.drift",
+      "strength": 0.032
+    },
+    "ridge-height": {
+      "op": "levels",
+      "input": "warped-furrows",
+      "in": [
+        0.004,
+        0.1
+      ],
+      "gamma": 1.15,
+      "out": [
+        0.1,
+        0.74
+      ]
+    },
+    "splits": {
+      "op": "voronoi",
+      "scale": 85,
+      "stretch": [
+        1,
+        6
+      ],
+      "feature": "edges",
+      "seed": 819
+    },
+    "warped-splits": {
+      "op": "warp",
+      "input": "splits",
+      "x": "shared.bend",
+      "y": "shared.drift",
+      "strength": 0.025
+    },
+    "split-height": {
+      "op": "levels",
+      "input": "warped-splits",
+      "in": [
+        0.002,
+        0.04
+      ],
+      "out": [
+        0.44,
+        1
+      ],
+      "gamma": 1.15
+    },
+    "broken-ridges": {
+      "op": "blend",
+      "a": "ridge-height",
+      "b": "split-height",
+      "mode": "multiply",
+      "opacity": 0.42
+    },
+    "rough-ridges": {
+      "op": "blend",
+      "a": "splintered-ridges",
+      "b": "shared.rough-grain",
+      "mode": "mix",
+      "opacity": 0.2
+    },
+    "height": {
+      "op": "blend",
+      "a": "rough-ridges",
+      "b": "shared.fiber-height",
+      "mode": "multiply",
+      "opacity": 0.2
+    },
+    "normal": {
+      "op": "normal",
+      "input": "height",
+      "strength": 0.015,
+      "convention": "opengl",
+      "edge": "repeat"
+    },
+    "repeat-height": {
+      "op": "transform",
+      "input": "height",
+      "scale": [
+        0.5,
+        0.5
+      ],
+      "edge": "repeat"
+    },
+    "pigment": {
+      "op": "blend",
+      "a": "shared.mottle",
+      "b": "stringy-grain",
+      "mode": "mix",
+      "opacity": 0.45
+    },
+    "pigment-color": {
+      "op": "ramp",
+      "input": "pigment",
+      "stops": [
+        [
+          0,
+          "#20211e"
+        ],
+        [
+          0.32,
+          "#35372f"
+        ],
+        [
+          0.68,
+          "#515146"
+        ],
+        [
+          1,
+          "#727061"
+        ]
+      ]
+    },
+    "ridge-pigment": {
+      "op": "ramp",
+      "input": "ridge-height",
+      "stops": [
+        [
+          0,
+          "#77766b"
+        ],
+        [
+          0.4,
+          "#c6c3b4"
+        ],
+        [
+          0.7,
+          "#ffffff"
+        ],
+        [
+          1,
+          "#ffffff"
+        ]
+      ]
+    },
+    "color": {
+      "op": "blend",
+      "a": "pigment-color",
+      "b": "ridge-pigment",
+      "mode": "multiply",
+      "opacity": 0.6
+    },
+    "grain-roughness": {
+      "op": "levels",
+      "input": "shared.rough-grain",
+      "out": [
+        0.77,
+        0.92
+      ]
+    },
+    "crevice-roughness": {
+      "op": "levels",
+      "input": "ridge-height",
+      "out": [
+        0.94,
+        0.81
+      ]
+    },
+    "roughness": {
+      "op": "blend",
+      "a": "grain-roughness",
+      "b": "crevice-roughness",
+      "mode": "mix",
+      "opacity": 0.35
+    },
+    "zero": {
+      "op": "constant",
+      "value": 0
+    },
+    "metallic-roughness": {
+      "op": "pack",
+      "r": "zero",
+      "g": "roughness",
+      "b": "zero"
+    },
+    "young-color": {
+      "op": "ramp",
+      "input": "shared.fibers",
+      "stops": [
+        [
+          0,
+          "#403b2b"
+        ],
+        [
+          0.5,
+          "#6b6045"
+        ],
+        [
+          1,
+          "#918462"
+        ]
+      ]
+    },
+    "young-height": {
+      "op": "levels",
+      "input": "shared.fibers",
+      "out": [
+        0.47,
+        0.53
+      ]
+    },
+    "young-normal": {
+      "op": "normal",
+      "input": "young-height",
+      "strength": 0.002,
+      "convention": "opengl",
+      "edge": "repeat"
+    },
+    "young-roughness": {
+      "op": "levels",
+      "input": "shared.fibers",
+      "out": [
+        0.64,
+        0.78
+      ]
+    },
+    "young-metallic-roughness": {
+      "op": "pack",
+      "r": "zero",
+      "g": "young-roughness",
+      "b": "zero"
+    },
+    "stringy-grain": {
+      "op": "clouds",
+      "scale": 95,
+      "stretch": [
+        1,
+        9
+      ],
+      "octaves": 4,
+      "seed": 1945
+    },
+    "splinter-height": {
+      "op": "levels",
+      "input": "stringy-grain",
+      "in": [
+        0.18,
+        0.82
+      ],
+      "out": [
+        0.45,
+        1
+      ]
+    },
+    "splintered-ridges": {
+      "op": "blend",
+      "a": "broken-ridges",
+      "b": "splinter-height",
+      "mode": "multiply",
+      "opacity": 0.8
+    }
+  },
+  "outputs": {
+    "bark-color.png": "color",
+    "bark-height.png": {
+      "node": "height",
+      "bits": 16
+    },
+    "bark-normal.png": {
+      "node": "normal",
+      "bits": 16
+    },
+    "bark-roughness.png": {
+      "node": "roughness",
+      "bits": 16
+    },
+    "bark-metallic-roughness.png": "metallic-roughness",
+    "young-color.png": "young-color",
+    "young-normal.png": {
+      "node": "young-normal",
+      "bits": 16
+    },
+    "young-roughness.png": {
+      "node": "young-roughness",
+      "bits": 16
+    },
+    "young-metallic-roughness.png": "young-metallic-roughness",
+    "bark.mtlx": {
+      "type": "materialx",
+      "name": "WillowBark",
+      "inputs": {
+        "base_color": {
+          "texture": "bark-color.png"
+        },
+        "specular_roughness": {
+          "texture": "bark-roughness.png"
+        },
+        "metalness": 0,
+        "specular_IOR": 1.5
+      },
+      "normal": {
+        "texture": "bark-normal.png",
+        "convention": "opengl"
+      }
+    },
+    "young.mtlx": {
+      "type": "materialx",
+      "name": "WillowYoungBark",
+      "inputs": {
+        "base_color": {
+          "texture": "young-color.png"
+        },
+        "specular_roughness": {
+          "texture": "young-roughness.png"
+        },
+        "metalness": 0,
+        "specular_IOR": 1.5
+      },
+      "normal": {
+        "texture": "young-normal.png",
+        "convention": "opengl"
+      }
+    },
+    "bark-sheet.png": {
+      "type": "sheet",
+      "title": "Willow bark | gray-brown, broken vertical furrows",
+      "columns": 3,
+      "cell": 384,
+      "items": [
+        {
+          "node": "height",
+          "label": "Height"
+        },
+        {
+          "node": "repeat-height",
+          "label": "2x2 height repeat"
+        },
+        {
+          "node": "normal",
+          "label": "OpenGL normal"
+        },
+        {
+          "node": "color",
+          "label": "Unlit bark color"
+        },
+        {
+          "node": "roughness",
+          "label": "Dry bark roughness"
+        },
+        {
+          "node": "young-color",
+          "label": "Young branch pigment"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,299 @@
+{
+  "size": [
+    384,
+    768
+  ],
+  "seed": 710,
+  "tile": false,
+  "nodes": {
+    "fibers": {
+      "op": "simplex",
+      "scale": 48,
+      "stretch": [
+        0.18,
+        3.5
+      ],
+      "fractal": "fbm",
+      "octaves": 3
+    },
+    "veins": {
+      "op": "stripes",
+      "count": 9,
+      "wave": "sine"
+    },
+    "meander": {
+      "op": "simplex",
+      "scale": 3,
+      "stretch": [
+        0.75,
+        2.8
+      ],
+      "fractal": "fbm",
+      "octaves": 3
+    },
+    "veins_curved": {
+      "op": "directional_warp",
+      "input": "veins",
+      "intensity": "meander",
+      "angle": 0,
+      "strength": 0.028,
+      "midlevel": 0.5,
+      "edge": "clamp"
+    },
+    "microrelief": {
+      "op": "blend",
+      "a": "fibers",
+      "b": "vein_structure",
+      "mode": "mix",
+      "opacity": 0.6
+    },
+    "height": {
+      "op": "levels",
+      "input": "microrelief",
+      "out": [
+        0.47,
+        0.53
+      ]
+    },
+    "normal": {
+      "op": "normal",
+      "input": "height",
+      "strength": 0.08,
+      "convention": "opengl",
+      "edge": "clamp"
+    },
+    "finish": {
+      "op": "simplex",
+      "scale": 35,
+      "fractal": "fbm",
+      "octaves": 3
+    },
+    "roughness": {
+      "op": "blend",
+      "a": "roughness_base",
+      "b": "vein_structure",
+      "mode": "add",
+      "opacity": 0.055
+    },
+    "zero": {
+      "op": "constant",
+      "value": 0
+    },
+    "one": {
+      "op": "constant",
+      "value": 1
+    },
+    "metallic_roughness": {
+      "op": "pack",
+      "r": "one",
+      "g": "roughness",
+      "b": "zero"
+    },
+    "petal_gradient": {
+      "op": "gradient",
+      "angle": 90
+    },
+    "pigment": {
+      "op": "blend",
+      "a": "petal_gradient",
+      "b": "meander",
+      "mode": "add",
+      "opacity": 0.1
+    },
+    "vein_ridges": {
+      "op": "levels",
+      "input": "veins_curved",
+      "gamma": 0.3
+    },
+    "long_fibers": {
+      "op": "simplex",
+      "scale": 20,
+      "stretch": [
+        0.25,
+        3.5
+      ],
+      "fractal": "fbm",
+      "octaves": 3
+    },
+    "fiber_mask": {
+      "op": "levels",
+      "input": "long_fibers",
+      "in": [
+        0.2,
+        0.8
+      ],
+      "gamma": 0.6
+    },
+    "vein_structure": {
+      "op": "blend",
+      "a": "vein_ridges",
+      "b": "fiber_mask",
+      "mode": "multiply",
+      "opacity": 1
+    },
+    "roughness_base": {
+      "op": "levels",
+      "input": "finish",
+      "out": [
+        0.43,
+        0.59
+      ]
+    },
+    "color_base": {
+      "op": "ramp",
+      "input": "pigment",
+      "interpolation": "smooth",
+      "stops": [
+        [
+          0,
+          "#f5c707"
+        ],
+        [
+          0.5,
+          "#efb904"
+        ],
+        [
+          0.86,
+          "#dfa001"
+        ],
+        [
+          1,
+          "#bc7904"
+        ]
+      ]
+    },
+    "pigment_variation": {
+      "op": "ramp",
+      "input": "long_fibers",
+      "interpolation": "smooth",
+      "stops": [
+        [
+          0,
+          [
+            0.62,
+            0.5,
+            0.28,
+            1
+          ]
+        ],
+        [
+          0.45,
+          [
+            0.87,
+            0.8,
+            0.55,
+            1
+          ]
+        ],
+        [
+          1,
+          [
+            1,
+            1,
+            1,
+            1
+          ]
+        ]
+      ]
+    },
+    "mottled_color": {
+      "op": "blend",
+      "a": "color_base",
+      "b": "pigment_variation",
+      "mode": "multiply",
+      "opacity": 0.55
+    },
+    "vein_tint": {
+      "op": "ramp",
+      "input": "vein_structure",
+      "stops": [
+        [
+          0,
+          [
+            1,
+            1,
+            1,
+            1
+          ]
+        ],
+        [
+          1,
+          [
+            0.77,
+            0.64,
+            0.32,
+            1
+          ]
+        ]
+      ]
+    },
+    "color": {
+      "op": "blend",
+      "a": "mottled_color",
+      "b": "vein_tint",
+      "mode": "multiply",
+      "opacity": 0.55
+    }
+  },
+  "outputs": {
+    "height.png": {
+      "node": "height",
+      "bits": 16
+    },
+    "normal.png": {
+      "node": "normal",
+      "bits": 16
+    },
+    "roughness.png": {
+      "node": "roughness",
+      "bits": 16
+    },
+    "metallic-roughness.png": {
+      "node": "metallic_roughness",
+      "bits": 8
+    },
+    "color.png": "color",
+    "petal.mtlx": {
+      "type": "materialx",
+      "name": "SunflowerPetal",
+      "inputs": {
+        "base_color": {
+          "texture": "color.png"
+        },
+        "specular_roughness": {
+          "texture": "roughness.png"
+        },
+        "metalness": 0,
+        "specular_IOR": 1.45
+      },
+      "normal": {
+        "texture": "normal.png",
+        "convention": "opengl"
+      }
+    },
+    "maps.png": {
+      "type": "sheet",
+      "title": "Sunflower petal | native TexUtil maps",
+      "columns": 4,
+      "cell": 300,
+      "items": [
+        {
+          "node": "height",
+          "label": "Height: subtle veins"
+        },
+        {
+          "node": "normal",
+          "label": "OpenGL normal"
+        },
+        {
+          "node": "roughness",
+          "label": "Roughness"
+        },
+        {
+          "node": "color",
+          "label": "Unlit yellow pigment"
+        }
+      ]
+    }
+  }
+}

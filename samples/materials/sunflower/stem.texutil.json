@@ -1,0 +1,156 @@
+{
+  "size": 768,
+  "seed": 360,
+  "tile": true,
+  "nodes": {
+    "fibers": {
+      "op": "simplex",
+      "scale": 35,
+      "stretch": [
+        0.13,
+        3.5
+      ],
+      "fractal": "fbm",
+      "octaves": 3
+    },
+    "pigment": {
+      "op": "simplex",
+      "scale": 5,
+      "stretch": [
+        0.25,
+        2.8
+      ],
+      "fractal": "fbm",
+      "octaves": 3
+    },
+    "pores": {
+      "op": "simplex",
+      "scale": 110,
+      "fractal": "fbm",
+      "octaves": 2
+    },
+    "height_fibers": {
+      "op": "levels",
+      "input": "fibers",
+      "out": [
+        0.46,
+        0.52
+      ]
+    },
+    "height": {
+      "op": "blend",
+      "a": "height_fibers",
+      "b": "pores",
+      "mode": "add",
+      "opacity": 0.015
+    },
+    "color": {
+      "op": "ramp",
+      "input": "pigment",
+      "stops": [
+        [
+          0,
+          "#3b5120"
+        ],
+        [
+          0.4,
+          "#5e702c"
+        ],
+        [
+          0.75,
+          "#839443"
+        ],
+        [
+          1,
+          "#a4ad65"
+        ]
+      ]
+    },
+    "normal": {
+      "op": "normal",
+      "input": "height",
+      "strength": 0.02,
+      "convention": "opengl",
+      "edge": "repeat"
+    },
+    "roughness": {
+      "op": "levels",
+      "input": "pores",
+      "out": [
+        0.66,
+        0.82
+      ]
+    },
+    "zero": {
+      "op": "constant",
+      "value": 0
+    },
+    "one": {
+      "op": "constant",
+      "value": 1
+    },
+    "metallic_roughness": {
+      "op": "pack",
+      "r": "one",
+      "g": "roughness",
+      "b": "zero"
+    }
+  },
+  "outputs": {
+    "stem-color.png": "color",
+    "stem-normal.png": {
+      "node": "normal",
+      "bits": 16
+    },
+    "stem-height.png": {
+      "node": "height",
+      "bits": 16
+    },
+    "stem-roughness.png": {
+      "node": "roughness",
+      "bits": 16
+    },
+    "stem-metallic-roughness.png": "metallic_roughness",
+    "stem.mtlx": {
+      "type": "materialx",
+      "name": "SunflowerStem",
+      "inputs": {
+        "base_color": {
+          "texture": "stem-color.png"
+        },
+        "specular_roughness": {
+          "texture": "stem-roughness.png"
+        },
+        "metalness": 0
+      },
+      "normal": {
+        "texture": "stem-normal.png",
+        "convention": "opengl"
+      }
+    },
+    "stem-maps.png": {
+      "type": "sheet",
+      "title": "Sunflower stem | native TexUtil maps",
+      "columns": 4,
+      "cell": 256,
+      "items": [
+        {
+          "node": "height",
+          "label": "Height"
+        },
+        {
+          "node": "normal",
+          "label": "OpenGL normal"
+        },
+        {
+          "node": "roughness",
+          "label": "Roughness"
+        },
+        {
+          "node": "color",
+          "label": "Unlit pigment"
+        }
+      ]
+    }
+  }
+}

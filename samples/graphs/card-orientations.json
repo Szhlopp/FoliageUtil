@@ -1,0 +1,109 @@
+{
+  "version": 1,
+  "name": "Card orientations",
+  "description": "Left: crossed. Center: outward from pivot. Right: outward with +/- [15,40,20] degrees local XYZ jitter. All cards are opaque for orientation inspection.",
+  "seed": 42,
+  "nodes": {
+    "sites": {
+      "op": "radial",
+      "count": 12,
+      "radius": [
+        1,
+        1
+      ],
+      "height": [
+        0.3,
+        0.8
+      ],
+      "tilt": [
+        0,
+        0
+      ],
+      "jitter": 0
+    },
+    "single": {
+      "op": "card",
+      "width": 0.48,
+      "height": 0.65
+    },
+    "cross": {
+      "op": "card",
+      "width": 0.48,
+      "height": 0.65,
+      "planes": 2
+    },
+    "outward": {
+      "op": "orient",
+      "input": "sites",
+      "center": [
+        0,
+        0.4,
+        0
+      ],
+      "horizontal": true
+    },
+    "randomized": {
+      "op": "orient",
+      "input": "sites",
+      "center": [
+        0,
+        0.4,
+        0
+      ],
+      "horizontal": true,
+      "rotation_jitter": [
+        15,
+        40,
+        20
+      ]
+    },
+    "crossed": {
+      "op": "instance",
+      "input": "cross",
+      "points": "outward",
+      "color_variation": 0.1
+    },
+    "precise": {
+      "op": "instance",
+      "input": "single",
+      "points": "outward",
+      "color_variation": 0.1
+    },
+    "varied": {
+      "op": "instance",
+      "input": "single",
+      "points": "randomized",
+      "color_variation": 0.1
+    },
+    "left": {
+      "op": "transform",
+      "input": "crossed",
+      "translation": [
+        -3,
+        0,
+        0
+      ]
+    },
+    "right": {
+      "op": "transform",
+      "input": "varied",
+      "translation": [
+        3,
+        0,
+        0
+      ]
+    },
+    "comparison": {
+      "op": "merge",
+      "inputs": [
+        "left",
+        "precise",
+        "right"
+      ]
+    }
+  },
+  "outputs": {
+    "card-orientations.glb": "comparison",
+    "card-orientations.obj": "comparison"
+  }
+}

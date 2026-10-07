@@ -1,0 +1,6 @@
+{
+  "name": "FoliageUtil.Runtime",
+  "rootNamespace": "FoliageUtil",
+  "autoReferenced": true,
+  "allowUnsafeCode": false
+}

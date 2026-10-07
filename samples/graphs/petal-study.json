@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "seed": 42,
+  "units": "meters",
+  "name": "Single petal study",
+  "description": "One seeded fan stencil on a curved card, using the same atlas and saved thin-tissue material as the detailed rose. Use the Blender backlit preset to inspect translucency.",
+  "materials": {
+    "petal": {
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "base_color_texture": "../assets/rose/petals.atlas.assets/color.png",
+      "normal_texture": "../assets/rose/petals.atlas.assets/normal.png",
+      "metallic_roughness_texture": "../assets/rose/petals.atlas.assets/metallic-roughness.png",
+      "metallic": 0,
+      "roughness": 1,
+      "double_sided": true,
+      "alpha_mode": "MASK",
+      "alpha_cutoff": 0.5,
+      "translucency": 0.16,
+      "subsurface": 0.12,
+      "subsurface_scale": 0.001,
+      "subsurface_radius": [
+        1,
+        0.45,
+        0.25
+      ]
+    }
+  },
+  "nodes": {
+    "surface": {
+      "op": "card",
+      "width": 0.15,
+      "height": 0.12,
+      "segments": 32,
+      "width_segments": 16,
+      "curl": -0.06,
+      "fold": -0.12,
+      "twist": 5,
+      "pivot": "base",
+      "material": "petal"
+    },
+    "site": {
+      "op": "radial",
+      "count": 1,
+      "center": [
+        0,
+        0.71,
+        0
+      ],
+      "radius": [
+        0,
+        0
+      ],
+      "tilt": [
+        0,
+        0
+      ],
+      "angle": 90,
+      "jitter": 0
+    },
+    "petal": {
+      "op": "instance",
+      "input": "surface",
+      "points": "site",
+      "atlas": "../assets/rose/petals.atlas.json",
+      "atlas_mode": "fixed",
+      "atlas_index": 3
+    }
+  },
+  "outputs": {
+    "petal-study.glb": "petal"
+  }
+}

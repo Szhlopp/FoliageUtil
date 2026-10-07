@@ -1,0 +1,6 @@
+{
+  "name": "FoliageUtil.Editor",
+  "references": ["FoliageUtil.Runtime"],
+  "includePlatforms": ["Editor"],
+  "autoReferenced": true
+}

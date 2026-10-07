@@ -1,0 +1,653 @@
+{
+  "version": 1,
+  "seed": 42,
+  "units": "meters",
+  "name": "Golden wheat",
+  "description": "Textured awned wheat patch: three seeded stalk shapes, head attachments following actual bent stem tips, alternating spikelet groups, fine tapered awns, narrow curved blades and ripe straw materials.",
+  "materials": {
+    "straw": {
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "base_color_texture": "../assets/wheat/straw-color.png",
+      "normal_texture": "../assets/wheat/normal.png",
+      "metallic_roughness_texture": "../assets/wheat/metallic-roughness.png",
+      "roughness": 1,
+      "double_sided": false
+    },
+    "husk": {
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "base_color_texture": "../assets/wheat/husk-color.png",
+      "normal_texture": "../assets/wheat/normal.png",
+      "metallic_roughness_texture": "../assets/wheat/metallic-roughness.png",
+      "roughness": 1,
+      "double_sided": false
+    },
+    "blade": {
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "base_color_texture": "../assets/wheat/leaf-color.png",
+      "normal_texture": "../assets/wheat/normal.png",
+      "metallic_roughness_texture": "../assets/wheat/metallic-roughness.png",
+      "roughness": 1,
+      "double_sided": true,
+      "translucency": 0.12
+    },
+    "awn": {
+      "base_color": [
+        0.6,
+        0.4,
+        0.13,
+        1
+      ],
+      "roughness": 0.65,
+      "double_sided": false
+    }
+  },
+  "nodes": {
+    "kernel_shape": {
+      "op": "ellipsoid",
+      "radii": [
+        0.0031,
+        0.0078,
+        0.0024
+      ],
+      "rings": 7,
+      "sides": 8,
+      "material": "husk"
+    },
+    "kernel": {
+      "op": "transform",
+      "input": "kernel_shape",
+      "translation": [
+        0,
+        0.0078,
+        0
+      ]
+    },
+    "awn_path": {
+      "op": "curve",
+      "points": [
+        [
+          0,
+          0.017,
+          0
+        ],
+        [
+          0.0008,
+          0.026,
+          0.0015
+        ],
+        [
+          0.002,
+          0.042,
+          0.004
+        ],
+        [
+          0.0035,
+          0.062,
+          0.007
+        ]
+      ],
+      "radius": 0.00018,
+      "taper": 0.96
+    },
+    "awn": {
+      "op": "tube",
+      "input": "awn_path",
+      "sides": 3,
+      "material": "awn",
+      "cap_material": "awn"
+    },
+    "floret": {
+      "op": "merge",
+      "inputs": [
+        "kernel",
+        "husk_front",
+        "husk_back",
+        "awn"
+      ]
+    },
+    "floret_left": {
+      "op": "transform",
+      "input": "floret",
+      "translation": [
+        -0.003,
+        0.001,
+        0
+      ],
+      "rotation": [
+        0,
+        -12,
+        16
+      ],
+      "scale": 0.9
+    },
+    "floret_right": {
+      "op": "transform",
+      "input": "floret",
+      "translation": [
+        0.003,
+        0.001,
+        0
+      ],
+      "rotation": [
+        0,
+        12,
+        -16
+      ],
+      "scale": 0.9
+    },
+    "spikelet": {
+      "op": "merge",
+      "inputs": [
+        "floret",
+        "floret_left",
+        "floret_right"
+      ]
+    },
+    "spikelet_sites": {
+      "op": "radial",
+      "mode": "spiral",
+      "count": 22,
+      "angle_step": 180,
+      "angle": 0,
+      "radius": [
+        0.002,
+        0.0008
+      ],
+      "height": [
+        0.002,
+        0.102
+      ],
+      "tilt": [
+        32,
+        15
+      ],
+      "scale": [
+        1.05,
+        0.66
+      ],
+      "jitter": 0.045
+    },
+    "spikelets": {
+      "op": "instance",
+      "input": "spikelet",
+      "points": "spikelet_sites",
+      "scale_jitter": [
+        0.05,
+        0.08,
+        0.05
+      ],
+      "color_variation": 0.08
+    },
+    "rachis_path": {
+      "op": "curve",
+      "points": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0.035,
+          0
+        ],
+        [
+          0.001,
+          0.072,
+          0
+        ],
+        [
+          0.001,
+          0.115,
+          0
+        ]
+      ],
+      "radius": 0.0012,
+      "taper": 0.72
+    },
+    "rachis": {
+      "op": "tube",
+      "input": "rachis_path",
+      "sides": 7,
+      "material": "straw",
+      "cap_material": "straw"
+    },
+    "head": {
+      "op": "merge",
+      "inputs": [
+        "rachis",
+        "spikelets"
+      ]
+    },
+    "blade_shape": {
+      "op": "leaf",
+      "shape": "lanceolate",
+      "length": 0.29,
+      "width": 0.014,
+      "segments": 22,
+      "width_segments": 4,
+      "curl": 0.7,
+      "fold": 0.24,
+      "twist": 12,
+      "material": "blade"
+    },
+    "a_stalk": {
+      "op": "trunk",
+      "length": 0.95,
+      "radius": 0.0019,
+      "segments": 32,
+      "taper": 0.42,
+      "flare": 0,
+      "noise": 0.025,
+      "bend": [
+        0.026,
+        0,
+        0.009
+      ]
+    },
+    "a_stem": {
+      "op": "tube",
+      "input": "a_stalk",
+      "sides": 7,
+      "node_spacing": 0.23,
+      "node_strength": 0.22,
+      "uv_scale": [
+        1,
+        3
+      ],
+      "material": "straw",
+      "cap_material": "straw"
+    },
+    "a_tip": {
+      "op": "scatter",
+      "input": "a_stalk",
+      "count": 1,
+      "distribution": "tip",
+      "angle": 0,
+      "jitter": 0,
+      "scale": [
+        1,
+        1
+      ]
+    },
+    "a_ear": {
+      "op": "instance",
+      "input": "head",
+      "points": "a_tip",
+      "color_variation": 0.07,
+      "scale_jitter": [
+        0.06,
+        0.08,
+        0.06
+      ]
+    },
+    "a_blade_sites": {
+      "op": "scatter",
+      "input": "a_stalk",
+      "count": 3,
+      "distribution": "alternate",
+      "azimuth": 180,
+      "range": [
+        0.23,
+        0.72
+      ],
+      "angle": 28,
+      "jitter": 0.12,
+      "scale": [
+        0.62,
+        1.1
+      ]
+    },
+    "a_blades": {
+      "op": "instance",
+      "input": "blade_shape",
+      "points": "a_blade_sites",
+      "color_variation": 0.14,
+      "scale_jitter": [
+        0.12,
+        0.14,
+        0.08
+      ]
+    },
+    "a_plant": {
+      "op": "merge",
+      "inputs": [
+        "a_stem",
+        "a_ear",
+        "a_blades"
+      ]
+    },
+    "a_bases": {
+      "op": "scatter",
+      "count": 14,
+      "radius": 0.31,
+      "scale": [
+        0.82,
+        1.12
+      ]
+    },
+    "a_lean": {
+      "op": "orient",
+      "input": "a_bases",
+      "mode": "keep",
+      "rotation_jitter": [
+        4,
+        5,
+        4
+      ]
+    },
+    "a_patch": {
+      "op": "instance",
+      "input": "a_plant",
+      "points": "a_lean",
+      "color_variation": 0.11,
+      "scale_jitter": [
+        0.07,
+        0.06,
+        0.07
+      ]
+    },
+    "b_stalk": {
+      "op": "trunk",
+      "length": 0.87,
+      "radius": 0.0019,
+      "segments": 32,
+      "taper": 0.42,
+      "flare": 0,
+      "noise": 0.025,
+      "bend": [
+        -0.032,
+        0,
+        0.01
+      ]
+    },
+    "b_stem": {
+      "op": "tube",
+      "input": "b_stalk",
+      "sides": 7,
+      "node_spacing": 0.23,
+      "node_strength": 0.22,
+      "uv_scale": [
+        1,
+        3
+      ],
+      "material": "straw",
+      "cap_material": "straw"
+    },
+    "b_tip": {
+      "op": "scatter",
+      "input": "b_stalk",
+      "count": 1,
+      "distribution": "tip",
+      "angle": 0,
+      "jitter": 0,
+      "scale": [
+        1,
+        1
+      ]
+    },
+    "b_ear": {
+      "op": "instance",
+      "input": "head",
+      "points": "b_tip",
+      "color_variation": 0.07,
+      "scale_jitter": [
+        0.06,
+        0.08,
+        0.06
+      ]
+    },
+    "b_blade_sites": {
+      "op": "scatter",
+      "input": "b_stalk",
+      "count": 3,
+      "distribution": "alternate",
+      "azimuth": 180,
+      "range": [
+        0.23,
+        0.72
+      ],
+      "angle": 28,
+      "jitter": 0.12,
+      "scale": [
+        0.62,
+        1.1
+      ]
+    },
+    "b_blades": {
+      "op": "instance",
+      "input": "blade_shape",
+      "points": "b_blade_sites",
+      "color_variation": 0.14,
+      "scale_jitter": [
+        0.12,
+        0.14,
+        0.08
+      ]
+    },
+    "b_plant": {
+      "op": "merge",
+      "inputs": [
+        "b_stem",
+        "b_ear",
+        "b_blades"
+      ]
+    },
+    "b_bases": {
+      "op": "scatter",
+      "count": 12,
+      "radius": 0.31,
+      "scale": [
+        0.82,
+        1.12
+      ]
+    },
+    "b_lean": {
+      "op": "orient",
+      "input": "b_bases",
+      "mode": "keep",
+      "rotation_jitter": [
+        4,
+        5,
+        4
+      ]
+    },
+    "b_patch": {
+      "op": "instance",
+      "input": "b_plant",
+      "points": "b_lean",
+      "color_variation": 0.11,
+      "scale_jitter": [
+        0.07,
+        0.06,
+        0.07
+      ]
+    },
+    "c_stalk": {
+      "op": "trunk",
+      "length": 1.04,
+      "radius": 0.0019,
+      "segments": 32,
+      "taper": 0.42,
+      "flare": 0,
+      "noise": 0.025,
+      "bend": [
+        0.049,
+        0,
+        -0.012
+      ]
+    },
+    "c_stem": {
+      "op": "tube",
+      "input": "c_stalk",
+      "sides": 7,
+      "node_spacing": 0.23,
+      "node_strength": 0.22,
+      "uv_scale": [
+        1,
+        3
+      ],
+      "material": "straw",
+      "cap_material": "straw"
+    },
+    "c_tip": {
+      "op": "scatter",
+      "input": "c_stalk",
+      "count": 1,
+      "distribution": "tip",
+      "angle": 0,
+      "jitter": 0,
+      "scale": [
+        1,
+        1
+      ]
+    },
+    "c_ear": {
+      "op": "instance",
+      "input": "head",
+      "points": "c_tip",
+      "color_variation": 0.07,
+      "scale_jitter": [
+        0.06,
+        0.08,
+        0.06
+      ]
+    },
+    "c_blade_sites": {
+      "op": "scatter",
+      "input": "c_stalk",
+      "count": 3,
+      "distribution": "alternate",
+      "azimuth": 180,
+      "range": [
+        0.23,
+        0.72
+      ],
+      "angle": 28,
+      "jitter": 0.12,
+      "scale": [
+        0.62,
+        1.1
+      ]
+    },
+    "c_blades": {
+      "op": "instance",
+      "input": "blade_shape",
+      "points": "c_blade_sites",
+      "color_variation": 0.14,
+      "scale_jitter": [
+        0.12,
+        0.14,
+        0.08
+      ]
+    },
+    "c_plant": {
+      "op": "merge",
+      "inputs": [
+        "c_stem",
+        "c_ear",
+        "c_blades"
+      ]
+    },
+    "c_bases": {
+      "op": "scatter",
+      "count": 10,
+      "radius": 0.31,
+      "scale": [
+        0.82,
+        1.12
+      ]
+    },
+    "c_lean": {
+      "op": "orient",
+      "input": "c_bases",
+      "mode": "keep",
+      "rotation_jitter": [
+        4,
+        5,
+        4
+      ]
+    },
+    "c_patch": {
+      "op": "instance",
+      "input": "c_plant",
+      "points": "c_lean",
+      "color_variation": 0.11,
+      "scale_jitter": [
+        0.07,
+        0.06,
+        0.07
+      ]
+    },
+    "patch": {
+      "op": "merge",
+      "inputs": [
+        "a_patch",
+        "b_patch",
+        "c_patch"
+      ]
+    },
+    "wind": {
+      "op": "wind",
+      "input": "patch",
+      "height": 1.4,
+      "strength": 0.7,
+      "exponent": 1.4
+    },
+    "husk_shape": {
+      "op": "leaf",
+      "shape": "lanceolate",
+      "length": 0.018,
+      "width": 0.008,
+      "segments": 7,
+      "width_segments": 2,
+      "curl": -0.01,
+      "fold": -0.48,
+      "material": "husk"
+    },
+    "husk_front": {
+      "op": "transform",
+      "input": "husk_shape",
+      "translation": [
+        0,
+        0,
+        0.0023
+      ]
+    },
+    "husk_back": {
+      "op": "transform",
+      "input": "husk_shape",
+      "translation": [
+        0,
+        0,
+        -0.0023
+      ],
+      "rotation": [
+        0,
+        180,
+        0
+      ]
+    }
+  },
+  "outputs": {
+    "wheat.glb": "wind",
+    "wheat.obj": "wind",
+    "wheat-stalk.glb": "a_plant",
+    "wheat-head.glb": "head"
+  }
+}

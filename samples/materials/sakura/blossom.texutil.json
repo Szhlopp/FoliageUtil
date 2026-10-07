@@ -1,0 +1,195 @@
+{
+  "size": 512,
+  "seed": 812,
+  "tile": false,
+  "imports": {
+    "petal": "petal.texutil.json"
+  },
+  "nodes": {
+    "petals": {
+      "op": "radial",
+      "input": "petal.color",
+      "count": 5,
+      "radius": 0.205,
+      "size": [
+        0.43,
+        0.54
+      ],
+      "start": -90,
+      "angle": 90,
+      "orient": true,
+      "mode": "over"
+    },
+    "petal-height": {
+      "op": "radial",
+      "input": "petal.height",
+      "count": 5,
+      "radius": 0.205,
+      "size": [
+        0.43,
+        0.54
+      ],
+      "start": -90,
+      "angle": 90,
+      "orient": true,
+      "mode": "max"
+    },
+    "center": {
+      "op": "shape",
+      "type": "circle",
+      "center": [
+        0.5,
+        0.5
+      ],
+      "size": 0.13,
+      "softness": 0.28,
+      "color": "#bf617c"
+    },
+    "heart": {
+      "op": "blend",
+      "a": "petals",
+      "b": "center",
+      "mode": "over",
+      "opacity": 1
+    },
+    "filament": {
+      "op": "shape",
+      "type": "capsule",
+      "size": [
+        0.025,
+        0.8
+      ],
+      "color": "#efe3b2"
+    },
+    "filaments": {
+      "op": "radial",
+      "input": "filament",
+      "count": 23,
+      "radius": 0.084,
+      "size": [
+        0.16,
+        0.16
+      ],
+      "start": -90,
+      "angle": 90,
+      "orient": true,
+      "mode": "over"
+    },
+    "anther": {
+      "op": "shape",
+      "type": "circle",
+      "size": [
+        0.9,
+        0.7
+      ],
+      "color": "#d1aa48"
+    },
+    "pollen": {
+      "op": "radial",
+      "input": "anther",
+      "count": 23,
+      "radius": 0.14,
+      "size": 0.014,
+      "mode": "over"
+    },
+    "inner-filaments": {
+      "op": "radial",
+      "input": "filament",
+      "count": 15,
+      "radius": 0.059,
+      "size": [
+        0.13,
+        0.13
+      ],
+      "start": -75,
+      "angle": 90,
+      "orient": true,
+      "mode": "over"
+    },
+    "inner-pollen": {
+      "op": "radial",
+      "input": "anther",
+      "count": 15,
+      "radius": 0.104,
+      "size": 0.011,
+      "start": -75,
+      "mode": "over"
+    },
+    "with-filaments": {
+      "op": "blend",
+      "a": "heart",
+      "b": "filaments",
+      "mode": "over",
+      "opacity": 1
+    },
+    "with-inner": {
+      "op": "blend",
+      "a": "with-filaments",
+      "b": "inner-filaments",
+      "mode": "over",
+      "opacity": 1
+    },
+    "with-pollen": {
+      "op": "blend",
+      "a": "with-inner",
+      "b": "pollen",
+      "mode": "over",
+      "opacity": 1
+    },
+    "color": {
+      "op": "blend",
+      "a": "with-pollen",
+      "b": "inner-pollen",
+      "mode": "over",
+      "opacity": 1
+    },
+    "height": {
+      "op": "levels",
+      "input": "petal-height",
+      "out": [
+        0.46,
+        0.53
+      ]
+    },
+    "roughness": {
+      "op": "constant",
+      "value": 0.54
+    },
+    "one": {
+      "op": "constant",
+      "value": 1
+    },
+    "zero": {
+      "op": "constant",
+      "value": 0
+    },
+    "normal": {
+      "op": "normal",
+      "input": "height",
+      "strength": 0.012,
+      "convention": "opengl",
+      "edge": "clamp"
+    },
+    "metallic-roughness": {
+      "op": "pack",
+      "r": "one",
+      "g": "roughness",
+      "b": "zero"
+    }
+  },
+  "outputs": {
+    "color.png": {
+      "node": "color",
+      "alpha": true
+    },
+    "normal.png": {
+      "node": "normal",
+      "bits": 16
+    },
+    "height.png": {
+      "node": "height",
+      "bits": 16
+    },
+    "metallic-roughness.png": "metallic-roughness"
+  }
+}

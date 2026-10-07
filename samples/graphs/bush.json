@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "name": "bush",
+  "description": "",
+  "seed": 42,
+  "units": "meters",
+  "materials": {},
+  "nodes": {
+    "shoot": {
+      "op": "trunk",
+      "length": 1.25,
+      "radius": 0.035,
+      "segments": 12,
+      "bend": [
+        0.24,
+        0,
+        0.07
+      ],
+      "flare": 0
+    },
+    "branches": {
+      "op": "branch",
+      "input": "shoot",
+      "count": 9,
+      "range": [
+        0.12,
+        0.98
+      ],
+      "length": 0.55,
+      "angle": 65,
+      "bend": [
+        0,
+        0.2,
+        0
+      ]
+    },
+    "paths": {
+      "op": "merge",
+      "inputs": [
+        "shoot",
+        "branches"
+      ]
+    },
+    "wood": {
+      "op": "tube",
+      "input": "paths",
+      "sides": 5
+    },
+    "tips": {
+      "op": "scatter",
+      "input": "branches",
+      "count": 12,
+      "range": [
+        0.1,
+        1
+      ],
+      "angle": 55
+    },
+    "leaf": {
+      "op": "leaf",
+      "length": 0.17,
+      "width": 0.08,
+      "segments": 4
+    },
+    "leaves": {
+      "op": "instance",
+      "input": "leaf",
+      "points": "tips"
+    },
+    "plant": {
+      "op": "merge",
+      "inputs": [
+        "wood",
+        "leaves"
+      ]
+    },
+    "bases": {
+      "op": "scatter",
+      "count": 7,
+      "radius": 0.4,
+      "scale": [
+        0.65,
+        1.1
+      ]
+    },
+    "bush": {
+      "op": "instance",
+      "input": "plant",
+      "points": "bases"
+    },
+    "wind": {
+      "op": "wind",
+      "input": "bush",
+      "height": 1.6
+    }
+  },
+  "outputs": {
+    "bush.glb": "wind",
+    "bush.obj": "wind"
+  }
+}

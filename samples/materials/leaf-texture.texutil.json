@@ -1,0 +1,9 @@
+{
+  "size": 256,
+  "seed": 42,
+  "alpha": true,
+  "nodes": {
+    "leaf": {"op": "shape", "type": "circle", "size": [0.72, 0.94], "softness": 0.025, "color": [1, 1, 1, 1]}
+  },
+  "outputs": {"leaf.png": {"node": "leaf", "alpha": true}}
+}

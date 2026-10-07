@@ -1,0 +1,307 @@
+{
+  "size": 512,
+  "seed": 301,
+  "nodes": {
+    "u": {
+      "op": "gradient",
+      "angle": 0
+    },
+    "v": {
+      "op": "gradient",
+      "angle": 90
+    },
+    "center_x": {
+      "op": "math",
+      "input": "u",
+      "mode": "subtract",
+      "value": 0.5
+    },
+    "abs_x": {
+      "op": "math",
+      "input": "center_x",
+      "mode": "abs"
+    },
+    "notch_depth": {
+      "op": "math",
+      "input": "v",
+      "mode": "subtract",
+      "value": 0.52
+    },
+    "notch_width": {
+      "op": "math",
+      "input": "notch_depth",
+      "mode": "multiply",
+      "value": 0.22
+    },
+    "notch_field": {
+      "op": "math",
+      "input": "notch_width",
+      "mode": "subtract",
+      "b": "abs_x"
+    },
+    "notch": {
+      "op": "levels",
+      "input": "notch_field",
+      "out": [
+        0,
+        1
+      ],
+      "in": [
+        -0.001,
+        0.002
+      ]
+    },
+    "disk": {
+      "op": "shape",
+      "type": "circle",
+      "center": [
+        0.5,
+        0.5
+      ],
+      "size": [
+        0.9,
+        0.92
+      ],
+      "softness": 0.002
+    },
+    "notched_disk": {
+      "op": "math",
+      "input": "disk",
+      "mode": "subtract",
+      "b": "notch"
+    },
+    "mask": {
+      "op": "math",
+      "input": "notched_disk",
+      "mode": "clamp"
+    },
+    "outline": {
+      "op": "ramp",
+      "input": "mask",
+      "stops": [
+        [
+          0,
+          [
+            1,
+            1,
+            1,
+            0
+          ]
+        ],
+        [
+          1,
+          [
+            1,
+            1,
+            1,
+            1
+          ]
+        ]
+      ]
+    },
+    "noise_x": {
+      "op": "simplex",
+      "scale": 4.1,
+      "fractal": "fbm",
+      "octaves": 3
+    },
+    "noise_y": {
+      "op": "simplex",
+      "scale": 5.2,
+      "fractal": "fbm",
+      "octaves": 3
+    },
+    "silhouette": {
+      "op": "warp",
+      "input": "outline",
+      "x": "noise_x",
+      "y": "noise_y",
+      "strength": 0.007,
+      "edge": "transparent"
+    },
+    "rays_strip": {
+      "op": "stripes",
+      "count": 14,
+      "wave": "square",
+      "duty": 0.022
+    },
+    "rays": {
+      "op": "polar",
+      "input": "rays_strip",
+      "mode": "from_polar",
+      "center": [
+        0.5,
+        0.5
+      ],
+      "radius": 0.46,
+      "angle": 12,
+      "edge": "repeat"
+    },
+    "rays_bent": {
+      "op": "warp",
+      "input": "rays",
+      "x": "noise_x",
+      "y": "noise_y",
+      "strength": 0.008,
+      "edge": "clamp"
+    },
+    "cells": {
+      "op": "voronoi",
+      "scale": 26,
+      "feature": "edges",
+      "jitter": 0.85
+    },
+    "fine_veins": {
+      "op": "levels",
+      "input": "cells",
+      "out": [
+        1,
+        0
+      ],
+      "in": [
+        0,
+        0.035
+      ]
+    },
+    "veins": {
+      "op": "blend",
+      "a": "rays_bent",
+      "b": "fine_veins",
+      "mode": "max",
+      "opacity": 0.26
+    },
+    "grain": {
+      "op": "simplex",
+      "scale": 95,
+      "fractal": "fbm",
+      "octaves": 2
+    },
+    "height_fine": {
+      "op": "levels",
+      "input": "grain",
+      "out": [
+        0.494,
+        0.506
+      ]
+    },
+    "height": {
+      "op": "blend",
+      "a": "height_fine",
+      "b": "veins",
+      "mode": "subtract",
+      "opacity": 0.016
+    },
+    "pigment": {
+      "op": "simplex",
+      "scale": 2.4,
+      "fractal": "fbm",
+      "octaves": 3
+    },
+    "palette": {
+      "op": "ramp",
+      "input": "pigment",
+      "stops": [
+        [
+          0,
+          "#16432a"
+        ],
+        [
+          0.38,
+          "#326833"
+        ],
+        [
+          0.7,
+          "#51803c"
+        ],
+        [
+          1,
+          "#86974e"
+        ]
+      ]
+    },
+    "vein_color": {
+      "op": "constant",
+      "value": "#a0ac5e"
+    },
+    "veined_color": {
+      "op": "blend",
+      "a": "palette",
+      "b": "vein_color",
+      "mask": "veins",
+      "mode": "mix",
+      "opacity": 0.22
+    },
+    "rim": {
+      "op": "shape",
+      "type": "ring",
+      "center": [
+        0.5,
+        0.5
+      ],
+      "size": [
+        0.9,
+        0.92
+      ],
+      "thickness": 0.018,
+      "softness": 0.3
+    },
+    "rim_color": {
+      "op": "constant",
+      "value": "#6a493b"
+    },
+    "pigmented": {
+      "op": "blend",
+      "a": "veined_color",
+      "b": "rim_color",
+      "mask": "rim",
+      "mode": "mix",
+      "opacity": 0.55
+    },
+    "color": {
+      "op": "math",
+      "input": "silhouette",
+      "mode": "multiply",
+      "b": "pigmented"
+    },
+    "normal": {
+      "op": "normal",
+      "input": "height",
+      "strength": 0.005,
+      "convention": "opengl",
+      "edge": "clamp"
+    },
+    "roughness": {
+      "op": "levels",
+      "input": "grain",
+      "out": [
+        0.29,
+        0.4
+      ]
+    },
+    "zero": {
+      "op": "constant",
+      "value": 0
+    },
+    "one": {
+      "op": "constant",
+      "value": 1
+    },
+    "metallic_roughness": {
+      "op": "pack",
+      "r": "one",
+      "g": "roughness",
+      "b": "zero"
+    }
+  },
+  "outputs": {
+    "color.png": {
+      "node": "color",
+      "alpha": true
+    },
+    "normal.png": {
+      "node": "normal",
+      "bits": 16
+    },
+    "metallic-roughness.png": "metallic_roughness"
+  }
+}

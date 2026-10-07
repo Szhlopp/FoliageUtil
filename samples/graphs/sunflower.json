@@ -1,0 +1,746 @@
+{
+  "version": 1,
+  "name": "sunflower",
+  "seed": 42,
+  "description": "Domed seed head with front-facing surface scatter, two rings of petals and an attached flower. Geometry demonstration with thin-tissue materials; seeds use area-random placement.",
+  "materials": {
+    "stem": {
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "roughness": 1,
+      "base_color_texture": "../assets/sunflower/stem-color.png",
+      "normal_texture": "../assets/sunflower/stem-normal.png",
+      "metallic_roughness_texture": "../assets/sunflower/stem-metallic-roughness.png"
+    },
+    "leaf": {
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "roughness": 1,
+      "translucency": 0.12,
+      "base_color_texture": "../assets/sunflower/leaf-color.png",
+      "normal_texture": "../assets/sunflower/leaf-normal.png",
+      "metallic_roughness_texture": "../assets/sunflower/leaf-metallic-roughness.png"
+    },
+    "disk": {
+      "base_color": [
+        0.037,
+        0.024,
+        0.006,
+        1
+      ],
+      "roughness": 0.98
+    },
+    "seed": {
+      "base_color": [
+        0.072,
+        0.033,
+        0.009,
+        1
+      ],
+      "roughness": 0.9
+    },
+    "petal": {
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "roughness": 1,
+      "translucency": 0.1,
+      "subsurface": 0.015,
+      "subsurface_scale": 0.0007,
+      "base_color_texture": "../assets/sunflower/petals.atlas.assets/color.png",
+      "normal_texture": "../assets/sunflower/petals.atlas.assets/normal.png",
+      "metallic_roughness_texture": "../assets/sunflower/petals.atlas.assets/metallic-roughness.png"
+    },
+    "petal_inner": {
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "roughness": 1,
+      "translucency": 0.1,
+      "subsurface": 0.015,
+      "subsurface_scale": 0.0007,
+      "base_color_texture": "../assets/sunflower/petals.atlas.assets/color.png",
+      "normal_texture": "../assets/sunflower/petals.atlas.assets/normal.png",
+      "metallic_roughness_texture": "../assets/sunflower/petals.atlas.assets/metallic-roughness.png"
+    }
+  },
+  "nodes": {
+    "stem": {
+      "op": "trunk",
+      "length": 1.35,
+      "radius": 0.014,
+      "taper": 0.35,
+      "segments": 28,
+      "noise": 0.018,
+      "bend": [
+        0.025,
+        0,
+        0.075
+      ],
+      "flare": 0.2
+    },
+    "stem_mesh": {
+      "op": "tube",
+      "input": "stem",
+      "sides": 14,
+      "material": "stem",
+      "cap_material": "stem",
+      "ridges": 7,
+      "ridge_depth": 0.035,
+      "uv_scale": [
+        1,
+        2.5
+      ]
+    },
+    "petioles": {
+      "op": "branch",
+      "input": "stem",
+      "count": 7,
+      "range": [
+        0.18,
+        0.76
+      ],
+      "length": 0.15,
+      "length_variation": 0.18,
+      "length_decay": 0.25,
+      "radius_scale": 0.33,
+      "angle": 65,
+      "angle_jitter": 12,
+      "segments": 6,
+      "bend": [
+        0,
+        -0.018,
+        0
+      ],
+      "noise": 0.012
+    },
+    "petiole_mesh": {
+      "op": "tube",
+      "input": "petioles",
+      "sides": 7,
+      "material": "stem",
+      "cap_material": "stem",
+      "uv_scale": [
+        1,
+        2.5
+      ]
+    },
+    "leaf_sites": {
+      "op": "scatter",
+      "input": "petioles",
+      "count": 1,
+      "distribution": "tip",
+      "range": [
+        1,
+        1
+      ],
+      "angle": 12,
+      "jitter": 0,
+      "scale": [
+        0.85,
+        1.15
+      ]
+    },
+    "leaf": {
+      "op": "leaf",
+      "length": 0.32,
+      "width": 0.22,
+      "segments": 32,
+      "width_segments": 10,
+      "shape": "oval",
+      "fold": 0.1,
+      "curl": -0.25,
+      "twist": 8,
+      "material": "leaf",
+      "edge_wave": 0.035,
+      "edge_frequency": 3.3
+    },
+    "leaves": {
+      "op": "instance",
+      "input": "leaf",
+      "points": "leaf_sites",
+      "scale_jitter": [
+        0.12,
+        0.08,
+        0.08
+      ],
+      "color_variation": 0.23
+    },
+    "head": {
+      "op": "ellipsoid",
+      "radii": [
+        0.137,
+        0.031,
+        0.137
+      ],
+      "rings": 28,
+      "sides": 64,
+      "material": "disk"
+    },
+    "back": {
+      "op": "ellipsoid",
+      "radii": [
+        0.143,
+        0.03,
+        0.143
+      ],
+      "rings": 16,
+      "sides": 48,
+      "material": "stem"
+    },
+    "back_position": {
+      "op": "transform",
+      "input": "back",
+      "translation": [
+        0,
+        -0.025,
+        0
+      ]
+    },
+    "seed_sites": {
+      "op": "scatter",
+      "input": "head",
+      "count": 6500,
+      "normal_direction": [
+        0,
+        1,
+        0
+      ],
+      "max_surface_angle": 84,
+      "angle": 0,
+      "scale": [
+        0.7,
+        1.15
+      ],
+      "offset": -0.001
+    },
+    "seed_shape": {
+      "op": "ellipsoid",
+      "radii": [
+        0.0024,
+        0.0055,
+        0.0024
+      ],
+      "rings": 5,
+      "sides": 6,
+      "material": "seed"
+    },
+    "seed": {
+      "op": "transform",
+      "input": "seed_shape",
+      "translation": [
+        0,
+        0.0035,
+        0
+      ]
+    },
+    "seeds": {
+      "op": "instance",
+      "input": "seed",
+      "points": "seed_sites",
+      "color_variation": 0.5,
+      "scale_jitter": [
+        0.1,
+        0.15,
+        0.1
+      ]
+    },
+    "petal": {
+      "op": "leaf",
+      "shape": "petal",
+      "length": 0.175,
+      "width": 0.042,
+      "segments": 40,
+      "width_segments": 10,
+      "curl": 0.08,
+      "fold": -0.6,
+      "twist": 26,
+      "material": "petal",
+      "width_profile": [
+        [
+          0.0,
+          0
+        ],
+        [
+          0.041666666666666664,
+          0.10157
+        ],
+        [
+          0.08333333333333333,
+          0.1969
+        ],
+        [
+          0.125,
+          0.29252
+        ],
+        [
+          0.16666666666666666,
+          0.38807
+        ],
+        [
+          0.20833333333333334,
+          0.48234
+        ],
+        [
+          0.25,
+          0.57374
+        ],
+        [
+          0.2916666666666667,
+          0.66054
+        ],
+        [
+          0.3333333333333333,
+          0.74093
+        ],
+        [
+          0.375,
+          0.81307
+        ],
+        [
+          0.4166666666666667,
+          0.87518
+        ],
+        [
+          0.4583333333333333,
+          0.92552
+        ],
+        [
+          0.5,
+          0.9625
+        ],
+        [
+          0.5416666666666666,
+          0.98465
+        ],
+        [
+          0.5833333333333334,
+          0.99069
+        ],
+        [
+          0.625,
+          0.97953
+        ],
+        [
+          0.6666666666666666,
+          0.95032
+        ],
+        [
+          0.7083333333333334,
+          0.90243
+        ],
+        [
+          0.75,
+          0.83544
+        ],
+        [
+          0.7916666666666666,
+          0.74916
+        ],
+        [
+          0.8333333333333334,
+          0.64351
+        ],
+        [
+          0.875,
+          0.51842
+        ],
+        [
+          0.9166666666666666,
+          0.37343
+        ],
+        [
+          0.9583333333333334,
+          0.20644
+        ],
+        [
+          1.0,
+          0
+        ]
+      ],
+      "edge_wave": 0.22,
+      "edge_frequency": 2.5,
+      "lateral_bend": 0.04
+    },
+    "petal_outer_sites": {
+      "op": "radial",
+      "count": 32,
+      "radius": [
+        0.125,
+        0.125
+      ],
+      "height": [
+        -0.012,
+        -0.012
+      ],
+      "tilt": [
+        91,
+        91
+      ],
+      "jitter": 0.065
+    },
+    "petals_outer": {
+      "op": "instance",
+      "input": "petal",
+      "points": "petal_outer_frame",
+      "scale_jitter": [
+        0.18,
+        0.15,
+        0.15
+      ],
+      "color_variation": 0.12,
+      "atlas": "../assets/sunflower/petals.atlas.json",
+      "atlas_mode": "random"
+    },
+    "petal_inner": {
+      "op": "leaf",
+      "shape": "petal",
+      "length": 0.155,
+      "width": 0.039,
+      "segments": 40,
+      "width_segments": 10,
+      "curl": -0.08,
+      "fold": -0.45,
+      "twist": -22,
+      "material": "petal_inner",
+      "width_profile": [
+        [
+          0.0,
+          0
+        ],
+        [
+          0.041666666666666664,
+          0.10157
+        ],
+        [
+          0.08333333333333333,
+          0.1969
+        ],
+        [
+          0.125,
+          0.29252
+        ],
+        [
+          0.16666666666666666,
+          0.38807
+        ],
+        [
+          0.20833333333333334,
+          0.48234
+        ],
+        [
+          0.25,
+          0.57374
+        ],
+        [
+          0.2916666666666667,
+          0.66054
+        ],
+        [
+          0.3333333333333333,
+          0.74093
+        ],
+        [
+          0.375,
+          0.81307
+        ],
+        [
+          0.4166666666666667,
+          0.87518
+        ],
+        [
+          0.4583333333333333,
+          0.92552
+        ],
+        [
+          0.5,
+          0.9625
+        ],
+        [
+          0.5416666666666666,
+          0.98465
+        ],
+        [
+          0.5833333333333334,
+          0.99069
+        ],
+        [
+          0.625,
+          0.97953
+        ],
+        [
+          0.6666666666666666,
+          0.95032
+        ],
+        [
+          0.7083333333333334,
+          0.90243
+        ],
+        [
+          0.75,
+          0.83544
+        ],
+        [
+          0.7916666666666666,
+          0.74916
+        ],
+        [
+          0.8333333333333334,
+          0.64351
+        ],
+        [
+          0.875,
+          0.51842
+        ],
+        [
+          0.9166666666666666,
+          0.37343
+        ],
+        [
+          0.9583333333333334,
+          0.20644
+        ],
+        [
+          1.0,
+          0
+        ]
+      ],
+      "edge_wave": 0.22,
+      "edge_frequency": 3.3,
+      "lateral_bend": -0.025
+    },
+    "petal_inner_sites": {
+      "op": "radial",
+      "count": 23,
+      "radius": [
+        0.123,
+        0.123
+      ],
+      "height": [
+        0.004,
+        0.004
+      ],
+      "tilt": [
+        77,
+        77
+      ],
+      "angle": 7,
+      "jitter": 0.075
+    },
+    "petals_inner": {
+      "op": "instance",
+      "input": "petal_inner",
+      "points": "petal_inner_frame",
+      "scale_jitter": [
+        0.18,
+        0.15,
+        0.15
+      ],
+      "color_variation": 0.1,
+      "atlas": "../assets/sunflower/petals.atlas.json",
+      "atlas_mode": "random"
+    },
+    "sepal": {
+      "op": "leaf",
+      "shape": "lanceolate",
+      "length": 0.096,
+      "width": 0.03,
+      "segments": 12,
+      "width_segments": 4,
+      "curl": 0.4,
+      "fold": 0.3,
+      "material": "stem"
+    },
+    "sepal_sites": {
+      "op": "radial",
+      "count": 19,
+      "radius": [
+        0.11,
+        0.11
+      ],
+      "height": [
+        -0.029,
+        -0.029
+      ],
+      "tilt": [
+        120,
+        120
+      ],
+      "jitter": 0.07
+    },
+    "sepals": {
+      "op": "instance",
+      "input": "sepal",
+      "points": "sepal_sites",
+      "color_variation": 0.15
+    },
+    "flower": {
+      "op": "merge",
+      "inputs": [
+        "head",
+        "back_position",
+        "seeds",
+        "petals_outer",
+        "petals_inner",
+        "sepals"
+      ]
+    },
+    "flower_sites": {
+      "op": "scatter",
+      "input": "stem",
+      "count": 1,
+      "distribution": "tip",
+      "range": [
+        1,
+        1
+      ],
+      "angle": 0,
+      "jitter": 0,
+      "scale": [
+        1,
+        1
+      ]
+    },
+    "flower_attached": {
+      "op": "instance",
+      "input": "flower",
+      "points": "flower_frame",
+      "rotation": [
+        64,
+        0,
+        0
+      ],
+      "color_variation": 0
+    },
+    "plant": {
+      "op": "merge",
+      "inputs": [
+        "stem_mesh",
+        "petiole_mesh",
+        "leaves",
+        "flower_attached"
+      ]
+    },
+    "flower_frame": {
+      "op": "orient",
+      "input": "flower_sites",
+      "mode": "fixed",
+      "direction": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ]
+    },
+    "petal_outer_frame": {
+      "op": "orient",
+      "input": "petal_outer_sites",
+      "mode": "keep",
+      "rotation_jitter": [
+        9,
+        10,
+        7
+      ]
+    },
+    "petal_inner_frame": {
+      "op": "orient",
+      "input": "petal_inner_sites",
+      "mode": "keep",
+      "rotation_jitter": [
+        9,
+        10,
+        7
+      ]
+    }
+  },
+  "outputs": {
+    "sunflower.glb": "plant"
+  },
+  "lods": {
+    "LOD1": {
+      "density": 0.55,
+      "topology": 0.5,
+      "tube_stride": 2,
+      "overrides": {
+        "flower_attached": {
+          "density": 1
+        },
+        "leaves": {
+          "density": 1
+        },
+        "head": {
+          "rings": 28,
+          "sides": 64
+        }
+      }
+    },
+    "LOD2": {
+      "density": 0.22,
+      "topology": 0.25,
+      "tube_stride": 3,
+      "overrides": {
+        "flower_attached": {
+          "density": 1
+        },
+        "leaves": {
+          "density": 0.7
+        },
+        "head": {
+          "rings": 28,
+          "sides": 64
+        }
+      }
+    }
+  },
+  "growth": {
+    "steps": 9,
+    "stages": {
+      "stem": {
+        "start": 0,
+        "end": 0.7
+      },
+      "petioles": {
+        "start": 0.2,
+        "end": 0.7
+      },
+      "leaves": {
+        "start": 0.3,
+        "end": 0.8
+      },
+      "flower_attached": {
+        "start": 0.5,
+        "end": 0.85
+      },
+      "petals_outer": {
+        "start": 0.65,
+        "end": 1
+      },
+      "petals_inner": {
+        "start": 0.7,
+        "end": 1
+      },
+      "seeds": {
+        "start": 0.75,
+        "end": 1
+      }
+    }
+  }
+}

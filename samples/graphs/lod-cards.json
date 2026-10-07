@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "seed": 42,
+  "name": "Card LOD export",
+  "description": "Seeded nested card-density subsets and lower topology, exported together through named LOD profiles.",
+  "materials": {
+    "stencil": {
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "roughness": 0.7,
+      "alpha_mode": "MASK",
+      "double_sided": true,
+      "base_color_texture": "../assets/leaf-stencil.png"
+    }
+  },
+  "nodes": {
+    "line": {
+      "op": "curve",
+      "points": [
+        [
+          -0.375,
+          0,
+          0
+        ],
+        [
+          0.375,
+          0,
+          0
+        ]
+      ],
+      "radius": 1e-05,
+      "taper": 0
+    },
+    "sites": {
+      "op": "scatter",
+      "input": "line",
+      "count": 7,
+      "range": [
+        0,
+        1
+      ],
+      "angle": 0,
+      "jitter": 0,
+      "scale": [
+        1,
+        1
+      ],
+      "offset": -1e-05
+    },
+    "facing": {
+      "op": "orient",
+      "input": "sites",
+      "mode": "fixed",
+      "direction": [
+        0,
+        0,
+        1
+      ]
+    },
+    "flat": {
+      "op": "card",
+      "width": 0.075,
+      "height": 0.12,
+      "material": "stencil"
+    },
+    "curved": {
+      "op": "card",
+      "width": 0.075,
+      "height": 0.12,
+      "segments": 8,
+      "width_segments": 4,
+      "curl": -0.14,
+      "fold": -0.22,
+      "twist": 12,
+      "material": "stencil"
+    },
+    "identical": {
+      "op": "instance",
+      "input": "flat",
+      "points": "facing",
+      "color_variation": 0
+    },
+    "sized": {
+      "op": "instance",
+      "input": "flat",
+      "points": "facing",
+      "color_variation": 0,
+      "scale_jitter": [
+        0.18,
+        0.12,
+        0.08
+      ]
+    },
+    "molded": {
+      "op": "instance",
+      "input": "curved",
+      "points": "facing",
+      "color_variation": 0,
+      "scale_jitter": [
+        0.18,
+        0.12,
+        0.08
+      ]
+    },
+    "top": {
+      "op": "transform",
+      "input": "identical",
+      "translation": [
+        0,
+        0.32,
+        0
+      ]
+    },
+    "middle": {
+      "op": "transform",
+      "input": "sized",
+      "translation": [
+        0,
+        0.16,
+        0
+      ]
+    },
+    "comparison": {
+      "op": "merge",
+      "inputs": [
+        "top",
+        "middle",
+        "molded"
+      ]
+    }
+  },
+  "outputs": {
+    "lod-cards.glb": "comparison",
+    "lod-cards.obj": "comparison"
+  },
+  "lods": {
+    "LOD1": {
+      "density": 0.5,
+      "topology": 0.5,
+      "screen_height": 0.3
+    },
+    "LOD2": {
+      "density": 0.2,
+      "topology": 0.1,
+      "screen_height": 0.1
+    }
+  }
+}

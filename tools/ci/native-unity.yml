@@ -1,0 +1,56 @@
+name: Native Unity packages
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-latest
+            arch: universal
+            artifact: macOS-universal
+          - os: ubuntu-22.04
+            arch: x64
+            artifact: Linux-x64
+          - os: windows-2022
+            arch: x64
+            artifact: Windows-x64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - uses: ilammy/msvc-dev-cmd@v1
+        if: runner.os == 'Windows'
+        with:
+          arch: x64
+      - name: Build host package with static dependencies
+        run: python tools/build_unity_package.py --arch ${{ matrix.arch }} --build build-unity --jobs 4
+      - name: Native and packaging tests
+        run: ctest --test-dir build-unity -C Release --output-on-failure --parallel 4
+      - name: Windows native search path
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: '"$env:GITHUB_WORKSPACE\build-unity" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append'
+      - name: Real managed PInvoke smoke test
+        env:
+          LD_LIBRARY_PATH: ${{ github.workspace }}/build-unity
+          DYLD_LIBRARY_PATH: ${{ github.workspace }}/build-unity
+          DOTNET_CLI_TELEMETRY_OPTOUT: '1'
+        run: dotnet run --project tests/managed/ManagedSmoke.csproj -- build-unity/test-samples/graphs/growth-exports.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: FoliageUtil-Unity-${{ matrix.artifact }}
+          path: out/unity-package/
+          include-hidden-files: true
+          if-no-files-found: error

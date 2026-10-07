@@ -1,0 +1,389 @@
+{
+  "size": 1024,
+  "seed": 1831,
+  "tile": false,
+  "nodes": {
+    "u": {
+      "op": "gradient",
+      "angle": 0
+    },
+    "t": {
+      "op": "gradient",
+      "angle": 90,
+      "reverse": true
+    },
+    "u_centered": {
+      "op": "math",
+      "input": "u",
+      "mode": "subtract",
+      "value": 0.5
+    },
+    "u_abs": {
+      "op": "math",
+      "input": "u_centered",
+      "mode": "abs"
+    },
+    "edge": {
+      "op": "math",
+      "input": "u_abs",
+      "mode": "multiply",
+      "value": 2
+    },
+    "brush": {
+      "op": "simplex",
+      "scale": 15,
+      "stretch": [
+        0.9,
+        1.2
+      ],
+      "fractal": "fbm",
+      "octaves": 3,
+      "seed": 143
+    },
+    "brush_centered": {
+      "op": "math",
+      "input": "brush",
+      "mode": "subtract",
+      "value": 0.5
+    },
+    "brush_amplitude": {
+      "op": "math",
+      "input": "brush_centered",
+      "mode": "multiply",
+      "value": 0.13
+    },
+    "broken_length": {
+      "op": "math",
+      "input": "t",
+      "mode": "add",
+      "b": "brush_amplitude"
+    },
+    "dark_length": {
+      "op": "range_mask",
+      "input": "broken_length",
+      "range": [
+        0.2,
+        0.8
+      ],
+      "softness": 0.018
+    },
+    "interior": {
+      "op": "range_mask",
+      "input": "edge",
+      "range": [
+        0,
+        0.925
+      ],
+      "softness": 0.048
+    },
+    "dark_region": {
+      "op": "math",
+      "input": "dark_length",
+      "mode": "multiply",
+      "b": "interior"
+    },
+    "outer_length": {
+      "op": "range_mask",
+      "input": "broken_length",
+      "range": [
+        0.155,
+        0.84
+      ],
+      "softness": 0.025
+    },
+    "red_interior": {
+      "op": "range_mask",
+      "input": "edge",
+      "range": [
+        0,
+        0.965
+      ],
+      "softness": 0.022
+    },
+    "red_region": {
+      "op": "math",
+      "input": "outer_length",
+      "mode": "multiply",
+      "b": "red_interior"
+    },
+    "warm_color": {
+      "op": "ramp",
+      "input": "t",
+      "stops": [
+        [
+          0,
+          "#e5edab"
+        ],
+        [
+          0.055,
+          "#ffdf78"
+        ],
+        [
+          0.2,
+          "#ffa21b"
+        ],
+        [
+          0.62,
+          "#ef5710"
+        ],
+        [
+          0.85,
+          "#ff7909"
+        ],
+        [
+          1,
+          "#ff9a12"
+        ]
+      ]
+    },
+    "red_color": {
+      "op": "ramp",
+      "input": "brush",
+      "stops": [
+        [
+          0,
+          "#651121"
+        ],
+        [
+          0.5,
+          "#95152b"
+        ],
+        [
+          1,
+          "#bd3523"
+        ]
+      ]
+    },
+    "dark_color": {
+      "op": "ramp",
+      "input": "brush",
+      "stops": [
+        [
+          0,
+          "#180d1b"
+        ],
+        [
+          0.5,
+          "#25121e"
+        ],
+        [
+          1,
+          "#3a152d"
+        ]
+      ]
+    },
+    "red_ground": {
+      "op": "blend",
+      "a": "warm_color",
+      "b": "red_color",
+      "mask": "red_region",
+      "mode": "mix"
+    },
+    "petal_pigment": {
+      "op": "blend",
+      "a": "red_ground",
+      "b": "dark_color",
+      "mask": "dark_region",
+      "mode": "mix"
+    },
+    "speck_zone": {
+      "op": "range_mask",
+      "input": "t",
+      "range": [
+        0.075,
+        0.225
+      ],
+      "softness": 0.028
+    },
+    "speck": {
+      "op": "shape",
+      "type": "circle",
+      "size": [
+        0.6,
+        0.94
+      ],
+      "softness": 0.1
+    },
+    "specks": {
+      "op": "scatter",
+      "input": "speck",
+      "count": 800,
+      "size": [
+        0.025,
+        0.028
+      ],
+      "size_jitter": 0.65,
+      "rotation_jitter": 20,
+      "mask": "speck_zone",
+      "seed": 735
+    },
+    "speck_pigment": {
+      "op": "constant",
+      "value": "#251023"
+    },
+    "petal_color": {
+      "op": "blend",
+      "a": "petal_pigment",
+      "b": "speck_pigment",
+      "mask": "specks",
+      "mode": "mix",
+      "opacity": 0.94
+    },
+    "veins": {
+      "op": "stripes",
+      "count": 32,
+      "wave": "sine"
+    },
+    "veins_curved": {
+      "op": "directional_warp",
+      "input": "veins",
+      "intensity": "brush",
+      "angle": 0,
+      "strength": 0.025,
+      "midlevel": 0.5,
+      "edge": "clamp"
+    },
+    "fine": {
+      "op": "simplex",
+      "scale": 85,
+      "stretch": [
+        0.75,
+        2
+      ],
+      "fractal": "fbm",
+      "octaves": 3
+    },
+    "tissue": {
+      "op": "blend",
+      "a": "veins_curved",
+      "b": "fine",
+      "mode": "mix",
+      "opacity": 0.22
+    },
+    "height": {
+      "op": "levels",
+      "input": "tissue",
+      "out": [
+        0.49,
+        0.51
+      ]
+    },
+    "normal": {
+      "op": "normal",
+      "input": "height",
+      "strength": 0.007,
+      "convention": "opengl",
+      "edge": "clamp"
+    },
+    "roughness": {
+      "op": "levels",
+      "input": "fine",
+      "out": [
+        0.65,
+        0.78
+      ]
+    },
+    "zero": {
+      "op": "constant",
+      "value": 0
+    },
+    "one": {
+      "op": "constant",
+      "value": 1
+    },
+    "packed": {
+      "op": "pack",
+      "r": "one",
+      "g": "roughness",
+      "b": "zero"
+    },
+    "leaf_color": {
+      "op": "ramp",
+      "input": "brush",
+      "stops": [
+        [
+          0,
+          "#1d351b"
+        ],
+        [
+          0.5,
+          "#2c4820"
+        ],
+        [
+          1,
+          "#3a5a25"
+        ]
+      ]
+    },
+    "leaf_rough": {
+      "op": "levels",
+      "input": "fine",
+      "out": [
+        0.36,
+        0.5
+      ]
+    },
+    "leaf_packed": {
+      "op": "pack",
+      "r": "one",
+      "g": "leaf_rough",
+      "b": "zero"
+    },
+    "bud_stripes": {
+      "op": "stripes",
+      "count": 6,
+      "wave": "sine"
+    },
+    "bud_color": {
+      "op": "ramp",
+      "input": "bud_stripes",
+      "stops": [
+        [
+          0,
+          "#35451b"
+        ],
+        [
+          0.4,
+          "#57752b"
+        ],
+        [
+          1,
+          "#879348"
+        ]
+      ]
+    }
+  },
+  "outputs": {
+    "petal-color.png": "petal_color",
+    "petal-normal.png": "normal",
+    "petal-metallic-roughness.png": "packed",
+    "leaf-color.png": "leaf_color",
+    "leaf-normal.png": "normal",
+    "leaf-metallic-roughness.png": "leaf_packed",
+    "bud-color.png": "bud_color",
+    "material-sheet.png": {
+      "type": "sheet",
+      "title": "Asiatic lily | Plum, ember and gold",
+      "columns": 4,
+      "cell": 320,
+      "items": [
+        {
+          "node": "petal_color",
+          "label": "Petal color / tip above"
+        },
+        {
+          "node": "normal",
+          "label": "OpenGL normal"
+        },
+        {
+          "node": "roughness",
+          "label": "Roughness"
+        },
+        {
+          "node": "leaf_color",
+          "label": "Leaf color"
+        }
+      ]
+    }
+  }
+}

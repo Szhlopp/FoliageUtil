@@ -1,0 +1,323 @@
+{
+  "version": 1,
+  "size": 2048,
+  "seed": 412,
+  "tile": true,
+  "nodes": {
+    "bend": {
+      "op": "clouds",
+      "scale": 3,
+      "stretch": [
+        1,
+        2
+      ],
+      "octaves": 3,
+      "seed": 713
+    },
+    "drift": {
+      "op": "clouds",
+      "scale": 5,
+      "octaves": 2,
+      "seed": 829
+    },
+    "plates": {
+      "op": "voronoi",
+      "scale": 18,
+      "stretch": [
+        1,
+        8
+      ],
+      "feature": "edges",
+      "seed": 412
+    },
+    "warped-plates": {
+      "op": "warp",
+      "input": "plates",
+      "x": "bend",
+      "y": "drift",
+      "strength": 0.045
+    },
+    "plate-height": {
+      "op": "levels",
+      "input": "warped-plates",
+      "in": [
+        0.004,
+        0.08
+      ],
+      "gamma": 1.7,
+      "out": [
+        0.12,
+        0.78
+      ]
+    },
+    "small-cracks": {
+      "op": "voronoi",
+      "scale": 51,
+      "stretch": [
+        1,
+        6
+      ],
+      "feature": "edges",
+      "seed": 688
+    },
+    "warped-cracks": {
+      "op": "warp",
+      "input": "small-cracks",
+      "x": "bend",
+      "y": "drift",
+      "strength": 0.045
+    },
+    "crack-height": {
+      "op": "levels",
+      "input": "warped-cracks",
+      "in": [
+        0.003,
+        0.035
+      ],
+      "gamma": 1.1,
+      "out": [
+        0.35,
+        1
+      ]
+    },
+    "broken-plates": {
+      "op": "blend",
+      "a": "plate-height",
+      "b": "crack-height",
+      "mode": "multiply",
+      "opacity": 0.28
+    },
+    "fibers": {
+      "op": "clouds",
+      "scale": 170,
+      "stretch": [
+        1,
+        4
+      ],
+      "octaves": 3,
+      "seed": 942
+    },
+    "fiber-height": {
+      "op": "levels",
+      "input": "fibers",
+      "out": [
+        0.65,
+        1
+      ]
+    },
+    "height": {
+      "op": "blend",
+      "a": "ridge-surface",
+      "b": "fiber-height",
+      "mode": "multiply",
+      "opacity": 0.18
+    },
+    "coarse-displacement": {
+      "op": "levels",
+      "input": "plate-height",
+      "out": [
+        0.25,
+        0.75
+      ]
+    },
+    "rough-grain": {
+      "op": "clouds",
+      "scale": 60,
+      "stretch": [
+        1,
+        2
+      ],
+      "octaves": 3,
+      "seed": 975
+    },
+    "ridge-surface": {
+      "op": "blend",
+      "a": "broken-plates",
+      "b": "rough-grain",
+      "mode": "mix",
+      "opacity": 0.22
+    },
+    "cells": {
+      "op": "voronoi",
+      "scale": 18,
+      "stretch": [
+        1,
+        8
+      ],
+      "feature": "cells",
+      "seed": 412
+    },
+    "warped-cells": {
+      "op": "warp",
+      "input": "cells",
+      "x": "bend",
+      "y": "drift",
+      "strength": 0.045
+    },
+    "mottle": {
+      "op": "clouds",
+      "scale": 6,
+      "octaves": 4,
+      "seed": 314
+    },
+    "pigment": {
+      "op": "blend",
+      "a": "warped-cells",
+      "b": "mottle",
+      "mode": "mix",
+      "opacity": 0.6
+    },
+    "pigment-color": {
+      "op": "ramp",
+      "input": "pigment",
+      "stops": [
+        [
+          0,
+          "#30291f"
+        ],
+        [
+          0.3,
+          "#4b4031"
+        ],
+        [
+          0.65,
+          "#6c5f4c"
+        ],
+        [
+          1,
+          "#94816a"
+        ]
+      ]
+    },
+    "crack-color": {
+      "op": "ramp",
+      "input": "height",
+      "stops": [
+        [
+          0,
+          "#5e5140"
+        ],
+        [
+          0.17,
+          "#857259"
+        ],
+        [
+          0.42,
+          "#c3b599"
+        ],
+        [
+          0.7,
+          "#ffffff"
+        ],
+        [
+          1,
+          "#ffffff"
+        ]
+      ]
+    },
+    "color": {
+      "op": "blend",
+      "a": "pigment-color",
+      "b": "crack-color",
+      "mode": "multiply"
+    },
+    "normal": {
+      "op": "normal",
+      "input": "height",
+      "strength": 0.012,
+      "convention": "opengl",
+      "edge": "repeat"
+    },
+    "roughness": {
+      "op": "levels",
+      "input": "height",
+      "out": [
+        0.96,
+        0.73
+      ]
+    },
+    "zero": {
+      "op": "constant",
+      "value": 0
+    },
+    "metallic-roughness": {
+      "op": "pack",
+      "r": "zero",
+      "g": "roughness",
+      "b": "zero"
+    },
+    "repeat-height": {
+      "op": "transform",
+      "input": "height",
+      "scale": [
+        0.5,
+        0.5
+      ],
+      "edge": "repeat"
+    }
+  },
+  "outputs": {
+    "bark-color.png": "color",
+    "bark-normal.png": "normal",
+    "bark-roughness.png": "roughness",
+    "bark-metallic-roughness.png": "metallic-roughness",
+    "bark-height.png": {
+      "node": "height",
+      "bits": 16
+    },
+    "bark-coarse-height.png": {
+      "node": "coarse-displacement",
+      "bits": 16
+    },
+    "bark-sheet.png": {
+      "type": "sheet",
+      "title": "Hefty bark | TexUtil seeded material",
+      "columns": 3,
+      "cell": 384,
+      "items": [
+        {
+          "node": "height",
+          "label": "Height / 16-bit master"
+        },
+        {
+          "node": "normal",
+          "label": "Normal / OpenGL"
+        },
+        {
+          "node": "color",
+          "label": "Unlit base color"
+        },
+        {
+          "node": "roughness",
+          "label": "Dry roughness"
+        },
+        {
+          "node": "repeat-height",
+          "label": "2x2 height repeat"
+        },
+        {
+          "node": "coarse-displacement",
+          "label": "Optional coarse displacement"
+        }
+      ]
+    },
+    "bark.mtlx": {
+      "type": "materialx",
+      "name": "HeftyBark",
+      "inputs": {
+        "base_color": {
+          "texture": "bark-color.png"
+        },
+        "specular_roughness": {
+          "texture": "bark-roughness.png"
+        },
+        "metalness": 0,
+        "specular_IOR": 1.5
+      },
+      "normal": {
+        "texture": "bark-normal.png",
+        "convention": "opengl"
+      }
+    }
+  }
+}
